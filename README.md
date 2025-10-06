@@ -3,6 +3,15 @@
 # **One-Prompt Site Build Brief** (continued)
 
 ```
+Build windshieldadvisor.info with this structure:
+
+NAVIGATION: Home | Safety Quizzes | Safety Guides | Find Installers | Resources
+
+QUIZ HUB (/quizzes/): 5 interactive quizzes with conditional logic, 
+results pages (red/yellow/green severity), email gates, auto-populate 
+lead forms. Priority: "Is My Windshield Safe?" and "Does My Car Need 
+ADAS Calibration?"
+
 WHITE PAPER HUB (/safety-guides/): 10 pillar pages, each with 4 
 supporting blog posts. Priority order: ADAS Calibration > OEM vs 
 Aftermarket > Repair vs Replace > Choosing Installer > remaining 6.
