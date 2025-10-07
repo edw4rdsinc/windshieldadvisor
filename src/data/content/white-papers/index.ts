@@ -25,6 +25,11 @@ export const featuredWhitePapers = publishedWhitePapers.filter(
   (wp) => wp.featured
 );
 
+// Export function for featured white papers (for consistency)
+export function getFeaturedWhitePapers() {
+  return featuredWhitePapers;
+}
+
 // Utility functions
 export function getWhitePaperBySlug(slug: string) {
   return allWhitePapers.find((wp) => wp.slug === slug);
