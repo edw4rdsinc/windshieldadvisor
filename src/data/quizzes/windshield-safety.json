@@ -1,0 +1,168 @@
+{
+  "id": "windshield-safety",
+  "slug": "windshield-safety",
+  "title": "Is My Windshield Safe?",
+  "description": "Get instant assessment of existing damage and safety risks",
+  "icon": "shield-alert",
+  "duration": 3,
+  "priority": 1,
+  "featured": true,
+  "questions": [
+    {
+      "id": "q1",
+      "text": "What best describes the damage to your windshield?",
+      "type": "radio",
+      "required": true,
+      "options": [
+        {
+          "id": "q1a1",
+          "text": "No chips or cracks",
+          "value": "no_damage",
+          "score": 0
+        },
+        {
+          "id": "q1a2",
+          "text": "A small chip or \"bullseye\" (smaller than a quarter)",
+          "value": "small_chip",
+          "score": 5
+        },
+        {
+          "id": "q1a3",
+          "text": "A crack shorter than 6 inches",
+          "value": "short_crack",
+          "score": 10
+        },
+        {
+          "id": "q1a4",
+          "text": "A crack longer than 6 inches or multiple cracks",
+          "value": "long_crack",
+          "score": 25
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "text": "Where is the damage located?",
+      "type": "radio",
+      "required": true,
+      "options": [
+        {
+          "id": "q2a1",
+          "text": "No damage",
+          "value": "no_damage",
+          "score": 0
+        },
+        {
+          "id": "q2a2",
+          "text": "On the passenger side, away from the edges",
+          "value": "passenger_side",
+          "score": 5
+        },
+        {
+          "id": "q2a3",
+          "text": "Directly in the driver's line of sight",
+          "value": "driver_sight",
+          "score": 25
+        },
+        {
+          "id": "q2a4",
+          "text": "Near the edge of the windshield or in front of a camera sensor",
+          "value": "edge_or_sensor",
+          "score": 25
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "text": "Since your last windshield replacement (if any), have you noticed...",
+      "type": "radio",
+      "required": true,
+      "options": [
+        {
+          "id": "q3a1",
+          "text": "No issues / Original factory windshield",
+          "value": "no_issues",
+          "score": 0
+        },
+        {
+          "id": "q3a2",
+          "text": "I'm not sure",
+          "value": "not_sure",
+          "score": 5
+        },
+        {
+          "id": "q3a3",
+          "text": "A \"whooshing\" or wind noise at high speeds",
+          "value": "wind_noise",
+          "score": 20
+        },
+        {
+          "id": "q3a4",
+          "text": "Any signs of water leaks during rain or a car wash",
+          "value": "water_leaks",
+          "score": 20
+        }
+      ]
+    }
+  ],
+  "scoring": {
+    "severityThresholds": {
+      "safe": {
+        "min": 0,
+        "max": 5,
+        "color": "green"
+      },
+      "caution": {
+        "min": 6,
+        "max": 15,
+        "color": "yellow"
+      },
+      "critical": {
+        "min": 16,
+        "max": 100,
+        "color": "red"
+      }
+    },
+    "resultMessages": {
+      "safe": {
+        "title": "Your Windshield Appears Safe",
+        "summary": "Based on your answers, your windshield seems to be in good condition.",
+        "explanation": "The modern windshield is a critical safety component, contributing up to <strong>60% of your vehicle's roof strength</strong> in a rollover and ensuring proper airbag deployment.\n\nContinue with regular care, such as cleaning with ammonia-free products and replacing worn wiper blades, to maintain its integrity.",
+        "nextSteps": [
+          "Continue regular windshield maintenance",
+          "Clean with ammonia-free products",
+          "Replace wiper blades when worn",
+          "Monitor for any new damage"
+        ]
+      },
+      "caution": {
+        "title": "Caution: Repair Recommended",
+        "summary": "Your windshield has minor damage that should be addressed.",
+        "explanation": "Small chips and cracks can compromise the structural integrity and are likely to spread due to road vibrations and temperature changes.\n\nAccording to the <strong>Repair of Laminated Auto Glass Standard (ROLAGS™)</strong>, many smaller issues can be professionally repaired, which is cheaper than a replacement and preserves your vehicle's critical factory seal. Don't delay, as a botched DIY repair can be irreversible.",
+        "nextSteps": [
+          "Schedule a professional inspection soon",
+          "Ask about ROLAGS™-certified repair",
+          "Avoid DIY repair kits",
+          "Get quotes from certified installers"
+        ]
+      },
+      "critical": {
+        "title": "Unsafe: Immediate Professional Inspection Required",
+        "summary": "The damage or issues you've described indicate a significant safety risk.",
+        "explanation": "Damage in the driver's line of sight, near the edge, or in front of ADAS cameras requires immediate attention. A compromised windshield fails to provide necessary support for the roof and airbags in an accident.\n\nFurthermore, any wind noise or water leaks suggest a failed adhesive seal from a previous replacement, which is extremely dangerous. <strong>Your vehicle should be inspected by a certified technician immediately. Replacement is required.</strong>",
+        "nextSteps": [
+          "Do not delay - safety is compromised",
+          "Contact a certified installer immediately",
+          "Ask about OEM glass vs aftermarket",
+          "Ensure ADAS calibration if applicable"
+        ]
+      }
+    }
+  },
+  "metadata": {
+    "relatedQuizzes": ["adas-calibration", "repair-replace"],
+    "relatedWhitePapers": ["adas-calibration-guide", "repair-vs-replace"],
+    "ctaText": "Find Certified Installers",
+    "ctaUrl": "/find-installers"
+  }
+}

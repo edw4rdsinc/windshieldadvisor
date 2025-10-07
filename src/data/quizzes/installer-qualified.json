@@ -1,0 +1,178 @@
+{
+  "id": "installer-qualified",
+  "slug": "installer-qualified",
+  "title": "Is My Installer Qualified?",
+  "description": "Verify your shop meets critical safety standards",
+  "icon": "certificate",
+  "duration": 3,
+  "priority": 4,
+  "featured": false,
+  "questions": [
+    {
+      "id": "q1",
+      "text": "When you mentioned your car has safety features (like lane assist) and needs a new windshield, they said:",
+      "type": "radio",
+      "required": true,
+      "helpText": "ADAS calibration is mandatory after windshield replacement on equipped vehicles",
+      "options": [
+        {
+          "id": "q1a1",
+          "text": "\"We will need to perform an ADAS recalibration after the replacement. It's mandatory for safety.\"",
+          "value": "good_adas",
+          "score": 1,
+          "flag": "green"
+        },
+        {
+          "id": "q1a2",
+          "text": "\"You don't need to worry about that, it'll work fine.\" or \"Calibration is an optional upsell.\"",
+          "value": "bad_adas",
+          "score": 0,
+          "flag": "red"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "text": "Regarding the type of glass they will use:",
+      "type": "radio",
+      "required": true,
+      "helpText": "Shops should explain glass options clearly",
+      "options": [
+        {
+          "id": "q2a1",
+          "text": "They explained the difference between OEM glass and Aftermarket (OEE) glass and gave you a clear choice.",
+          "value": "good_glass",
+          "score": 1,
+          "flag": "green"
+        },
+        {
+          "id": "q2a2",
+          "text": "They pushed the cheapest option without explaining potential issues or avoided the question.",
+          "value": "bad_glass",
+          "score": 0,
+          "flag": "red"
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "text": "When you ask about their technicians:",
+      "type": "radio",
+      "required": true,
+      "helpText": "Look for AGSC (Auto Glass Safety Council) certification",
+      "options": [
+        {
+          "id": "q3a1",
+          "text": "They state their technicians are certified (e.g., by the Auto Glass Safety Council™ - AGSC).",
+          "value": "good_cert",
+          "score": 1,
+          "flag": "green"
+        },
+        {
+          "id": "q3a2",
+          "text": "They are evasive or say something like \"our guys have tons of experience, they don't need a certificate.\"",
+          "value": "bad_cert",
+          "score": 0,
+          "flag": "red"
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "text": "After the replacement is scheduled, they tell you:",
+      "type": "radio",
+      "required": true,
+      "helpText": "Adhesive cure time is critical for safety",
+      "options": [
+        {
+          "id": "q4a1",
+          "text": "\"Your vehicle will be ready to drive after a specific 'cure time' for the adhesive, usually at least one hour.\"",
+          "value": "good_time",
+          "score": 1,
+          "flag": "green"
+        },
+        {
+          "id": "q4a2",
+          "text": "\"You can drive it away as soon as we're done.\"",
+          "value": "bad_time",
+          "score": 0,
+          "flag": "red"
+        }
+      ]
+    }
+  ],
+  "scoring": {
+    "type": "percentage_based",
+    "totalQuestions": 4,
+    "thresholds": {
+      "excellent": {
+        "min": 0.75,
+        "max": 1.0,
+        "severity": "safe",
+        "color": "green",
+        "result": "trustworthy"
+      },
+      "caution": {
+        "min": 0.5,
+        "max": 0.74,
+        "severity": "caution",
+        "color": "yellow",
+        "result": "proceed_caution"
+      },
+      "poor": {
+        "min": 0,
+        "max": 0.49,
+        "severity": "critical",
+        "color": "red",
+        "result": "red_flags"
+      }
+    },
+    "results": {
+      "trustworthy": {
+        "severity": "safe",
+        "color": "green",
+        "title": "This Shop Sounds Trustworthy",
+        "summary": "This shop appears to follow modern safety standards.",
+        "explanation": "This shop appears to follow modern safety standards. They understand that a windshield is a critical safety component, not just a piece of glass.\n\nBy prioritizing <strong>mandatory ADAS calibration</strong>, offering clear choices in glass, employing <strong>certified technicians</strong>, and respecting adhesive cure times, they are putting your safety first. This aligns with the best practices outlined by vehicle manufacturers and safety organizations.",
+        "nextSteps": [
+          "Proceed with confidence",
+          "Get written estimate before service",
+          "Ask for calibration documentation",
+          "Verify warranty coverage"
+        ]
+      },
+      "proceed_caution": {
+        "severity": "caution",
+        "color": "yellow",
+        "title": "Proceed with Caution",
+        "summary": "This shop shows some positive signs but also has potential red flags.",
+        "explanation": "This shop shows some positive signs but also has some potential red flags. The most critical issue is any ambiguity around <strong>ADAS calibration—it is not optional.</strong>\n\nDismissing the need for calibration, certified technicians, or proper adhesive cure times can lead to a \"silent failure\" of your safety systems. Ask for clarification on their procedures. If they cannot provide confident, safety-focused answers, consider finding another provider.",
+        "nextSteps": [
+          "Ask detailed questions about red flag areas",
+          "Request to see technician certifications",
+          "Get second opinion if uncertain",
+          "Consider alternative shops"
+        ]
+      },
+      "red_flags": {
+        "severity": "critical",
+        "color": "red",
+        "title": "Significant Red Flags Detected",
+        "summary": "This shop is ignoring fundamental safety protocols.",
+        "explanation": "This shop is ignoring fundamental, non-negotiable safety protocols. Practices like dismissing <strong>mandatory ADAS calibration</strong> or ignoring adhesive <strong>Safe Drive-Away Times</strong> are extremely dangerous and can lead to catastrophic failure of your vehicle's safety systems in an accident.\n\nA shop that cuts these corners is not trustworthy. For your safety, it is strongly recommended that you find a different, certified facility that follows the Auto Glass Replacement Safety Standard (AGRSS™).",
+        "nextSteps": [
+          "Find a different shop immediately",
+          "Look for AGRSS certification",
+          "Verify AGSC-certified technicians",
+          "Ask about Vero Verified Network shops"
+        ]
+      }
+    }
+  },
+  "metadata": {
+    "relatedQuizzes": ["adas-calibration", "windshield-safety"],
+    "relatedWhitePapers": ["choosing-installer", "adas-calibration-guide"],
+    "ctaText": "Find Trusted Installers",
+    "ctaUrl": "/find-installers"
+  }
+}

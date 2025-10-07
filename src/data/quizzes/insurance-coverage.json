@@ -1,0 +1,275 @@
+{
+  "id": "insurance-coverage",
+  "slug": "insurance-coverage",
+  "title": "Will Insurance Cover My Replacement?",
+  "description": "Understand your coverage and out-of-pocket costs",
+  "icon": "document-text",
+  "duration": 3,
+  "priority": 5,
+  "featured": false,
+  "questions": [
+    {
+      "id": "q1",
+      "text": "Do you have comprehensive coverage on your auto insurance policy?",
+      "type": "radio",
+      "required": true,
+      "helpText": "Comprehensive coverage (not liability-only) is typically required for glass coverage",
+      "options": [
+        {
+          "id": "q1a1",
+          "text": "Yes, I have comprehensive coverage",
+          "value": "has_comprehensive",
+          "score": 1
+        },
+        {
+          "id": "q1a2",
+          "text": "No, I only have liability coverage",
+          "value": "liability_only",
+          "score": 0,
+          "endQuiz": true,
+          "result": "no_coverage"
+        },
+        {
+          "id": "q1a3",
+          "text": "I'm not sure",
+          "value": "not_sure",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "text": "What state do you live in?",
+      "type": "select",
+      "required": true,
+      "helpText": "Some states have zero-deductible glass coverage laws",
+      "conditionalLogic": {
+        "showIf": {
+          "questionId": "q1",
+          "answerEquals": ["has_comprehensive", "not_sure"]
+        }
+      },
+      "options": [
+        {
+          "id": "q2a1",
+          "text": "Florida",
+          "value": "FL",
+          "score": 2,
+          "zeroDeductible": true
+        },
+        {
+          "id": "q2a2",
+          "text": "Kentucky",
+          "value": "KY",
+          "score": 2,
+          "zeroDeductible": true
+        },
+        {
+          "id": "q2a3",
+          "text": "South Carolina",
+          "value": "SC",
+          "score": 2,
+          "zeroDeductible": true
+        },
+        {
+          "id": "q2a4",
+          "text": "Arizona",
+          "value": "AZ",
+          "score": 1,
+          "zeroDeductible": false,
+          "note": "Arizona has optional zero-deductible glass coverage"
+        },
+        {
+          "id": "q2a5",
+          "text": "Massachusetts",
+          "value": "MA",
+          "score": 1,
+          "zeroDeductible": false,
+          "note": "Massachusetts has optional glass coverage with lower deductibles"
+        },
+        {
+          "id": "q2a6",
+          "text": "Other state",
+          "value": "OTHER",
+          "score": 1,
+          "zeroDeductible": false
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "text": "Do you need a full windshield replacement or just a repair?",
+      "type": "radio",
+      "required": true,
+      "helpText": "Repairs often have lower or zero deductibles",
+      "options": [
+        {
+          "id": "q3a1",
+          "text": "Just a chip/crack repair",
+          "value": "repair",
+          "score": 1
+        },
+        {
+          "id": "q3a2",
+          "text": "Full replacement",
+          "value": "replacement",
+          "score": 0
+        },
+        {
+          "id": "q3a3",
+          "text": "Not sure yet",
+          "value": "not_sure",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "text": "Do you know your comprehensive deductible amount?",
+      "type": "radio",
+      "required": true,
+      "helpText": "This is the amount you pay before insurance coverage kicks in",
+      "options": [
+        {
+          "id": "q4a1",
+          "text": "$0 - No deductible",
+          "value": "zero",
+          "score": 2
+        },
+        {
+          "id": "q4a2",
+          "text": "$100 or less",
+          "value": "low",
+          "score": 1
+        },
+        {
+          "id": "q4a3",
+          "text": "$250 - $500",
+          "value": "medium",
+          "score": 0
+        },
+        {
+          "id": "q4a4",
+          "text": "$500 or more",
+          "value": "high",
+          "score": 0
+        },
+        {
+          "id": "q4a5",
+          "text": "I'm not sure",
+          "value": "unknown",
+          "score": 0
+        }
+      ]
+    }
+  ],
+  "scoring": {
+    "type": "mixed",
+    "results": {
+      "no_coverage": {
+        "severity": "info",
+        "color": "red",
+        "title": "Likely Not Covered",
+        "summary": "Liability-only policies typically don't cover glass damage.",
+        "explanation": "Unfortunately, if you only have liability coverage (which covers damage you cause to others), your policy will not cover damage to your own windshield.\n\n<strong>Your Options:</strong>\n\n• <strong>Pay out of pocket:</strong> Repairs cost $50-$150, replacements $200-$1,000+\n\n• <strong>Upgrade your policy:</strong> Add comprehensive coverage for future incidents\n\n• <strong>Check for exceptions:</strong> Some states or policies have special glass provisions",
+        "nextSteps": [
+          "Get quotes for out-of-pocket cost",
+          "Consider adding comprehensive coverage",
+          "Ask about payment plans",
+          "Check if repair is cheaper than replacement"
+        ]
+      },
+      "zero_deductible_state": {
+        "severity": "safe",
+        "color": "green",
+        "title": "Likely Fully Covered!",
+        "summary": "Your state has zero-deductible glass coverage laws.",
+        "explanation": "Good news! You live in a state with <strong>zero-deductible glass coverage laws</strong>. This means your comprehensive insurance should cover your windshield repair or replacement with <strong>no out-of-pocket cost</strong>.\n\n<strong>Important Notes:</strong>\n\n• Your insurance company cannot raise your rates for a glass claim in these states\n\n• You should still verify coverage with your insurer\n\n• Choose a shop in your insurance network to avoid billing issues",
+        "nextSteps": [
+          "Call your insurance company to confirm",
+          "Ask for approved shop list",
+          "Verify zero deductible applies",
+          "Schedule service with confidence"
+        ]
+      },
+      "repair_likely_covered": {
+        "severity": "safe",
+        "color": "green",
+        "title": "Repair Likely Fully Covered",
+        "summary": "Most insurance policies cover chip/crack repairs with no deductible.",
+        "explanation": "Most comprehensive insurance policies cover windshield <strong>repairs</strong> (not replacements) with <strong>zero deductible</strong>. This is because insurance companies save money by encouraging repair over replacement.\n\n<strong>Why This Matters:</strong>\n\n• Repairs cost $50-$150 out of pocket, but $0 with insurance\n\n• No rate increase for repair claims (typically)\n\n• Faster service (30 minutes vs 2+ hours)\n\n• Preserves your original factory windshield seal",
+        "nextSteps": [
+          "Call insurance to confirm zero-deductible repair",
+          "Ask if claim affects rates",
+          "Find approved repair shops",
+          "Act quickly before chip spreads"
+        ]
+      },
+      "replacement_check_deductible": {
+        "severity": "caution",
+        "color": "yellow",
+        "title": "Likely Covered, But Check Your Deductible",
+        "summary": "Replacement is usually covered, but you may owe your deductible.",
+        "explanation": "If you have comprehensive coverage, your windshield replacement should be covered. However, you will likely need to pay your <strong>comprehensive deductible</strong> first.\n\n<strong>Deductible Considerations:</strong>\n\n• <strong>Low deductible ($0-$100):</strong> Claim makes sense\n\n• <strong>Medium deductible ($250-$500):</strong> Compare to out-of-pocket cost\n\n• <strong>High deductible ($500+):</strong> May be cheaper to pay yourself\n\n<strong>Rate Impact:</strong> Some insurers may raise your rates for a comprehensive claim. Ask before filing.",
+        "nextSteps": [
+          "Call insurance to verify deductible",
+          "Ask if claim will affect rates",
+          "Get quote with and without insurance",
+          "Compare total costs before deciding"
+        ]
+      },
+      "check_policy": {
+        "severity": "caution",
+        "color": "blue",
+        "title": "Check Your Policy Details",
+        "summary": "You may have coverage, but need to verify with your insurer.",
+        "explanation": "Based on your answers, you may have glass coverage, but the details are unclear. The best step is to call your insurance company directly and ask:\n\n<strong>Key Questions to Ask:</strong>\n\n• \"Do I have comprehensive coverage?\"\n\n• \"Does my policy cover glass damage?\"\n\n• \"What is my glass or comprehensive deductible?\"\n\n• \"Will a glass claim increase my rates?\"\n\n• \"Do you have a preferred shop network?\"",
+        "nextSteps": [
+          "Call your insurance company",
+          "Have policy number ready",
+          "Ask all key questions above",
+          "Get written confirmation if possible"
+        ]
+      }
+    },
+    "logic": {
+      "rules": [
+        {
+          "if": {
+            "q1": "liability_only"
+          },
+          "then": "no_coverage"
+        },
+        {
+          "if": {
+            "q2": ["FL", "KY", "SC"],
+            "q1": "has_comprehensive"
+          },
+          "then": "zero_deductible_state"
+        },
+        {
+          "if": {
+            "q3": "repair"
+          },
+          "then": "repair_likely_covered"
+        },
+        {
+          "if": {
+            "q3": "replacement",
+            "q1": "has_comprehensive"
+          },
+          "then": "replacement_check_deductible"
+        },
+        {
+          "default": "check_policy"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "relatedQuizzes": ["repair-replace", "windshield-safety"],
+    "relatedWhitePapers": ["insurance-coverage-guide", "state-laws"],
+    "ctaText": "Find Insurance-Approved Installers",
+    "ctaUrl": "/find-installers"
+  }
+}

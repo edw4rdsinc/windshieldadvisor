@@ -1,0 +1,158 @@
+{
+  "id": "repair-replace",
+  "slug": "repair-replace",
+  "title": "Should I Repair or Replace?",
+  "description": "Determine the safest and most cost-effective option",
+  "icon": "wrench",
+  "duration": 2,
+  "priority": 3,
+  "featured": true,
+  "questions": [
+    {
+      "id": "q1",
+      "text": "How large is the damaged area?",
+      "type": "radio",
+      "required": true,
+      "options": [
+        {
+          "id": "q1a1",
+          "text": "A chip smaller than a quarter",
+          "value": "small_chip",
+          "score": 0,
+          "recommendation": "repair"
+        },
+        {
+          "id": "q1a2",
+          "text": "A single crack shorter than a dollar bill (6 inches)",
+          "value": "short_crack",
+          "score": 0,
+          "recommendation": "repair"
+        },
+        {
+          "id": "q1a3",
+          "text": "A crack longer than a dollar bill",
+          "value": "long_crack",
+          "score": 1,
+          "recommendation": "replace"
+        },
+        {
+          "id": "q1a4",
+          "text": "There are three or more separate chips/cracks",
+          "value": "multiple_damage",
+          "score": 1,
+          "recommendation": "replace"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "text": "Where on the windshield is the damage?",
+      "type": "radio",
+      "required": true,
+      "options": [
+        {
+          "id": "q2a1",
+          "text": "On the passenger's side, not near the edge",
+          "value": "passenger_side",
+          "score": 0,
+          "recommendation": "repair"
+        },
+        {
+          "id": "q2a2",
+          "text": "Directly in the driver's line of sight",
+          "value": "driver_sight",
+          "score": 1,
+          "recommendation": "replace"
+        },
+        {
+          "id": "q2a3",
+          "text": "Within 2-3 inches of the windshield's edge",
+          "value": "near_edge",
+          "score": 1,
+          "recommendation": "replace"
+        },
+        {
+          "id": "q2a4",
+          "text": "Over an internal antenna or ADAS camera sensor",
+          "value": "over_sensor",
+          "score": 1,
+          "recommendation": "replace"
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "text": "What does the damage look like?",
+      "type": "radio",
+      "required": true,
+      "options": [
+        {
+          "id": "q3a1",
+          "text": "A simple round \"bullseye\" or small \"star\" break",
+          "value": "bullseye_star",
+          "score": 0,
+          "recommendation": "repair"
+        },
+        {
+          "id": "q3a2",
+          "text": "The glass is shattered or has a hole through it",
+          "value": "shattered",
+          "score": 1,
+          "recommendation": "replace"
+        },
+        {
+          "id": "q3a3",
+          "text": "The damage is on the inside surface of the windshield",
+          "value": "inside_surface",
+          "score": 1,
+          "recommendation": "replace"
+        },
+        {
+          "id": "q3a4",
+          "text": "It's a single, clean crack",
+          "value": "single_crack",
+          "score": 0,
+          "recommendation": "repair"
+        }
+      ]
+    }
+  ],
+  "scoring": {
+    "type": "recommendation_based",
+    "method": "any_replace_wins",
+    "results": {
+      "repair": {
+        "severity": "safe",
+        "color": "green",
+        "title": "Repair is Your Best Option",
+        "summary": "Your windshield damage qualifies for a safe and effective repair.",
+        "explanation": "Based on industry standards like <strong>ROLAGS™ (Repair of Laminated Auto Glass Standard)</strong>, your windshield damage qualifies for a safe and effective repair. This is your most cost-effective choice.\n\n<strong>Why Repair?</strong> It's faster, significantly cheaper (often fully covered by insurance with no deductible), and better for the environment. Most importantly, it preserves the critical factory seal of your original windshield, which is vital for your car's structural integrity and ADAS system performance.\n\n<strong>Act quickly!</strong> Temperature changes and road vibrations can cause small chips to crack out, making a replacement necessary.",
+        "nextSteps": [
+          "Schedule repair within 1-2 days",
+          "Ask about ROLAGS™ certification",
+          "Check if insurance covers with no deductible",
+          "Avoid DIY repair kits"
+        ]
+      },
+      "replace": {
+        "severity": "caution",
+        "color": "red",
+        "title": "Replacement is Required",
+        "summary": "Due to the size, location, or severity of the damage, a repair is not a safe option.",
+        "explanation": "Due to the size, location, or severity of the damage, a repair is not a safe option. Your windshield's structural integrity is compromised, and a full replacement is necessary to ensure your safety.\n\n<strong>Key Considerations for Replacement:</strong>\n\n• <strong>Glass Quality:</strong> Discuss OEM (Original Equipment Manufacturer) vs. Aftermarket glass with your technician. OEM is guaranteed to match your car's specifications.\n\n• <strong>Adhesives:</strong> Ensure the shop uses OEM-approved urethane and respects the safe drive-away time.\n\n• <strong>ADAS Calibration:</strong> If your car has safety features like lane-keep assist, a post-replacement ADAS camera calibration is <strong>mandatory</strong> for them to function correctly.",
+        "nextSteps": [
+          "Get quotes from certified installers",
+          "Ask about OEM vs aftermarket glass",
+          "Verify ADAS calibration is included",
+          "Confirm safe drive-away time policy"
+        ]
+      }
+    }
+  },
+  "metadata": {
+    "relatedQuizzes": ["windshield-safety", "installer-qualified"],
+    "relatedWhitePapers": ["repair-vs-replace", "oem-vs-aftermarket"],
+    "ctaText": "Find Certified Installers",
+    "ctaUrl": "/find-installers"
+  }
+}

@@ -1,0 +1,199 @@
+{
+  "id": "adas-calibration",
+  "slug": "adas-calibration",
+  "title": "Does My Car Need ADAS Calibration?",
+  "description": "Find out if your safety systems are working properly",
+  "icon": "camera",
+  "duration": 4,
+  "priority": 2,
+  "featured": true,
+  "questions": [
+    {
+      "id": "q1",
+      "text": "Does your car have features like Lane Keeping Assist, Automatic Emergency Braking, or Adaptive Cruise Control?",
+      "type": "radio",
+      "required": true,
+      "options": [
+        {
+          "id": "q1a1",
+          "text": "Yes",
+          "value": "has_adas",
+          "score": 0,
+          "nextQuestion": "q2"
+        },
+        {
+          "id": "q1a2",
+          "text": "No / I'm not sure",
+          "value": "no_adas",
+          "score": 0,
+          "endQuiz": true,
+          "result": "no_adas"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "text": "Have you had your windshield replaced recently?",
+      "type": "radio",
+      "required": true,
+      "conditionalLogic": {
+        "showIf": {
+          "questionId": "q1",
+          "answerEquals": "has_adas"
+        }
+      },
+      "options": [
+        {
+          "id": "q2a1",
+          "text": "Yes",
+          "value": "windshield_replaced",
+          "score": 0,
+          "endQuiz": true,
+          "result": "mandatory_calibration"
+        },
+        {
+          "id": "q2a2",
+          "text": "No",
+          "value": "no_replacement",
+          "score": 0,
+          "nextQuestion": "q3"
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "text": "Has your vehicle recently been in a collision (even minor) or had suspension work or a wheel alignment?",
+      "type": "radio",
+      "required": true,
+      "conditionalLogic": {
+        "showIf": {
+          "questionId": "q2",
+          "answerEquals": "no_replacement"
+        }
+      },
+      "options": [
+        {
+          "id": "q3a1",
+          "text": "Yes",
+          "value": "collision_or_work",
+          "score": 0,
+          "endQuiz": true,
+          "result": "recommended_calibration"
+        },
+        {
+          "id": "q3a2",
+          "text": "No",
+          "value": "no_event",
+          "score": 0,
+          "nextQuestion": "q4"
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "text": "Are your car's safety features behaving strangely? (e.g., braking unexpectedly, not detecting lane lines)",
+      "type": "radio",
+      "required": true,
+      "conditionalLogic": {
+        "showIf": {
+          "questionId": "q3",
+          "answerEquals": "no_event"
+        }
+      },
+      "options": [
+        {
+          "id": "q4a1",
+          "text": "Yes",
+          "value": "malfunction",
+          "score": 0,
+          "endQuiz": true,
+          "result": "required_calibration"
+        },
+        {
+          "id": "q4a2",
+          "text": "No",
+          "value": "working_fine",
+          "score": 0,
+          "endQuiz": true,
+          "result": "not_needed"
+        }
+      ]
+    }
+  ],
+  "scoring": {
+    "type": "conditional",
+    "results": {
+      "mandatory_calibration": {
+        "severity": "critical",
+        "color": "red",
+        "title": "Calibration is MANDATORY",
+        "summary": "Nearly all automakers mandate ADAS calibration after every windshield replacement.",
+        "explanation": "The windshield is a critical part of the camera's optical system. Even a microscopic change in its position or angle after replacement can cause a safety system to fail.\n\nA misaligned camera will not trigger a warning light, creating a \"silent failure.\" The system may not work in a crash, or could even cause one by braking or steering incorrectly. Do not drive the vehicle until a proper static and/or dynamic calibration is performed by a qualified technician.",
+        "nextSteps": [
+          "Contact your installer immediately",
+          "Verify ADAS calibration was performed",
+          "Request calibration certificate/documentation",
+          "Do not drive until calibrated"
+        ]
+      },
+      "recommended_calibration": {
+        "severity": "caution",
+        "color": "yellow",
+        "title": "Calibration is Highly Recommended",
+        "summary": "Any event that can alter the geometry of the vehicle can affect ADAS alignment.",
+        "explanation": "Any event that can alter the geometry of the vehicle—like a collision, hitting a large pothole, suspension work, or a wheel alignment—can throw off the ADAS camera's precise alignment.\n\nThis is known as a \"recalibration event.\" To ensure your safety systems are aimed correctly and will function as designed, a professional calibration check is strongly recommended by vehicle manufacturers.",
+        "nextSteps": [
+          "Schedule a calibration check soon",
+          "Find an ADAS-certified technician",
+          "Explain the recent event to the shop",
+          "Request diagnostic scan if available"
+        ]
+      },
+      "required_calibration": {
+        "severity": "critical",
+        "color": "red",
+        "title": "Calibration is REQUIRED",
+        "summary": "Unusual behavior from safety systems indicates misalignment.",
+        "explanation": "If you are noticing unusual behavior from your safety systems, this is a clear sign that a sensor, likely the forward-facing camera, is misaligned. This is a significant safety risk and should be addressed immediately.\n\nThis condition is dangerous because the system may make incorrect decisions, such as applying the brakes for no reason (\"phantom braking\") or steering the car out of its lane. A full diagnostic scan and recalibration are necessary.",
+        "nextSteps": [
+          "Stop driving and address immediately",
+          "Contact an ADAS-certified shop",
+          "Request full diagnostic scan",
+          "Perform complete recalibration"
+        ]
+      },
+      "not_needed": {
+        "severity": "safe",
+        "color": "green",
+        "title": "Calibration is Likely Not Needed",
+        "summary": "Your ADAS systems appear to be functioning correctly.",
+        "explanation": "Based on your answers, your vehicle's ADAS does not currently have a clear reason to require recalibration. The systems should be functioning as intended.\n\nRemember to have the system recalibrated immediately if you have your windshield replaced or are involved in a collision in the future.",
+        "nextSteps": [
+          "Continue normal vehicle operation",
+          "Monitor ADAS performance",
+          "Remember: recalibrate after windshield replacement",
+          "Recalibrate after any collision"
+        ]
+      },
+      "no_adas": {
+        "severity": "info",
+        "color": "blue",
+        "title": "Calibration is Not Applicable",
+        "summary": "Your vehicle does not appear to have ADAS features.",
+        "explanation": "ADAS calibration is only required for vehicles equipped with Advanced Driver Assistance Systems that use a forward-facing camera, typically mounted on the windshield.\n\nIf your vehicle does not have features like Lane Keeping Assist or Automatic Emergency Braking, this procedure is not necessary for a windshield replacement.",
+        "nextSteps": [
+          "No action needed for ADAS",
+          "Standard windshield service applies",
+          "Ensure proper installation practices",
+          "Ask about AGSC certification"
+        ]
+      }
+    }
+  },
+  "metadata": {
+    "relatedQuizzes": ["windshield-safety", "installer-qualified"],
+    "relatedWhitePapers": ["adas-calibration-guide", "choosing-installer"],
+    "ctaText": "Find ADAS-Certified Installers",
+    "ctaUrl": "/find-installers"
+  }
+}
