@@ -71,7 +71,7 @@ export function QuizResults({ quiz, result, onEmailSubmit }: QuizResultsProps) {
         {/* Results Banner */}
         <SeverityBanner
           severity={severity}
-          title={result.result.title || quiz.results?.title || 'Quiz Complete!'}
+          title={result.result.title || quiz.metadata?.title || 'Quiz Complete!'}
         />
 
         {/* Result Content */}
@@ -219,13 +219,13 @@ export function QuizResults({ quiz, result, onEmailSubmit }: QuizResultsProps) {
           </div>
 
           {/* Related Content */}
-          {quiz.relatedContent && quiz.relatedContent.length > 0 && (
+          {quiz.metadata?.relatedWhitePapers && quiz.metadata?.relatedWhitePapers.length > 0 && (
             <div>
               <h3 className="text-xl font-bold text-deep-navy-900 mb-4">
                 Learn More
               </h3>
               <div className="grid md:grid-cols-2 gap-4">
-                {quiz.relatedContent.map((content, index) => (
+                {quiz.metadata?.relatedWhitePapers.map((content, index) => (
                   <Link
                     key={index}
                     href={content.url}
