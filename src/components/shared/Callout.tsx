@@ -63,7 +63,7 @@ const calloutConfig = {
 };
 
 export function Callout({ type, title, children, className = '' }: CalloutProps) {
-  const config = calloutConfig[type];
+  const config = calloutConfig[type as keyof typeof calloutConfig] || calloutConfig.info;
   const Icon = config.icon;
 
   return (

@@ -257,6 +257,8 @@ export function QuizEngine({ quiz, onComplete, sessionId }: QuizEngineProps) {
     const rules = quiz.scoring.logic?.rules || [];
 
     for (const rule of rules) {
+      if (!rule.if || !rule.then) continue;
+
       let conditionMet = true;
 
       // Check if conditions match

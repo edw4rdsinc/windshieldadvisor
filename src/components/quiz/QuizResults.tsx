@@ -71,7 +71,7 @@ export function QuizResults({ quiz, result, onEmailSubmit }: QuizResultsProps) {
         {/* Results Banner */}
         <SeverityBanner
           severity={severity}
-          title={result.result.title || quiz.metadata?.title || 'Quiz Complete!'}
+          title={result.result.title || 'Quiz Complete!'}
         />
 
         {/* Result Content */}
@@ -218,30 +218,7 @@ export function QuizResults({ quiz, result, onEmailSubmit }: QuizResultsProps) {
             </Link>
           </div>
 
-          {/* Related Content */}
-          {quiz.metadata?.relatedWhitePapers && quiz.metadata?.relatedWhitePapers.length > 0 && (
-            <div>
-              <h3 className="text-xl font-bold text-deep-navy-900 mb-4">
-                Learn More
-              </h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                {quiz.metadata?.relatedWhitePapers.map((content, index) => (
-                  <Link
-                    key={index}
-                    href={content.url}
-                    className="block p-5 bg-gray-50 rounded-lg border-2 border-gray-200 hover:border-safety-blue-800 hover:bg-white transition-all group"
-                  >
-                    <h4 className="font-semibold text-deep-navy-900 mb-2 group-hover:text-safety-blue-800">
-                      {content.title}
-                    </h4>
-                    <p className="text-sm text-gray-600 line-clamp-2">
-                      {content.description}
-                    </p>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )}
+          {/* Related Content - TODO: Implement when we have white paper objects */}
 
           {/* Action Buttons */}
           <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
