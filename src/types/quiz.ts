@@ -10,7 +10,7 @@ export interface QuizOption {
   value?: string;
   score?: number;
   recommendation?: string;
-  flag?: 'green' | 'red';
+  flag?: string;
   endQuiz?: boolean;
   result?: string;
   nextQuestion?: string;
@@ -21,10 +21,12 @@ export interface QuizQuestion {
   text: string;
   question?: string;
   description?: string;
+  helpText?: string;
   type: string;
   options: QuizOption[];
   required?: boolean;
   placeholder?: string;
+  conditionalLogic?: any;
 }
 
 export interface SeverityThreshold {
