@@ -47,13 +47,6 @@ export default function QuizzesPage() {
                   className="block bg-white rounded-lg shadow-card hover:shadow-card-hover p-6 md:p-8 border-2 border-transparent hover:border-safety-blue-800 transition-all group animate-fade-in-up hover:scale-[1.02]"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  {/* Category Badge */}
-                  <div className="mb-4">
-                    <span className="inline-block bg-safety-blue-100 text-safety-blue-800 px-3 py-1 rounded-full text-sm font-semibold">
-                      {quiz.category}
-                    </span>
-                  </div>
-
                   {/* Quiz Title */}
                   <h3 className="text-2xl font-bold text-deep-navy-900 mb-3 group-hover:text-safety-blue-800 transition-colors">
                     {quiz.title}
