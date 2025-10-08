@@ -19,19 +19,21 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
+  const title = `${quiz.title} | Windshield Safety Quiz`;
+  const description = quiz.description;
+
   return {
-    title: quiz.seo.metaTitle,
-    description: quiz.seo.metaDescription,
-    keywords: quiz.seo.keywords.join(', '),
+    title,
+    description,
     openGraph: {
-      title: quiz.seo.metaTitle,
-      description: quiz.seo.metaDescription,
+      title,
+      description,
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
-      title: quiz.seo.metaTitle,
-      description: quiz.seo.metaDescription,
+      title,
+      description,
     },
   };
 }
@@ -72,7 +74,7 @@ export default function QuizPage({ params }: PageProps) {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              <span>~{quiz.estimatedTime} minutes</span>
+              <span>~{quiz.duration} minutes</span>
             </div>
             <div className="flex items-center gap-2">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
