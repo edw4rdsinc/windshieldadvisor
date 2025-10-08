@@ -10,18 +10,10 @@ import {
   SparklesIcon,
 } from '@heroicons/react/24/outline';
 
-export type CalloutType =
-  | 'info'
-  | 'warning'
-  | 'danger'
-  | 'success'
-  | 'stat'
-  | 'case-study'
-  | 'legal'
-  | 'tip';
+export type CalloutType = string;
 
 interface CalloutProps {
-  type: CalloutType;
+  type: string;
   title?: string;
   children: React.ReactNode;
   className?: string;
