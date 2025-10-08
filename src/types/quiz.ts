@@ -36,8 +36,9 @@ export interface SeverityThreshold {
 }
 
 export interface ScoringRule {
-  if: Record<string, string | string[]>;
+  if: Record<string, any>;
   then: string;
+  default?: string;
 }
 
 export interface QuizScoring {
