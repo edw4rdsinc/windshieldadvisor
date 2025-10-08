@@ -82,26 +82,6 @@ export function WhitePaperLayout({
               <TableOfContents items={tableOfContents} />
             </div>
 
-            {/* Key Findings */}
-            {whitePaper.keyFindings && whitePaper.keyFindings.length > 0 && (
-              <div className="bg-white border-2 border-accent-orange-500 rounded-lg p-6 mb-8 animate-fade-in-up">
-                <h2 className="text-2xl font-bold text-deep-navy-900 mb-4 flex items-center gap-2">
-                  <svg className="w-6 h-6 text-accent-orange-500" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  Key Findings
-                </h2>
-                <ul className="space-y-3">
-                  {whitePaper.keyFindings.map((finding, index) => (
-                    <li key={index} className="flex items-start gap-3 animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
-                      <span className="text-accent-orange-500 font-bold mt-1">•</span>
-                      <span className="text-gray-700 flex-1">{finding}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
             {/* Sections */}
             <div className="space-y-12">
               {content.sections.map((section, index) => (
