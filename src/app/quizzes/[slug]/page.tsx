@@ -94,7 +94,7 @@ export default function QuizPage({ params }: PageProps) {
 
 // Generate static paths for all quizzes
 export async function generateStaticParams() {
-  const { default: allQuizzes } = await import('@/data/quizzes');
+  const { allQuizzes } = await import('@/data/quizzes');
 
   return allQuizzes.map((quiz) => ({
     slug: quiz.slug,
