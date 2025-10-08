@@ -41,6 +41,7 @@ export interface ContentSection {
   title: string;
   content: string;
   callouts?: Callout[];
+  subsections?: ContentSection[];
   image?: {
     url: string;
     alt: string;
