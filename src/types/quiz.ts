@@ -39,10 +39,11 @@ export interface ScoringRule {
 }
 
 export interface QuizScoring {
-  type: ScoringType;
+  type?: ScoringType;
   severityThresholds?: Record<string, SeverityThreshold>;
   thresholds?: Record<string, SeverityThreshold>;
   results?: Record<string, QuizResultData>;
+  resultMessages?: Record<string, QuizResultData>;
   logic?: {
     rules: ScoringRule[];
   };
