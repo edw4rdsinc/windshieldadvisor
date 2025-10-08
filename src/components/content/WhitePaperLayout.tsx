@@ -15,7 +15,7 @@ export function WhitePaperLayout({
   relatedWhitePapers = [],
   relatedQuizzes = [],
 }: WhitePaperLayoutProps) {
-  const { content, author, publishedAt, updatedAt, readTime, faqs } = whitePaper;
+  const { content, author, publishedAt, updatedAt, readTime, faqs, abstract, excerpt, tableOfContents, references } = whitePaper;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -39,7 +39,7 @@ export function WhitePaperLayout({
             </h1>
 
             <p className="text-lg md:text-xl text-blue-100 mb-6 animate-fade-in-up animation-delay-100">
-              {content.abstract}
+              {abstract || excerpt}
             </p>
 
             {/* Metadata */}
@@ -72,18 +72,18 @@ export function WhitePaperLayout({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Left Sidebar - Table of Contents (Desktop) */}
           <aside className="hidden lg:block lg:col-span-3">
-            <TableOfContents items={content.tableOfContents} />
+            <TableOfContents items={tableOfContents} />
           </aside>
 
           {/* Main Article */}
           <article className="lg:col-span-6">
             {/* Mobile Table of Contents */}
             <div className="lg:hidden mb-8">
-              <TableOfContents items={content.tableOfContents} />
+              <TableOfContents items={tableOfContents} />
             </div>
 
             {/* Key Findings */}
-            {content.keyFindings && content.keyFindings.length > 0 && (
+            {whitePaper.keyFindings && whitePaper.keyFindings.length > 0 && (
               <div className="bg-white border-2 border-accent-orange-500 rounded-lg p-6 mb-8 animate-fade-in-up">
                 <h2 className="text-2xl font-bold text-deep-navy-900 mb-4 flex items-center gap-2">
                   <svg className="w-6 h-6 text-accent-orange-500" fill="currentColor" viewBox="0 0 24 24">
@@ -92,7 +92,7 @@ export function WhitePaperLayout({
                   Key Findings
                 </h2>
                 <ul className="space-y-3">
-                  {content.keyFindings.map((finding, index) => (
+                  {whitePaper.keyFindings.map((finding, index) => (
                     <li key={index} className="flex items-start gap-3 animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
                       <span className="text-accent-orange-500 font-bold mt-1">•</span>
                       <span className="text-gray-700 flex-1">{finding}</span>
@@ -205,13 +205,13 @@ export function WhitePaperLayout({
             )}
 
             {/* References */}
-            {content.references && content.references.length > 0 && (
+            {references && references.length > 0 && (
               <section id="references" className="mt-12 scroll-mt-24 bg-gray-100 rounded-lg p-6 md:p-8 animate-fade-in-up">
                 <h2 className="text-2xl md:text-3xl font-bold text-deep-navy-900 mb-6">
                   References
                 </h2>
                 <ol className="space-y-3 text-sm text-gray-700">
-                  {content.references.map((ref, index) => (
+                  {references.map((ref, index) => (
                     <li key={index} className="flex gap-3">
                       <span className="font-semibold text-safety-blue-800 min-w-[2rem]">[{index + 1}]</span>
                       <span>
@@ -298,7 +298,7 @@ export function WhitePaperLayout({
                         {paper.title}
                       </h4>
                       <p className="text-sm text-gray-600 line-clamp-2">
-                        {paper.content.abstract}
+                        {paper.excerpt || paper.subtitle}
                       </p>
                       <div className="mt-2 text-xs text-gray-500">
                         {paper.readTime} min read
