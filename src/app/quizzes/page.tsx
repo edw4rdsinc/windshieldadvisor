@@ -101,13 +101,6 @@ export default function QuizzesPage() {
                 className="block bg-white rounded-lg shadow-card hover:shadow-card-hover p-6 border-2 border-transparent hover:border-safety-blue-800 transition-all group animate-fade-in-up hover:scale-[1.02]"
                 style={{ animationDelay: `${(featuredQuizzes.length + index) * 0.05}s` }}
               >
-                {/* Category Badge */}
-                <div className="mb-3">
-                  <span className="inline-block bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs font-semibold">
-                    {quiz.category}
-                  </span>
-                </div>
-
                 {/* Quiz Title */}
                 <h3 className="text-xl font-bold text-deep-navy-900 mb-2 group-hover:text-safety-blue-800 transition-colors">
                   {quiz.title}
@@ -124,7 +117,7 @@ export default function QuizzesPage() {
                     <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    {quiz.estimatedTime} min
+                    {quiz.duration} min
                   </span>
                   <span className="flex items-center gap-1">
                     <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
