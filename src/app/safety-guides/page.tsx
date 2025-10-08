@@ -61,28 +61,8 @@ export default function SafetyGuidesPage() {
 
                   {/* Abstract */}
                   <p className="text-gray-600 mb-4 leading-relaxed line-clamp-3">
-                    {paper.content.abstract}
+                    {paper.excerpt || paper.subtitle}
                   </p>
-
-                  {/* Key Findings Preview */}
-                  {paper.content.keyFindings && paper.content.keyFindings.length > 0 && (
-                    <div className="mb-4 bg-safety-blue-50 rounded-lg p-4">
-                      <h4 className="text-sm font-bold text-safety-blue-900 mb-2">Key Findings:</h4>
-                      <ul className="space-y-1">
-                        {paper.content.keyFindings.slice(0, 2).map((finding, idx) => (
-                          <li key={idx} className="text-sm text-safety-blue-800 flex items-start gap-2">
-                            <span className="mt-1">•</span>
-                            <span className="flex-1 line-clamp-1">{finding}</span>
-                          </li>
-                        ))}
-                        {paper.content.keyFindings.length > 2 && (
-                          <li className="text-sm text-safety-blue-700 font-semibold">
-                            +{paper.content.keyFindings.length - 2} more findings
-                          </li>
-                        )}
-                      </ul>
-                    </div>
-                  )}
 
                   {/* Meta Info */}
                   <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
@@ -142,7 +122,7 @@ export default function SafetyGuidesPage() {
 
                 {/* Abstract */}
                 <p className="text-sm text-gray-600 mb-4 line-clamp-3">
-                  {paper.content.abstract}
+                  {paper.excerpt || paper.subtitle}
                 </p>
 
                 {/* Meta Info */}
