@@ -51,10 +51,13 @@ export interface QuizScoring {
 
 export interface QuizResultData {
   title?: string;
-  severity?: Severity;
+  severity?: string;
   message?: string;
+  summary?: string;
+  explanation?: string;
   recommendations?: string[];
   warnings?: string[];
+  nextSteps?: string[];
   outcome?: string;
   totalScore?: number;
   percentage?: number;
