@@ -20,18 +20,18 @@ export interface SEO {
   focusKeyword: string;
   canonicalUrl: string;
   ogImage?: string;
-  twitterCard?: 'summary' | 'summary_large_image';
+  twitterCard?: string;
 }
 
 export interface TableOfContentsItem {
   id: string;
   title: string;
-  level: 2 | 3 | 4;
+  level: number;
   children?: TableOfContentsItem[];
 }
 
 export interface Callout {
-  type: 'info' | 'warning' | 'danger' | 'success' | 'stat' | 'case-study' | 'legal' | 'tip';
+  type: string;
   title?: string;
   content: string;
 }
@@ -80,8 +80,8 @@ export interface WhitePaper {
   // Identifiers
   id: string;
   slug: string;
-  type: 'white_paper';
-  status: ContentStatus;
+  type: string;
+  status: string;
   priority: number;
   featured: boolean;
 
@@ -127,8 +127,8 @@ export interface BlogPost {
   // Identifiers
   id: string;
   slug: string;
-  type: 'blog_post';
-  status: ContentStatus;
+  type: string;
+  status: string;
   priority: number;
 
   // Content
@@ -198,7 +198,7 @@ export interface ContentFilters {
 export interface ContentCard {
   id: string;
   slug: string;
-  type: ContentType;
+  type: string;
   title: string;
   excerpt: string;
   category: string;
