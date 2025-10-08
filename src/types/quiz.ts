@@ -36,8 +36,8 @@ export interface SeverityThreshold {
 }
 
 export interface ScoringRule {
-  if: Record<string, any>;
-  then: string;
+  if?: Record<string, any>;
+  then?: string;
   default?: string;
 }
 
