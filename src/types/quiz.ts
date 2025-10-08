@@ -18,9 +18,10 @@ export interface QuizOption {
 
 export interface QuizQuestion {
   id: string;
-  question: string;
+  text: string;
+  question?: string;
   description?: string;
-  type: QuestionType;
+  type: string;
   options: QuizOption[];
   required?: boolean;
   placeholder?: string;
@@ -74,21 +75,17 @@ export interface Quiz {
   slug: string;
   title: string;
   description: string;
-  category: string;
-  estimatedTime: number;
+  icon: string;
+  duration: number;
   priority: number;
   featured?: boolean;
   questions: QuizQuestion[];
   scoring: QuizScoring;
-  results?: {
-    title?: string;
-    emailTemplate?: string;
-  };
-  relatedContent?: RelatedContent[];
-  seo: {
-    metaTitle: string;
-    metaDescription: string;
-    keywords: string[];
+  metadata?: {
+    relatedQuizzes?: string[];
+    relatedWhitePapers?: string[];
+    ctaText?: string;
+    ctaUrl?: string;
   };
 }
 
