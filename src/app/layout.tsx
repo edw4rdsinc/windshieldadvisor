@@ -52,6 +52,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable}>
+      <head>
+        <script defer data-domain="windshieldadvisor.info" src="http://5.78.156.118:8001/js/script.js"></script>
+      </head>
       <body className="font-sans antialiased bg-white text-gray-900">
         {children}
       </body>
