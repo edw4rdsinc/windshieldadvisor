@@ -161,6 +161,39 @@
           "score": 0
         }
       ]
+    },
+    {
+      "id": "q5",
+      "text": "Does your policy have an endorsement for OEM (Original Equipment Manufacturer) parts?",
+      "type": "radio",
+      "required": true,
+      "helpText": "OEM coverage ensures your insurer pays for manufacturer-original glass instead of cheaper aftermarket alternatives",
+      "conditionalLogic": {
+        "showIf": {
+          "questionId": "q3",
+          "answerEquals": ["replacement", "not_sure"]
+        }
+      },
+      "options": [
+        {
+          "id": "q5a1",
+          "text": "Yes, I have OEM parts coverage",
+          "value": "has_oem",
+          "score": 2
+        },
+        {
+          "id": "q5a2",
+          "text": "No",
+          "value": "no_oem",
+          "score": 0
+        },
+        {
+          "id": "q5a3",
+          "text": "I'm not sure",
+          "value": "oem_unknown",
+          "score": 0
+        }
+      ]
     }
   ],
   "scoring": {
@@ -184,11 +217,13 @@
         "color": "green",
         "title": "Likely Fully Covered!",
         "summary": "Your state has zero-deductible glass coverage laws.",
-        "explanation": "Good news! You live in a state with <strong>zero-deductible glass coverage laws</strong>. This means your comprehensive insurance should cover your windshield repair or replacement with <strong>no out-of-pocket cost</strong>.\n\n<strong>Important Notes:</strong>\n\n• Your insurance company cannot raise your rates for a glass claim in these states\n\n• You should still verify coverage with your insurer\n\n• Choose a shop in your insurance network to avoid billing issues",
+        "explanation": "Good news! You live in a state with <strong>zero-deductible glass coverage laws</strong>. This means your comprehensive insurance should cover your windshield repair or replacement with <strong>no out-of-pocket cost</strong>.\n\n<strong>Important Notes:</strong>\n\n• Your insurance company cannot raise your rates for a glass claim in these states\n\n• You should still verify coverage with your insurer\n\n• Choose a shop in your insurance network to avoid billing issues\n\n<strong>Quality & Safety Reminder:</strong>\n\n• Even with full coverage, <strong>insist on OEM glass if your policy allows it</strong> or ensure high-quality aftermarket glass is used\n\n• Verify that <strong>ADAS calibration</strong> is included in the service—this is mandatory for modern vehicles with camera-based safety systems\n\n• Ask the installer to guarantee successful calibration and proper safety system function",
         "nextSteps": [
           "Call your insurance company to confirm",
           "Ask for approved shop list",
           "Verify zero deductible applies",
+          "Confirm OEM glass or high-quality aftermarket",
+          "Ensure ADAS calibration is included",
           "Schedule service with confidence"
         ]
       },
@@ -197,7 +232,7 @@
         "color": "green",
         "title": "Repair Likely Fully Covered",
         "summary": "Most insurance policies cover chip/crack repairs with no deductible.",
-        "explanation": "Most comprehensive insurance policies cover windshield <strong>repairs</strong> (not replacements) with <strong>zero deductible</strong>. This is because insurance companies save money by encouraging repair over replacement.\n\n<strong>Why This Matters:</strong>\n\n• Repairs cost $50-$150 out of pocket, but $0 with insurance\n\n• No rate increase for repair claims (typically)\n\n• Faster service (30 minutes vs 2+ hours)\n\n• Preserves your original factory windshield seal",
+        "explanation": "Most comprehensive insurance policies cover windshield <strong>repairs</strong> (not replacements) with <strong>zero deductible</strong>. This is because insurance companies save money by encouraging repair over replacement.\n\n<strong>Why This Matters:</strong>\n\n• Repairs cost $50-$150 out of pocket, but $0 with insurance\n\n• No rate increase for repair claims (typically)\n\n• Faster service (30 minutes vs 2+ hours)\n\n• Preserves your original factory windshield seal\n\n• Maintains the integrity of your vehicle's ADAS camera calibration",
         "nextSteps": [
           "Call insurance to confirm zero-deductible repair",
           "Ask if claim affects rates",
@@ -210,10 +245,12 @@
         "color": "yellow",
         "title": "Likely Covered, But Check Your Deductible",
         "summary": "Replacement is usually covered, but you may owe your deductible.",
-        "explanation": "If you have comprehensive coverage, your windshield replacement should be covered. However, you will likely need to pay your <strong>comprehensive deductible</strong> first.\n\n<strong>Deductible Considerations:</strong>\n\n• <strong>Low deductible ($0-$100):</strong> Claim makes sense\n\n• <strong>Medium deductible ($250-$500):</strong> Compare to out-of-pocket cost\n\n• <strong>High deductible ($500+):</strong> May be cheaper to pay yourself\n\n<strong>Rate Impact:</strong> Some insurers may raise your rates for a comprehensive claim. Ask before filing.",
+        "explanation": "If you have comprehensive coverage, your windshield replacement should be covered. However, you will likely need to pay your <strong>comprehensive deductible</strong> first.\n\n<strong>Deductible Considerations:</strong>\n\n• <strong>Low deductible ($0-$100):</strong> Claim makes sense\n\n• <strong>Medium deductible ($250-$500):</strong> Compare to out-of-pocket cost\n\n• <strong>High deductible ($500+):</strong> May be cheaper to pay yourself\n\n<strong>Rate Impact:</strong> Some insurers may raise your rates for a comprehensive claim. Ask before filing.\n\n<strong>Critical Safety Considerations:</strong>\n\n• <strong>OEM vs Aftermarket Glass:</strong> Insurance may default to cheaper aftermarket glass, which can have optical distortions that interfere with ADAS camera systems\n\n• <strong>ADAS Calibration:</strong> Modern vehicles require mandatory camera recalibration after windshield replacement. Ensure this cost ($75-$300+) is included in the quote\n\n• <strong>Quality Matters:</strong> If you don't have OEM coverage, you may need to pay the difference for manufacturer-original glass to ensure proper ADAS function",
         "nextSteps": [
           "Call insurance to verify deductible",
           "Ask if claim will affect rates",
+          "Confirm ADAS calibration is covered",
+          "Verify OEM vs aftermarket glass coverage",
           "Get quote with and without insurance",
           "Compare total costs before deciding"
         ]
@@ -223,12 +260,40 @@
         "color": "blue",
         "title": "Check Your Policy Details",
         "summary": "You may have coverage, but need to verify with your insurer.",
-        "explanation": "Based on your answers, you may have glass coverage, but the details are unclear. The best step is to call your insurance company directly and ask:\n\n<strong>Key Questions to Ask:</strong>\n\n• \"Do I have comprehensive coverage?\"\n\n• \"Does my policy cover glass damage?\"\n\n• \"What is my glass or comprehensive deductible?\"\n\n• \"Will a glass claim increase my rates?\"\n\n• \"Do you have a preferred shop network?\"",
+        "explanation": "Based on your answers, you may have glass coverage, but the details are unclear. The best step is to call your insurance company directly and ask:\n\n<strong>Key Questions to Ask:</strong>\n\n• \"Do I have comprehensive coverage?\"\n\n• \"Does my policy cover glass damage?\"\n\n• \"What is my glass or comprehensive deductible?\"\n\n• \"Will a glass claim increase my rates?\"\n\n• \"Do you have a preferred shop network?\"\n\n• \"Do I have OEM parts coverage for glass?\"\n\n• \"Is ADAS calibration covered in the replacement cost?\"",
         "nextSteps": [
           "Call your insurance company",
           "Have policy number ready",
           "Ask all key questions above",
           "Get written confirmation if possible"
+        ]
+      },
+      "replacement_oem_covered": {
+        "severity": "safe",
+        "color": "green",
+        "title": "Covered with OEM Protection",
+        "summary": "Your OEM coverage ensures you get manufacturer-quality glass.",
+        "explanation": "Excellent! Your policy includes OEM parts coverage, which means your insurer is <strong>obligated to pay for manufacturer-original glass</strong>. This is the best way to ensure proper ADAS function and vehicle safety.\n\n<strong>Your Advantage:</strong>\n\n• <strong>No aftermarket compromises:</strong> You get the same glass quality as when your vehicle was new\n\n• <strong>ADAS reliability:</strong> OEM glass is specifically designed to work with your vehicle's camera-based safety systems\n\n• <strong>Optical clarity:</strong> No risk of distortions that can affect collision avoidance, lane-keeping, or automatic emergency braking\n\n<strong>What to Verify:</strong>\n\n• Confirm ADAS calibration cost is included in the replacement quote\n\n• Insist the shop uses genuine OEM glass—don't accept substitutions\n\n• Ensure the installer has proper calibration equipment for your vehicle make/model",
+        "nextSteps": [
+          "Call insurance to confirm OEM coverage applies",
+          "Find shops certified for your vehicle brand",
+          "Verify ADAS calibration is included",
+          "Insist on genuine OEM glass—no substitutions",
+          "Request calibration completion certificate"
+        ]
+      },
+      "replacement_no_oem_warning": {
+        "severity": "caution",
+        "color": "yellow",
+        "title": "Covered, But Without OEM Protection",
+        "summary": "Insurance will cover it, but may default to cheaper aftermarket glass.",
+        "explanation": "Your insurance will cover the replacement, but <strong>without OEM parts coverage, they will likely approve only cheaper aftermarket glass</strong>. This creates a conflict between the insurer's cost-cutting and your vehicle's safety.\n\n<strong>The Systemic Risk:</strong>\n\n• <strong>Optical distortions:</strong> Aftermarket glass can have imperfections that prevent ADAS cameras from calibrating correctly\n\n• <strong>Safety system failures:</strong> Your collision avoidance, lane-keeping, or emergency braking may not function properly\n\n• <strong>Cost pressure:</strong> Insurers may also question the cost of proper ADAS calibration ($75-$300+)\n\n<strong>Your Options:</strong>\n\n1. <strong>Pay the difference:</strong> Upgrade to OEM glass out-of-pocket (typically $100-$400 more)\n\n2. <strong>High-quality aftermarket:</strong> If using aftermarket, insist on premium brands and demand a guarantee of successful ADAS calibration\n\n3. <strong>Do not skip calibration:</strong> This is a mandatory safety procedure, not optional",
+        "nextSteps": [
+          "Call insurance to verify coverage details",
+          "Ask about cost difference for OEM upgrade",
+          "Find shops that guarantee ADAS calibration",
+          "Consider paying difference for OEM glass",
+          "Do not accept service without calibration"
         ]
       }
     },
@@ -252,6 +317,22 @@
             "q3": "repair"
           },
           "then": "repair_likely_covered"
+        },
+        {
+          "if": {
+            "q3": "replacement",
+            "q1": "has_comprehensive",
+            "q5": "has_oem"
+          },
+          "then": "replacement_oem_covered"
+        },
+        {
+          "if": {
+            "q3": "replacement",
+            "q1": "has_comprehensive",
+            "q5": "no_oem"
+          },
+          "then": "replacement_no_oem_warning"
         },
         {
           "if": {
