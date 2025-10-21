@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import FloatingQuizButton from '@/components/FloatingQuizButton';
 
 export const metadata: Metadata = {
   title: 'Windshield Safety and ADAS Calibration Guide | Windshield Advisor',
@@ -976,6 +977,9 @@ export default function HomePage() {
           </div>
         </div>
       </footer>
+
+      {/* Floating Quiz Button */}
+      <FloatingQuizButton />
     </div>
   );
 }
