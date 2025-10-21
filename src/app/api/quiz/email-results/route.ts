@@ -3,8 +3,6 @@ import { Resend } from 'resend';
 import QuizResultsEmail from '@/emails/quiz-results';
 import type { Quiz, QuizResult } from '@/types/quiz';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -30,6 +28,9 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+
+    // Initialize Resend client (lazy initialization to avoid build-time errors)
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     // Send email using Resend
     const { data, error } = await resend.emails.send({
