@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+// Force dynamic rendering for this API route
+export const dynamic = 'force-dynamic';
+
 // Partner shop data for specific service areas
 const PARTNER_SHOPS = {
   // Portland Metro Area (OR: Washington, Clackamas, Multnomah counties)
