@@ -497,7 +497,7 @@ export default function HomePage() {
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-500">📖 15 min read</span>
                 <Link
-                  href="/safety-guides/adas-calibration-mandatory"
+                  href="/safety-guides/mandatory-adas-calibration-windshield-replacement"
                   className="text-safety-blue-600 hover:text-safety-blue-700 font-semibold"
                 >
                   Read Full Guide →
@@ -525,7 +525,7 @@ export default function HomePage() {
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-500">📖 18 min read</span>
                 <Link
-                  href="/safety-guides/oem-vs-aftermarket"
+                  href="/safety-guides/oem-vs-aftermarket-windshields-safety-adas-compatibility"
                   className="text-safety-blue-600 hover:text-safety-blue-700 font-semibold"
                 >
                   Read Full Guide →
@@ -553,7 +553,7 @@ export default function HomePage() {
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-500">📖 12 min read</span>
                 <Link
-                  href="/safety-guides/repair-vs-replace"
+                  href="/safety-guides/windshield-repair-vs-replacement-rolags-standards"
                   className="text-safety-blue-600 hover:text-safety-blue-700 font-semibold"
                 >
                   Read Full Guide →
@@ -570,18 +570,17 @@ export default function HomePage() {
               </div>
 
               <h3 className="text-2xl font-bold text-gray-900 mb-3" id="certified-installers">
-                How to Choose a Windshield Replacement Company
+                Best Practices for Windshield Care and Maintenance
               </h3>
 
               <p className="text-gray-600 mb-6 leading-relaxed">
-                The 7 certifications every shop must have, red flags indicating
-                unsafe practices, and critical questions to ask.
+                Proper cleaning techniques, seasonal protection, wiper blade care, and damage prevention strategies to extend windshield lifespan.
               </p>
 
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-500">📖 14 min read</span>
+                <span className="text-sm text-gray-500">📖 10 min read</span>
                 <Link
-                  href="/safety-guides/choosing-installer"
+                  href="/safety-guides/windshield-care-maintenance-best-practices"
                   className="text-safety-blue-600 hover:text-safety-blue-700 font-semibold"
                 >
                   Read Full Guide →
@@ -595,7 +594,7 @@ export default function HomePage() {
               href="/safety-guides"
               className="inline-flex items-center text-safety-blue-600 hover:text-safety-blue-700 font-semibold text-lg"
             >
-              VIEW ALL 10 SAFETY GUIDES →
+              VIEW ALL 9 SAFETY GUIDES →
             </Link>
           </div>
         </div>
@@ -685,7 +684,7 @@ export default function HomePage() {
               </p>
               <div className="flex items-center justify-between text-sm">
                 <span className="text-gray-500">📖 10 min read</span>
-                <Link href="/safety-guides/lamination-science" className="text-safety-blue-600 hover:text-safety-blue-700 font-semibold">
+                <Link href="/safety-guides/the-science-and-safety-of-laminated-automotive-glass" className="text-safety-blue-600 hover:text-safety-blue-700 font-semibold">
                   Read →
                 </Link>
               </div>
@@ -706,7 +705,7 @@ export default function HomePage() {
               </p>
               <div className="flex items-center justify-between text-sm">
                 <span className="text-gray-500">📖 11 min read</span>
-                <Link href="/safety-guides/temperature-impact" className="text-safety-blue-600 hover:text-safety-blue-700 font-semibold">
+                <Link href="/safety-guides/temperature-automotive-adhesive-curing-windshield-safety" className="text-safety-blue-600 hover:text-safety-blue-700 font-semibold">
                   Read →
                 </Link>
               </div>
@@ -727,34 +726,13 @@ export default function HomePage() {
               </p>
               <div className="flex items-center justify-between text-sm">
                 <span className="text-gray-500">📖 13 min read</span>
-                <Link href="/safety-guides/insurance-warranties" className="text-safety-blue-600 hover:text-safety-blue-700 font-semibold">
+                <Link href="/safety-guides/windshield-warranties-insurance-consumer-guide" className="text-safety-blue-600 hover:text-safety-blue-700 font-semibold">
                   Read →
                 </Link>
               </div>
             </div>
 
             {/* Card 8 */}
-            <div className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
-              <div className="text-safety-blue-600 mb-3">
-                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                The Windshield's Role in Vehicle Safety Systems
-              </h3>
-              <p className="text-gray-600 text-sm mb-4">
-                Roof strength, airbag deployment, and how windshields integrate with safety systems.
-              </p>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-500">📖 16 min read</span>
-                <Link href="/safety-guides/safety-systems-role" className="text-safety-blue-600 hover:text-safety-blue-700 font-semibold">
-                  Read →
-                </Link>
-              </div>
-            </div>
-
-            {/* Card 9 */}
             <div className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
               <div className="text-safety-blue-600 mb-3">
                 <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -769,13 +747,13 @@ export default function HomePage() {
               </p>
               <div className="flex items-center justify-between text-sm">
                 <span className="text-gray-500">📖 12 min read</span>
-                <Link href="/safety-guides/future-technology" className="text-safety-blue-600 hover:text-safety-blue-700 font-semibold">
+                <Link href="/safety-guides/future-windshield-technology-huds-smart-glass" className="text-safety-blue-600 hover:text-safety-blue-700 font-semibold">
                   Read →
                 </Link>
               </div>
             </div>
 
-            {/* Card 10 */}
+            {/* Card 9 */}
             <div className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
               <div className="text-safety-blue-600 mb-3">
                 <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -790,7 +768,7 @@ export default function HomePage() {
               </p>
               <div className="flex items-center justify-between text-sm">
                 <span className="text-gray-500">📖 9 min read</span>
-                <Link href="/safety-guides/recycling-environmental" className="text-safety-blue-600 hover:text-safety-blue-700 font-semibold">
+                <Link href="/safety-guides/circular-economy-automotive-glass-recycling" className="text-safety-blue-600 hover:text-safety-blue-700 font-semibold">
                   Read →
                 </Link>
               </div>
