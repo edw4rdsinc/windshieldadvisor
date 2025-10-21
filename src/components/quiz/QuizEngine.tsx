@@ -142,7 +142,12 @@ export function QuizEngine({ quiz, onComplete, sessionId }: QuizEngineProps) {
 
   const calculateThresholdResult = (finalAnswers: QuizAnswer[]) => {
     let totalScore = 0;
+    let hasCriticalFailure = false;
+    let hadWork = false;
+    let wasCalibrated = false;
+    let hasCamera = false;
 
+    // Check for critical failures and ADAS-specific flags
     finalAnswers.forEach(answer => {
       const question = quiz.questions.find(q => q.id === answer.questionId);
       if (!question) return;
@@ -151,10 +156,43 @@ export function QuizEngine({ quiz, onComplete, sessionId }: QuizEngineProps) {
         opt.id === answer.answer || opt.value === answer.answer
       );
 
+      if (option && (option as any).criticalFailure) {
+        hasCriticalFailure = true;
+      }
+
+      // Check for ADAS mandatory calibration case
+      if (option && (option as any).hadWork) {
+        hadWork = true;
+      }
+      if (option && (option as any).wasCalibrated === true) {
+        wasCalibrated = true;
+      }
+      if (option && (option as any).hasCamera) {
+        hasCamera = true;
+      }
+
       if (option && typeof option.score === 'number') {
         totalScore += option.score;
       }
     });
+
+    // Special case for ADAS: had work but no calibration
+    if (quiz.id === 'adas-calibration' && hadWork && !wasCalibrated && hasCamera && quiz.scoring.results?.['mandatory']) {
+      return {
+        severity: 'critical',
+        totalScore,
+        ...quiz.scoring.results['mandatory'],
+      };
+    }
+
+    // If critical failure detected, return critical failure result
+    if (hasCriticalFailure && quiz.scoring.results?.['critical_failure']) {
+      return {
+        severity: 'critical',
+        totalScore,
+        ...quiz.scoring.results['critical_failure'],
+      };
+    }
 
     const thresholds = quiz.scoring.severityThresholds;
     if (!thresholds) return { severity: 'info', totalScore };
@@ -254,6 +292,11 @@ export function QuizEngine({ quiz, onComplete, sessionId }: QuizEngineProps) {
       finalAnswers.map(a => [a.questionId, a.answer])
     );
 
+    // For insurance-coverage quiz, calculate costs
+    if (quiz.id === 'insurance-coverage') {
+      return calculateInsuranceCoverage(finalAnswers, answerMap);
+    }
+
     const rules = quiz.scoring.logic?.rules || [];
 
     for (const rule of rules) {
@@ -281,6 +324,117 @@ export function QuizEngine({ quiz, onComplete, sessionId }: QuizEngineProps) {
     }
 
     return quiz.scoring.results?.['default'] || { severity: 'info' };
+  };
+
+  const calculateInsuranceCoverage = (finalAnswers: QuizAnswer[], answerMap: Map<string, string | string[]>) => {
+    // Get answer values
+    const getAnswerValue = (questionId: string) => answerMap.get(questionId) as string;
+    const getAnswerOption = (questionId: string) => {
+      const answer = getAnswerValue(questionId);
+      const question = quiz.questions.find(q => q.id === questionId);
+      return question?.options.find(opt => opt.value === answer || opt.id === answer);
+    };
+
+    const stateAnswer = getAnswerOption('q1');
+    const coverageAnswer = getAnswerOption('q2');
+    const causeAnswer = getAnswerOption('q3');
+    const deductibleAnswer = getAnswerOption('q4');
+    const serviceAnswer = getAnswerOption('q5');
+    const fullGlassAnswer = getAnswerOption('q6');
+    const priorClaimsAnswer = getAnswerOption('q7');
+
+    let isCovered = false;
+    let deductibleAmount = 0;
+    let estimatedTotal = (serviceAnswer as any)?.estimatedCost || 500;
+    let outOfPocket = 0;
+    let notes: string[] = [];
+
+    // Determine if covered
+    if ((coverageAnswer as any)?.covered === true) {
+      if ((causeAnswer as any)?.covered === 'comprehensive' || (causeAnswer as any)?.covered === 'unknown') {
+        isCovered = true;
+      } else if ((causeAnswer as any)?.covered === 'collision' && getAnswerValue('q2') === 'comp_collision') {
+        isCovered = true;
+        notes.push('Collision coverage applies, but you may want to use comprehensive if deductible is lower');
+      }
+    } else if ((coverageAnswer as any)?.covered === false) {
+      isCovered = false;
+      notes.push('Liability-only or collision-only policies do not cover windshield damage');
+    }
+
+    // Calculate deductible
+    if (isCovered) {
+      // Zero-deductible states
+      if ((stateAnswer as any)?.zeroDeductible && (coverageAnswer as any)?.covered) {
+        deductibleAmount = 0;
+        const stateName = stateAnswer?.text || 'Your state';
+        notes.push(`${stateName} law requires insurers to waive comprehensive deductible for glass`);
+      }
+      // Repair often has $0 deductible
+      else if ((serviceAnswer as any)?.waivedDeductible) {
+        deductibleAmount = 0;
+        notes.push('Most insurers waive deductible for repairs to encourage fixing chips before they spread');
+      }
+      // Full glass coverage
+      else if ((fullGlassAnswer as any)?.hasFullGlass === true) {
+        deductibleAmount = 0;
+        notes.push('Your full glass coverage eliminates the deductible');
+      }
+      // Standard deductible applies
+      else if ((deductibleAnswer as any)?.amount !== null && (deductibleAnswer as any)?.amount !== undefined) {
+        deductibleAmount = (deductibleAnswer as any).amount;
+      }
+      // Unknown deductible
+      else {
+        deductibleAmount = 250; // Estimate
+        notes.push('Check your policy documents for your actual comprehensive deductible');
+      }
+    }
+
+    // Calculate out of pocket
+    if (!isCovered) {
+      outOfPocket = estimatedTotal;
+    } else {
+      outOfPocket = Math.min(deductibleAmount, estimatedTotal);
+    }
+
+    // Add additional context notes
+    if ((stateAnswer as any)?.optionalFullGlass && deductibleAmount > 0) {
+      notes.push(`💡 In ${stateAnswer?.text}, insurers offer optional full glass coverage. Ask about adding $0 glass deductible to your policy.`);
+    }
+
+    if ((priorClaimsAnswer as any)?.riskIncrease) {
+      notes.push('⚠️ Multiple glass claims may trigger a policy review. Consult your insurer about potential rate impacts.');
+    }
+
+    // Determine result type
+    let resultKey = 'check_policy';
+    if (!isCovered) {
+      resultKey = 'not_covered';
+    } else if (outOfPocket === 0) {
+      resultKey = 'fully_covered';
+    } else if (outOfPocket < estimatedTotal) {
+      resultKey = 'partially_covered';
+    }
+
+    const baseResult = quiz.scoring.results?.[resultKey] || { severity: 'info' };
+
+    return {
+      ...baseResult,
+      coverage: isCovered,
+      deductibleAmount,
+      estimatedTotal,
+      outOfPocket,
+      notes,
+      // Add cost breakdown for display
+      costBreakdown: {
+        covered: isCovered,
+        deductible: deductibleAmount,
+        estimatedCost: estimatedTotal,
+        yourCost: outOfPocket,
+        insurancePays: isCovered ? estimatedTotal - outOfPocket : 0
+      }
+    };
   };
 
   if (isComplete && result) {

@@ -69,6 +69,19 @@ export interface QuizResultData {
   level?: string;
   color?: string;
   recommendation?: string;
+  // Insurance quiz specific
+  coverage?: boolean;
+  deductibleAmount?: number;
+  estimatedTotal?: number;
+  outOfPocket?: number;
+  notes?: string[];
+  costBreakdown?: {
+    covered: boolean;
+    deductible: number;
+    estimatedCost: number;
+    yourCost: number;
+    insurancePays: number;
+  };
 }
 
 export interface RelatedContent {

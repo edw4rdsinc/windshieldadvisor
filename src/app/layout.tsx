@@ -53,7 +53,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <head>
-        <script defer data-domain="windshieldadvisor.info" src="http://5.78.156.118:8001/js/script.js"></script>
+        {/* Privacy-friendly analytics by Plausible */}
+        <script async src="https://plausible.io/js/pa-J0n8AbG1mmZxIYUwU9Z-v.js"></script>
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+            plausible.init()
+          `
+        }} />
       </head>
       <body className="font-sans antialiased bg-white text-gray-900">
         {children}

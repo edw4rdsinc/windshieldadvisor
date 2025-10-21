@@ -4,194 +4,292 @@
   "title": "Will Insurance Cover My Replacement?",
   "description": "Understand your coverage and out-of-pocket costs",
   "icon": "document-text",
-  "duration": 3,
+  "duration": 4,
   "priority": 5,
   "featured": false,
   "questions": [
     {
       "id": "q1",
-      "text": "Do you have comprehensive coverage on your auto insurance policy?",
+      "text": "What state do you live in?",
       "type": "radio",
       "required": true,
-      "helpText": "Comprehensive coverage (not liability-only) is typically required for glass coverage",
       "options": [
         {
           "id": "q1a1",
-          "text": "Yes, I have comprehensive coverage",
-          "value": "has_comprehensive",
-          "score": 1
+          "text": "Florida",
+          "value": "florida",
+          "zeroDeductible": true
         },
         {
           "id": "q1a2",
-          "text": "No, I only have liability coverage",
-          "value": "liability_only",
-          "score": 0,
-          "endQuiz": true,
-          "result": "no_coverage"
+          "text": "Kentucky",
+          "value": "kentucky",
+          "zeroDeductible": true
         },
         {
           "id": "q1a3",
-          "text": "I'm not sure",
-          "value": "not_sure",
-          "score": 0
+          "text": "South Carolina",
+          "value": "south_carolina",
+          "zeroDeductible": true
+        },
+        {
+          "id": "q1a4",
+          "text": "Arizona",
+          "value": "arizona",
+          "optionalFullGlass": true
+        },
+        {
+          "id": "q1a5",
+          "text": "Connecticut",
+          "value": "connecticut",
+          "optionalFullGlass": true
+        },
+        {
+          "id": "q1a6",
+          "text": "Massachusetts",
+          "value": "massachusetts",
+          "optionalFullGlass": true
+        },
+        {
+          "id": "q1a7",
+          "text": "Minnesota",
+          "value": "minnesota",
+          "optionalFullGlass": true
+        },
+        {
+          "id": "q1a8",
+          "text": "New York",
+          "value": "new_york",
+          "optionalFullGlass": true
+        },
+        {
+          "id": "q1a9",
+          "text": "Other state",
+          "value": "other",
+          "standardDeductible": true
         }
       ]
     },
     {
       "id": "q2",
-      "text": "What state do you live in?",
-      "type": "select",
+      "text": "What auto insurance coverage do you have?",
+      "type": "radio",
       "required": true,
-      "helpText": "Some states have zero-deductible glass coverage laws",
-      "conditionalLogic": {
-        "showIf": {
-          "questionId": "q1",
-          "answerEquals": ["has_comprehensive", "not_sure"]
-        }
-      },
       "options": [
         {
           "id": "q2a1",
-          "text": "Florida",
-          "value": "FL",
-          "score": 2,
-          "zeroDeductible": true
+          "text": "Comprehensive (covers non-collision damage)",
+          "value": "comprehensive",
+          "covered": true
         },
         {
           "id": "q2a2",
-          "text": "Kentucky",
-          "value": "KY",
-          "score": 2,
-          "zeroDeductible": true
+          "text": "Comprehensive and Collision",
+          "value": "comp_collision",
+          "covered": true
         },
         {
           "id": "q2a3",
-          "text": "South Carolina",
-          "value": "SC",
-          "score": 2,
-          "zeroDeductible": true
+          "text": "Collision only",
+          "value": "collision_only",
+          "covered": false
         },
         {
           "id": "q2a4",
-          "text": "Arizona",
-          "value": "AZ",
-          "score": 1,
-          "zeroDeductible": false,
-          "note": "Arizona has optional zero-deductible glass coverage"
+          "text": "Liability only",
+          "value": "liability_only",
+          "covered": false
         },
         {
           "id": "q2a5",
-          "text": "Massachusetts",
-          "value": "MA",
-          "score": 1,
-          "zeroDeductible": false,
-          "note": "Massachusetts has optional glass coverage with lower deductibles"
-        },
-        {
-          "id": "q2a6",
-          "text": "Other state",
-          "value": "OTHER",
-          "score": 1,
-          "zeroDeductible": false
+          "text": "I'm not sure",
+          "value": "dont_know",
+          "covered": null
         }
       ]
     },
     {
       "id": "q3",
-      "text": "Do you need a full windshield replacement or just a repair?",
+      "text": "What caused the windshield damage?",
       "type": "radio",
       "required": true,
-      "helpText": "Repairs often have lower or zero deductibles",
       "options": [
         {
           "id": "q3a1",
-          "text": "Just a chip/crack repair",
-          "value": "repair",
-          "score": 1
+          "text": "Rock/debris from another vehicle",
+          "value": "road_debris",
+          "covered": "comprehensive"
         },
         {
           "id": "q3a2",
-          "text": "Full replacement",
-          "value": "replacement",
-          "score": 0
+          "text": "Falling object (tree branch, hail)",
+          "value": "falling_object",
+          "covered": "comprehensive"
         },
         {
           "id": "q3a3",
-          "text": "Not sure yet",
-          "value": "not_sure",
-          "score": 0
+          "text": "Vandalism",
+          "value": "vandalism",
+          "covered": "comprehensive"
+        },
+        {
+          "id": "q3a4",
+          "text": "Car accident with another vehicle",
+          "value": "accident",
+          "covered": "collision"
+        },
+        {
+          "id": "q3a5",
+          "text": "Hit a stationary object",
+          "value": "hit_object",
+          "covered": "collision"
+        },
+        {
+          "id": "q3a6",
+          "text": "Not sure what caused it",
+          "value": "dont_know",
+          "covered": "unknown"
         }
       ]
     },
     {
       "id": "q4",
-      "text": "Do you know your comprehensive deductible amount?",
+      "text": "What is your comprehensive deductible?",
       "type": "radio",
       "required": true,
-      "helpText": "This is the amount you pay before insurance coverage kicks in",
       "options": [
         {
           "id": "q4a1",
-          "text": "$0 - No deductible",
-          "value": "zero",
-          "score": 2
+          "text": "$0 (I have full glass coverage)",
+          "value": "0",
+          "amount": 0
         },
         {
           "id": "q4a2",
-          "text": "$100 or less",
-          "value": "low",
-          "score": 1
+          "text": "$100",
+          "value": "100",
+          "amount": 100
         },
         {
           "id": "q4a3",
-          "text": "$250 - $500",
-          "value": "medium",
-          "score": 0
+          "text": "$250",
+          "value": "250",
+          "amount": 250
         },
         {
           "id": "q4a4",
-          "text": "$500 or more",
-          "value": "high",
-          "score": 0
+          "text": "$500",
+          "value": "500",
+          "amount": 500
         },
         {
           "id": "q4a5",
-          "text": "I'm not sure",
-          "value": "unknown",
-          "score": 0
+          "text": "$1,000",
+          "value": "1000",
+          "amount": 1000
+        },
+        {
+          "id": "q4a6",
+          "text": "I don't know",
+          "value": "dont_know",
+          "amount": null
         }
       ]
     },
     {
       "id": "q5",
-      "text": "Does your policy have an endorsement for OEM (Original Equipment Manufacturer) parts?",
+      "text": "Will this be a repair or replacement?",
       "type": "radio",
       "required": true,
-      "helpText": "OEM coverage ensures your insurer pays for manufacturer-original glass instead of cheaper aftermarket alternatives",
-      "conditionalLogic": {
-        "showIf": {
-          "questionId": "q3",
-          "answerEquals": ["replacement", "not_sure"]
-        }
-      },
       "options": [
         {
           "id": "q5a1",
-          "text": "Yes, I have OEM parts coverage",
-          "value": "has_oem",
-          "score": 2
+          "text": "Repair (small chip/crack)",
+          "value": "repair",
+          "estimatedCost": 75,
+          "waivedDeductible": true
         },
         {
           "id": "q5a2",
-          "text": "No",
-          "value": "no_oem",
-          "score": 0
+          "text": "Replacement (no ADAS camera)",
+          "value": "replace_no_adas",
+          "estimatedCost": 400
         },
         {
           "id": "q5a3",
+          "text": "Replacement with aftermarket glass + ADAS calibration",
+          "value": "replace_adas_aftermarket",
+          "estimatedCost": 650
+        },
+        {
+          "id": "q5a4",
+          "text": "Replacement with OEM glass + ADAS calibration",
+          "value": "replace_adas_oem",
+          "estimatedCost": 950
+        },
+        {
+          "id": "q5a5",
+          "text": "Not sure yet",
+          "value": "not_sure",
+          "estimatedCost": 500
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "text": "Do you have optional 'full glass coverage' or '$0 glass deductible'?",
+      "type": "radio",
+      "required": true,
+      "options": [
+        {
+          "id": "q6a1",
+          "text": "Yes",
+          "value": "yes",
+          "hasFullGlass": true
+        },
+        {
+          "id": "q6a2",
+          "text": "No",
+          "value": "no",
+          "hasFullGlass": false
+        },
+        {
+          "id": "q6a3",
+          "text": "I don't know",
+          "value": "dont_know",
+          "hasFullGlass": null
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "text": "Have you filed glass claims before?",
+      "type": "radio",
+      "required": true,
+      "options": [
+        {
+          "id": "q7a1",
+          "text": "No, this would be my first",
+          "value": "no",
+          "riskIncrease": false
+        },
+        {
+          "id": "q7a2",
+          "text": "Yes, one previous claim",
+          "value": "yes_one",
+          "riskIncrease": false
+        },
+        {
+          "id": "q7a3",
+          "text": "Yes, multiple claims",
+          "value": "yes_multiple",
+          "riskIncrease": true
+        },
+        {
+          "id": "q7a4",
           "text": "I'm not sure",
-          "value": "oem_unknown",
-          "score": 0
+          "value": "dont_know",
+          "riskIncrease": null
         }
       ]
     }
@@ -199,12 +297,12 @@
   "scoring": {
     "type": "mixed",
     "results": {
-      "no_coverage": {
-        "severity": "info",
+      "not_covered": {
+        "severity": "critical",
         "color": "red",
-        "title": "Likely Not Covered",
-        "summary": "Liability-only policies typically don't cover glass damage.",
-        "explanation": "Unfortunately, if you only have liability coverage (which covers damage you cause to others), your policy will not cover damage to your own windshield.\n\n<strong>Your Options:</strong>\n\n• <strong>Pay out of pocket:</strong> Repairs cost $50-$150, replacements $200-$1,000+\n\n• <strong>Upgrade your policy:</strong> Add comprehensive coverage for future incidents\n\n• <strong>Check for exceptions:</strong> Some states or policies have special glass provisions",
+        "title": "Not Covered by Insurance",
+        "summary": "Your policy does not cover windshield damage.",
+        "explanation": "<strong>Why You're Not Covered:</strong>\n\n• Windshield damage requires <strong>comprehensive coverage</strong>\n\n• Liability-only policies never cover your own vehicle damage\n\n• Collision coverage only applies if damage occurred in an accident\n\n• Consider adding comprehensive coverage to prevent this in the future\n\n<strong>Your Options:</strong>\n\n• <strong>Pay out of pocket:</strong> Repairs cost $50-$150, replacements $200-$1,000+\n\n• <strong>Upgrade your policy:</strong> Add comprehensive coverage for future incidents\n\n• <strong>Check for exceptions:</strong> Some states or policies have special glass provisions",
         "nextSteps": [
           "Get quotes for out-of-pocket cost",
           "Consider adding comprehensive coverage",
@@ -212,12 +310,12 @@
           "Check if repair is cheaper than replacement"
         ]
       },
-      "zero_deductible_state": {
+      "fully_covered": {
         "severity": "safe",
         "color": "green",
-        "title": "Likely Fully Covered!",
-        "summary": "Your state has zero-deductible glass coverage laws.",
-        "explanation": "Good news! You live in a state with <strong>zero-deductible glass coverage laws</strong>. This means your comprehensive insurance should cover your windshield repair or replacement with <strong>no out-of-pocket cost</strong>.\n\n<strong>Important Notes:</strong>\n\n• Your insurance company cannot raise your rates for a glass claim in these states\n\n• You should still verify coverage with your insurer\n\n• Choose a shop in your insurance network to avoid billing issues\n\n<strong>Quality & Safety Reminder:</strong>\n\n• Even with full coverage, <strong>insist on OEM glass if your policy allows it</strong> or ensure high-quality aftermarket glass is used\n\n• Verify that <strong>ADAS calibration</strong> is included in the service—this is mandatory for modern vehicles with camera-based safety systems\n\n• Ask the installer to guarantee successful calibration and proper safety system function",
+        "title": "$0 Out of Pocket!",
+        "summary": "Your insurance will cover 100% of the cost.",
+        "explanation": "<strong>Great News!</strong>\n\n✓ Your insurance will cover 100% of the cost\n\n✓ No deductible applies to this claim\n\n✓ Most glass claims don't affect your premium\n\n✓ Contact your insurer or go to an approved shop to begin the claim\n\n<strong>Filing Your Claim - Next Steps:</strong>\n\n1. <strong>Document damage</strong> with clear photos from multiple angles\n\n2. <strong>Contact your insurer</strong> to file a claim and get a claim number\n\n3. <strong>Choose your shop</strong> - you have the legal right to select any installer\n\n4. <strong>Don't accept pressure</strong> to use aftermarket glass if you have ADAS\n\n5. <strong>Confirm calibration</strong> is included in the approved work\n\n6. <strong>Pay only your deductible</strong> to the shop (if applicable)\n\n7. <strong>Get documentation</strong> including warranty and calibration reports",
         "nextSteps": [
           "Call your insurance company to confirm",
           "Ask for approved shop list",
@@ -227,24 +325,11 @@
           "Schedule service with confidence"
         ]
       },
-      "repair_likely_covered": {
-        "severity": "safe",
-        "color": "green",
-        "title": "Repair Likely Fully Covered",
-        "summary": "Most insurance policies cover chip/crack repairs with no deductible.",
-        "explanation": "Most comprehensive insurance policies cover windshield <strong>repairs</strong> (not replacements) with <strong>zero deductible</strong>. This is because insurance companies save money by encouraging repair over replacement.\n\n<strong>Why This Matters:</strong>\n\n• Repairs cost $50-$150 out of pocket, but $0 with insurance\n\n• No rate increase for repair claims (typically)\n\n• Faster service (30 minutes vs 2+ hours)\n\n• Preserves your original factory windshield seal\n\n• Maintains the integrity of your vehicle's ADAS camera calibration",
-        "nextSteps": [
-          "Call insurance to confirm zero-deductible repair",
-          "Ask if claim affects rates",
-          "Find approved repair shops",
-          "Act quickly before chip spreads"
-        ]
-      },
-      "replacement_check_deductible": {
+      "partially_covered": {
         "severity": "caution",
         "color": "yellow",
-        "title": "Likely Covered, But Check Your Deductible",
-        "summary": "Replacement is usually covered, but you may owe your deductible.",
+        "title": "Partially Covered",
+        "summary": "Your insurance covers this, but you'll owe your deductible.",
         "explanation": "If you have comprehensive coverage, your windshield replacement should be covered. However, you will likely need to pay your <strong>comprehensive deductible</strong> first.\n\n<strong>Deductible Considerations:</strong>\n\n• <strong>Low deductible ($0-$100):</strong> Claim makes sense\n\n• <strong>Medium deductible ($250-$500):</strong> Compare to out-of-pocket cost\n\n• <strong>High deductible ($500+):</strong> May be cheaper to pay yourself\n\n<strong>Rate Impact:</strong> Some insurers may raise your rates for a comprehensive claim. Ask before filing.\n\n<strong>Critical Safety Considerations:</strong>\n\n• <strong>OEM vs Aftermarket Glass:</strong> Insurance may default to cheaper aftermarket glass, which can have optical distortions that interfere with ADAS camera systems\n\n• <strong>ADAS Calibration:</strong> Modern vehicles require mandatory camera recalibration after windshield replacement. Ensure this cost ($75-$300+) is included in the quote\n\n• <strong>Quality Matters:</strong> If you don't have OEM coverage, you may need to pay the difference for manufacturer-original glass to ensure proper ADAS function",
         "nextSteps": [
           "Call insurance to verify deductible",
@@ -258,7 +343,7 @@
       "check_policy": {
         "severity": "caution",
         "color": "blue",
-        "title": "Check Your Policy Details",
+        "title": "Check Your Policy",
         "summary": "You may have coverage, but need to verify with your insurer.",
         "explanation": "Based on your answers, you may have glass coverage, but the details are unclear. The best step is to call your insurance company directly and ask:\n\n<strong>Key Questions to Ask:</strong>\n\n• \"Do I have comprehensive coverage?\"\n\n• \"Does my policy cover glass damage?\"\n\n• \"What is my glass or comprehensive deductible?\"\n\n• \"Will a glass claim increase my rates?\"\n\n• \"Do you have a preferred shop network?\"\n\n• \"Do I have OEM parts coverage for glass?\"\n\n• \"Is ADAS calibration covered in the replacement cost?\"",
         "nextSteps": [
@@ -267,79 +352,34 @@
           "Ask all key questions above",
           "Get written confirmation if possible"
         ]
-      },
-      "replacement_oem_covered": {
-        "severity": "safe",
-        "color": "green",
-        "title": "Covered with OEM Protection",
-        "summary": "Your OEM coverage ensures you get manufacturer-quality glass.",
-        "explanation": "Excellent! Your policy includes OEM parts coverage, which means your insurer is <strong>obligated to pay for manufacturer-original glass</strong>. This is the best way to ensure proper ADAS function and vehicle safety.\n\n<strong>Your Advantage:</strong>\n\n• <strong>No aftermarket compromises:</strong> You get the same glass quality as when your vehicle was new\n\n• <strong>ADAS reliability:</strong> OEM glass is specifically designed to work with your vehicle's camera-based safety systems\n\n• <strong>Optical clarity:</strong> No risk of distortions that can affect collision avoidance, lane-keeping, or automatic emergency braking\n\n<strong>What to Verify:</strong>\n\n• Confirm ADAS calibration cost is included in the replacement quote\n\n• Insist the shop uses genuine OEM glass—don't accept substitutions\n\n• Ensure the installer has proper calibration equipment for your vehicle make/model",
-        "nextSteps": [
-          "Call insurance to confirm OEM coverage applies",
-          "Find shops certified for your vehicle brand",
-          "Verify ADAS calibration is included",
-          "Insist on genuine OEM glass—no substitutions",
-          "Request calibration completion certificate"
-        ]
-      },
-      "replacement_no_oem_warning": {
-        "severity": "caution",
-        "color": "yellow",
-        "title": "Covered, But Without OEM Protection",
-        "summary": "Insurance will cover it, but may default to cheaper aftermarket glass.",
-        "explanation": "Your insurance will cover the replacement, but <strong>without OEM parts coverage, they will likely approve only cheaper aftermarket glass</strong>. This creates a conflict between the insurer's cost-cutting and your vehicle's safety.\n\n<strong>The Systemic Risk:</strong>\n\n• <strong>Optical distortions:</strong> Aftermarket glass can have imperfections that prevent ADAS cameras from calibrating correctly\n\n• <strong>Safety system failures:</strong> Your collision avoidance, lane-keeping, or emergency braking may not function properly\n\n• <strong>Cost pressure:</strong> Insurers may also question the cost of proper ADAS calibration ($75-$300+)\n\n<strong>Your Options:</strong>\n\n1. <strong>Pay the difference:</strong> Upgrade to OEM glass out-of-pocket (typically $100-$400 more)\n\n2. <strong>High-quality aftermarket:</strong> If using aftermarket, insist on premium brands and demand a guarantee of successful ADAS calibration\n\n3. <strong>Do not skip calibration:</strong> This is a mandatory safety procedure, not optional",
-        "nextSteps": [
-          "Call insurance to verify coverage details",
-          "Ask about cost difference for OEM upgrade",
-          "Find shops that guarantee ADAS calibration",
-          "Consider paying difference for OEM glass",
-          "Do not accept service without calibration"
-        ]
       }
     },
     "logic": {
       "rules": [
         {
           "if": {
-            "q1": "liability_only"
+            "q2": ["liability_only", "collision_only"]
           },
-          "then": "no_coverage"
+          "then": "not_covered"
         },
         {
           "if": {
-            "q2": ["FL", "KY", "SC"],
-            "q1": "has_comprehensive"
+            "q1": ["florida", "kentucky", "south_carolina"],
+            "q2": ["comprehensive", "comp_collision"]
           },
-          "then": "zero_deductible_state"
+          "then": "fully_covered"
         },
         {
           "if": {
-            "q3": "repair"
+            "q5": "repair"
           },
-          "then": "repair_likely_covered"
+          "then": "fully_covered"
         },
         {
           "if": {
-            "q3": "replacement",
-            "q1": "has_comprehensive",
-            "q5": "has_oem"
+            "q6": "yes"
           },
-          "then": "replacement_oem_covered"
-        },
-        {
-          "if": {
-            "q3": "replacement",
-            "q1": "has_comprehensive",
-            "q5": "no_oem"
-          },
-          "then": "replacement_no_oem_warning"
-        },
-        {
-          "if": {
-            "q3": "replacement",
-            "q1": "has_comprehensive"
-          },
-          "then": "replacement_check_deductible"
+          "then": "fully_covered"
         },
         {
           "default": "check_policy"

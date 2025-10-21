@@ -4,175 +4,454 @@
   "title": "Is My Installer Qualified?",
   "description": "Verify your shop meets critical safety standards",
   "icon": "certificate",
-  "duration": 3,
+  "duration": 5,
   "priority": 4,
   "featured": false,
   "questions": [
     {
       "id": "q1",
-      "text": "When you mentioned your car has safety features (like lane assist) and needs a new windshield, they said:",
+      "text": "Is the installer AGSC (Auto Glass Safety Council) certified?",
       "type": "radio",
       "required": true,
-      "helpText": "ADAS calibration is mandatory after windshield replacement on equipped vehicles",
+      "helpText": "AGSC certification is the industry standard for windshield safety",
       "options": [
         {
           "id": "q1a1",
-          "text": "\"We will need to perform an ADAS recalibration after the replacement. It's mandatory for safety.\"",
-          "value": "good_adas",
-          "score": 1,
-          "flag": "green"
+          "text": "Yes, I verified their certification",
+          "value": "verified",
+          "score": 5
         },
         {
           "id": "q1a2",
-          "text": "\"You don't need to worry about that, it'll work fine.\" or \"Calibration is an optional upsell.\"",
-          "value": "bad_adas",
+          "text": "They claim to be but I haven't verified",
+          "value": "claimed",
+          "score": 3
+        },
+        {
+          "id": "q1a3",
+          "text": "They have other certifications (I-CAR, NGA)",
+          "value": "other_cert",
+          "score": 2
+        },
+        {
+          "id": "q1a4",
+          "text": "No certification mentioned",
+          "value": "no_cert",
           "score": 0,
-          "flag": "red"
+          "warning": true
+        },
+        {
+          "id": "q1a5",
+          "text": "I don't know",
+          "value": "unknown",
+          "score": 0
         }
       ]
     },
     {
       "id": "q2",
-      "text": "Regarding the type of glass they will use:",
+      "text": "Can they perform ADAS calibration in-house?",
       "type": "radio",
       "required": true,
-      "helpText": "Shops should explain glass options clearly",
+      "helpText": "In-house ADAS calibration is essential for modern vehicles",
       "options": [
         {
           "id": "q2a1",
-          "text": "They explained the difference between OEM glass and Aftermarket (OEE) glass and gave you a clear choice.",
-          "value": "good_glass",
-          "score": 1,
-          "flag": "green"
+          "text": "Yes, they have calibration equipment on-site",
+          "value": "in_house",
+          "score": 5
         },
         {
           "id": "q2a2",
-          "text": "They pushed the cheapest option without explaining potential issues or avoided the question.",
-          "value": "bad_glass",
-          "score": 0,
-          "flag": "red"
+          "text": "They outsource it to a dealership",
+          "value": "outsource",
+          "score": 1
+        },
+        {
+          "id": "q2a3",
+          "text": "They didn't mention ADAS at all",
+          "value": "not_mentioned",
+          "score": 0
+        },
+        {
+          "id": "q2a4",
+          "text": "They said it's not necessary",
+          "value": "not_necessary",
+          "score": -5,
+          "criticalFailure": true
+        },
+        {
+          "id": "q2a5",
+          "text": "My car doesn't have ADAS",
+          "value": "no_adas",
+          "score": 5
         }
       ]
     },
     {
       "id": "q3",
-      "text": "When you ask about their technicians:",
+      "text": "What type of glass are they recommending?",
       "type": "radio",
       "required": true,
-      "helpText": "Look for AGSC (Auto Glass Safety Council) certification",
+      "helpText": "OEM glass is critical for ADAS-equipped vehicles",
       "options": [
         {
           "id": "q3a1",
-          "text": "They state their technicians are certified (e.g., by the Auto Glass Safety Council™ - AGSC).",
-          "value": "good_cert",
-          "score": 1,
-          "flag": "green"
+          "text": "OEM glass (my car has ADAS)",
+          "value": "oem_adas",
+          "score": 5
         },
         {
           "id": "q3a2",
-          "text": "They are evasive or say something like \"our guys have tons of experience, they don't need a certificate.\"",
-          "value": "bad_cert",
-          "score": 0,
-          "flag": "red"
+          "text": "OEM glass (no ADAS)",
+          "value": "oem_no_adas",
+          "score": 4
+        },
+        {
+          "id": "q3a3",
+          "text": "Explained OEM vs aftermarket options clearly",
+          "value": "explained",
+          "score": 3
+        },
+        {
+          "id": "q3a4",
+          "text": "Whatever is cheapest",
+          "value": "cheapest",
+          "score": 0
+        },
+        {
+          "id": "q3a5",
+          "text": "We haven't discussed this yet",
+          "value": "not_discussed",
+          "score": 1
         }
       ]
     },
     {
       "id": "q4",
-      "text": "After the replacement is scheduled, they tell you:",
+      "text": "What warranty do they offer?",
       "type": "radio",
       "required": true,
-      "helpText": "Adhesive cure time is critical for safety",
       "options": [
         {
           "id": "q4a1",
-          "text": "\"Your vehicle will be ready to drive after a specific 'cure time' for the adhesive, usually at least one hour.\"",
-          "value": "good_time",
-          "score": 1,
-          "flag": "green"
+          "text": "Lifetime workmanship warranty in writing",
+          "value": "lifetime_written",
+          "score": 4
         },
         {
           "id": "q4a2",
-          "text": "\"You can drive it away as soon as we're done.\"",
-          "value": "bad_time",
-          "score": 0,
-          "flag": "red"
+          "text": "Limited warranty (1-5 years) in writing",
+          "value": "limited_written",
+          "score": 3
+        },
+        {
+          "id": "q4a3",
+          "text": "Verbal warranty only",
+          "value": "verbal",
+          "score": 1
+        },
+        {
+          "id": "q4a4",
+          "text": "No warranty mentioned",
+          "value": "no_warranty",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "text": "Does their quote include all these items?",
+      "type": "radio",
+      "required": true,
+      "helpText": "A complete quote should include glass, labor, moldings, and ADAS calibration if needed",
+      "options": [
+        {
+          "id": "q5a1",
+          "text": "Glass, labor, moldings, ADAS calibration (if needed)",
+          "value": "complete",
+          "score": 5
+        },
+        {
+          "id": "q5a2",
+          "text": "Most items, but ADAS is extra or not mentioned",
+          "value": "mostly_complete",
+          "score": 2
+        },
+        {
+          "id": "q5a3",
+          "text": "Just glass and basic installation",
+          "value": "basic",
+          "score": 1
+        },
+        {
+          "id": "q5a4",
+          "text": "Quote is vague or incomplete",
+          "value": "incomplete",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "text": "Did they discuss Safe Drive-Away Time (SDAT)?",
+      "type": "radio",
+      "required": true,
+      "helpText": "SDAT is the minimum time before you can safely drive after installation",
+      "options": [
+        {
+          "id": "q6a1",
+          "text": "Yes, explained it depends on temperature and adhesive",
+          "value": "explained",
+          "score": 4
+        },
+        {
+          "id": "q6a2",
+          "text": "Mentioned waiting time but no details",
+          "value": "mentioned",
+          "score": 2
+        },
+        {
+          "id": "q6a3",
+          "text": "Said I can drive immediately after installation",
+          "value": "immediate",
+          "score": -3,
+          "criticalFailure": true
+        },
+        {
+          "id": "q6a4",
+          "text": "Not discussed yet",
+          "value": "not_discussed",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "text": "Where will the work be performed?",
+      "type": "radio",
+      "required": true,
+      "helpText": "Temperature and humidity control are critical for proper adhesive curing",
+      "options": [
+        {
+          "id": "q7a1",
+          "text": "Indoor shop with climate control",
+          "value": "indoor_climate",
+          "score": 5
+        },
+        {
+          "id": "q7a2",
+          "text": "Covered outdoor bay",
+          "value": "covered_outdoor",
+          "score": 3
+        },
+        {
+          "id": "q7a3",
+          "text": "Mobile service (moderate temperature, no precipitation)",
+          "value": "mobile_good",
+          "score": 2
+        },
+        {
+          "id": "q7a4",
+          "text": "Mobile service (extreme heat/cold or rainy)",
+          "value": "mobile_bad",
+          "score": -2
+        },
+        {
+          "id": "q7a5",
+          "text": "Don't know yet",
+          "value": "unknown",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "text": "Have you noticed any of these red flags?",
+      "type": "radio",
+      "required": true,
+      "options": [
+        {
+          "id": "q8a1",
+          "text": "None of these",
+          "value": "none",
+          "score": 5
+        },
+        {
+          "id": "q8a2",
+          "text": "High-pressure sales tactics",
+          "value": "high_pressure",
+          "score": -2
+        },
+        {
+          "id": "q8a3",
+          "text": "Quote is significantly cheaper than competitors",
+          "value": "too_cheap",
+          "score": -2
+        },
+        {
+          "id": "q8a4",
+          "text": "Unsolicited 'free windshield' offer",
+          "value": "free_offer",
+          "score": -5,
+          "criticalFailure": true
+        },
+        {
+          "id": "q8a5",
+          "text": "Dismissive of my questions or concerns",
+          "value": "dismissive",
+          "score": -3
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "text": "How do they handle insurance claims?",
+      "type": "radio",
+      "required": true,
+      "options": [
+        {
+          "id": "q9a1",
+          "text": "Experienced, will bill insurance directly",
+          "value": "direct_billing",
+          "score": 4
+        },
+        {
+          "id": "q9a2",
+          "text": "Will work with insurance but I pay upfront",
+          "value": "upfront_payment",
+          "score": 2
+        },
+        {
+          "id": "q9a3",
+          "text": "Cash only, I handle insurance myself",
+          "value": "cash_only",
+          "score": 0
+        },
+        {
+          "id": "q9a4",
+          "text": "Insist on aftermarket glass to match insurance",
+          "value": "force_aftermarket",
+          "score": -2
         }
       ]
     }
   ],
   "scoring": {
-    "type": "percentage_based",
-    "totalQuestions": 4,
-    "thresholds": {
-      "excellent": {
-        "min": 0.75,
-        "max": 1.0,
-        "severity": "safe",
-        "color": "green",
-        "result": "trustworthy"
+    "type": "threshold_based",
+    "severityThresholds": {
+      "highly_qualified": {
+        "min": 30,
+        "max": 100,
+        "color": "green"
+      },
+      "qualified": {
+        "min": 20,
+        "max": 29,
+        "color": "blue"
       },
       "caution": {
-        "min": 0.5,
-        "max": 0.74,
-        "severity": "caution",
-        "color": "yellow",
-        "result": "proceed_caution"
+        "min": 10,
+        "max": 19,
+        "color": "yellow"
       },
-      "poor": {
+      "unqualified": {
         "min": 0,
-        "max": 0.49,
-        "severity": "critical",
-        "color": "red",
-        "result": "red_flags"
+        "max": 9,
+        "color": "orange"
+      },
+      "do_not_use": {
+        "min": -100,
+        "max": -1,
+        "color": "red"
       }
     },
     "results": {
-      "trustworthy": {
-        "severity": "safe",
-        "color": "green",
-        "title": "This Shop Sounds Trustworthy",
-        "summary": "This shop appears to follow modern safety standards.",
-        "explanation": "This shop appears to follow modern safety standards. They understand that a windshield is a critical safety component, not just a piece of glass.\n\nBy prioritizing <strong>mandatory ADAS calibration</strong>, offering clear choices in glass, employing <strong>certified technicians</strong>, and respecting adhesive cure times, they are putting your safety first. This aligns with the best practices outlined by vehicle manufacturers and safety organizations.",
-        "nextSteps": [
-          "Proceed with confidence",
-          "Get written estimate before service",
-          "Ask for calibration documentation",
-          "Verify warranty coverage"
-        ]
-      },
-      "proceed_caution": {
-        "severity": "caution",
-        "color": "yellow",
-        "title": "Proceed with Caution",
-        "summary": "This shop shows some positive signs but also has potential red flags.",
-        "explanation": "This shop shows some positive signs but also has some potential red flags. The most critical issue is any ambiguity around <strong>ADAS calibration—it is not optional.</strong>\n\nDismissing the need for calibration, certified technicians, or proper adhesive cure times can lead to a \"silent failure\" of your safety systems. Ask for clarification on their procedures. If they cannot provide confident, safety-focused answers, consider finding another provider.",
-        "nextSteps": [
-          "Ask detailed questions about red flag areas",
-          "Request to see technician certifications",
-          "Get second opinion if uncertain",
-          "Consider alternative shops"
-        ]
-      },
-      "red_flags": {
+      "critical_failure": {
+        "title": "DO NOT USE This Installer",
         "severity": "critical",
-        "color": "red",
-        "title": "Significant Red Flags Detected",
-        "summary": "This shop is ignoring fundamental safety protocols.",
-        "explanation": "This shop is ignoring fundamental, non-negotiable safety protocols. Practices like dismissing <strong>mandatory ADAS calibration</strong> or ignoring adhesive <strong>Safe Drive-Away Times</strong> are extremely dangerous and can lead to catastrophic failure of your vehicle's safety systems in an accident.\n\nA shop that cuts these corners is not trustworthy. For your safety, it is strongly recommended that you find a different, certified facility that follows the Auto Glass Replacement Safety Standard (AGRSS™).",
+        "summary": "This installer has shown dangerous ignorance or fraud indicators.",
+        "explanation": "Based on your answers, this installer has displayed one or more critical red flags that indicate either dangerous ignorance of modern windshield safety standards or potential fraud:\n\n<strong>Critical Red Flags Detected:</strong>\n\n• <strong>ADAS dismissal:</strong> Claiming ADAS calibration is \"not necessary\" shows fundamental ignorance. This is MANDATORY per vehicle manufacturers and can result in safety system failure.\n\n• <strong>Unsolicited 'free windshield' offer:</strong> Classic insurance fraud scheme. These operations often perform substandard work, use inferior materials, and may commit insurance fraud in your name.\n\n• <strong>No SDAT understanding:</strong> Saying you can \"drive immediately\" after installation shows they don't understand adhesive curing. The windshield won't have proper structural bond and could fail in a crash.\n\n<strong>The Danger:</strong>\n\nUsing this installer puts you at serious risk:\n\n• Safety systems may not function in a crash\n• Windshield may not provide proper roof support in rollover\n• Airbags may deploy incorrectly\n• You may unknowingly be part of insurance fraud\n• Substandard work could fail catastrophically\n\n<strong>What You Should Do:</strong>\n\nFind a different installer immediately. Look for AGSC certification, proper ADAS equipment, and transparent, professional practices.",
         "nextSteps": [
-          "Find a different shop immediately",
-          "Look for AGRSS certification",
-          "Verify AGSC-certified technicians",
-          "Ask about Vero Verified Network shops"
+          "DO NOT proceed with this installer",
+          "Find AGSC-certified professional",
+          "Report fraud schemes to your insurance company",
+          "Verify ADAS calibration capability",
+          "Get everything in writing from new installer"
+        ]
+      },
+      "highly_qualified": {
+        "title": "Highly Qualified Installer",
+        "severity": "safe",
+        "summary": "This installer demonstrates professional qualifications and modern safety knowledge.",
+        "explanation": "Excellent! This installer shows all the hallmarks of a professional, safety-focused operation. They have the proper credentials, equipment, and knowledge to perform a safe, reliable windshield installation.\n\n<strong>Key Qualifications Present:</strong>\n\n• <strong>AGSC Certification:</strong> Industry-recognized safety training\n\n• <strong>ADAS Equipment:</strong> Can properly calibrate modern safety systems\n\n• <strong>Proper Facility:</strong> Climate-controlled environment for adhesive curing\n\n• <strong>Written Warranty:</strong> Stands behind their workmanship\n\n• <strong>Transparent Pricing:</strong> Complete quotes with all services included\n\n• <strong>SDAT Knowledge:</strong> Understands adhesive curing science\n\n<strong>Before Proceeding:</strong>\n\nEven with a highly qualified installer, verify these final details:\n\n• Get all warranties in writing\n• Confirm final price includes ADAS calibration (if applicable)\n• Ask to see AGSC certificate\n• Request pre/post-scan documentation for ADAS\n• Understand SDAT for current temperature conditions\n• Confirm OEM glass option for ADAS vehicles\n\n<strong>What to Expect:</strong>\n\nA professional installation with proper materials, techniques, and safety system verification. You should receive written documentation of warranty and calibration completion.",
+        "nextSteps": [
+          "Get all warranties and quotes in writing",
+          "Confirm ADAS calibration is included in price",
+          "Verify AGSC certification number",
+          "Request calibration completion certificate",
+          "Understand SDAT for current weather",
+          "Confirm OEM glass for ADAS vehicles"
+        ]
+      },
+      "qualified": {
+        "title": "Qualified Installer",
+        "severity": "safe",
+        "summary": "This installer is competent with acceptable qualifications.",
+        "explanation": "This installer demonstrates competent qualifications and should be able to perform a safe windshield installation. While they may not have every ideal qualification, they show sufficient knowledge and capability.\n\n<strong>Strengths:</strong>\n\n• Basic safety certifications or demonstrated competence\n• Understanding of ADAS requirements\n• Proper facility or equipment\n• Professional approach to warranty and pricing\n\n<strong>Areas to Verify:</strong>\n\nBefore proceeding, address any gaps in qualifications:\n\n• If AGSC certification is claimed but not verified, ask to see certificate\n• If ADAS is outsourced, confirm who performs it and get documentation\n• If warranty is limited, understand exactly what's covered\n• If quote is incomplete, get itemized breakdown including all services\n\n<strong>Questions to Ask:</strong>\n\n1. \"Can I verify your AGSC certification?\"\n2. \"Who specifically will perform the ADAS calibration and can I get documentation?\"\n3. \"What exactly is covered under your warranty?\"\n4. \"Can I get an itemized quote showing all charges including calibration?\"\n5. \"What is the Safe Drive-Away Time for today's temperature?\"\n\n<strong>You Should Be Comfortable:</strong>\n\nIf they provide clear, professional answers to your questions, proceed with confidence. If they're evasive or dismissive, consider getting a second opinion.",
+        "nextSteps": [
+          "Verify any claimed but unverified certifications",
+          "Get complete itemized quote in writing",
+          "Confirm ADAS calibration provider and process",
+          "Understand warranty coverage exactly",
+          "Ask about SDAT for current conditions"
+        ]
+      },
+      "caution": {
+        "title": "Proceed with Caution",
+        "severity": "caution",
+        "summary": "This installer has some qualifications but is missing key credentials.",
+        "explanation": "This installer shows some basic competence but is missing several important qualifications or has raised some concerns. While they may be able to complete the work, you should proceed carefully and consider getting a second opinion.\n\n<strong>Concerns Identified:</strong>\n\n• Missing or unverified AGSC certification\n• Limited or unclear ADAS capability\n• Incomplete quotes or vague warranty information\n• Less-than-ideal facility or equipment\n• Some minor red flags in approach or knowledge\n\n<strong>Why This Matters:</strong>\n\nWindshield installation is a critical safety service. Missing qualifications can indicate:\n\n• Lack of proper training in modern safety standards\n• Inadequate equipment for ADAS-equipped vehicles\n• Potential for substandard work or materials\n• Higher risk of installation problems\n\n<strong>Before Making a Decision:</strong>\n\n1. Get detailed answers to all missing information\n2. Request everything in writing\n3. Get a second quote from an AGSC-certified installer for comparison\n4. Ask specific technical questions (SDAT, adhesive types, calibration procedures)\n5. Check online reviews and complaint records\n\n<strong>Consider an Alternative:</strong>\n\nIf this installer cannot clearly address your concerns or provide missing credentials, strongly consider finding an AGSC-certified professional with in-house ADAS capability.",
+        "nextSteps": [
+          "Get everything in writing before proceeding",
+          "Ask technical questions about SDAT and procedures",
+          "Request to see certifications and equipment",
+          "Get second opinion from AGSC-certified installer",
+          "Check online reviews and complaint history"
+        ]
+      },
+      "unqualified": {
+        "title": "Likely Unqualified",
+        "severity": "critical",
+        "summary": "This installer lacks essential qualifications for safe modern windshield installation.",
+        "explanation": "Based on your answers, this installer is missing multiple essential qualifications needed for safe, reliable windshield installation on modern vehicles. Using this installer creates significant safety risks.\n\n<strong>Missing Critical Qualifications:</strong>\n\n• No verified AGSC certification\n• Limited or no ADAS calibration capability\n• Inadequate facility or equipment\n• Poor warranty or unclear pricing\n• Lack of knowledge about modern safety standards\n\n<strong>The Safety Risk:</strong>\n\nUnqualified installers can:\n\n• Install windshields that fail in crashes (improper adhesive, technique, or curing)\n• Leave ADAS systems uncalibrated or improperly calibrated\n• Use inferior materials that degrade over time\n• Fail to achieve proper structural bonding\n• Create water leaks, wind noise, or optical distortion\n\n<strong>Why AGSC Certification Matters:</strong>\n\nAGSC certification ensures the installer has been trained in:\n\n• Modern adhesive chemistry and application\n• Proper surface preparation techniques\n• ADAS system requirements and calibration\n• Safe Drive-Away Time science\n• Quality control procedures\n• Industry best practices and safety standards\n\n<strong>Strongly Recommended:</strong>\n\nFind an AGSC-certified installer with in-house ADAS calibration equipment. The peace of mind and safety assurance are worth any price difference.",
+        "nextSteps": [
+          "Find AGSC-certified installer instead",
+          "Verify certification at autoglasssafetycouncil.org",
+          "Confirm in-house ADAS calibration capability",
+          "Get complete written quotes with all services",
+          "Ask about facility, equipment, and warranties"
+        ]
+      },
+      "do_not_use": {
+        "title": "DO NOT USE This Installer",
+        "severity": "critical",
+        "summary": "This installer has a negative qualification score indicating serious problems.",
+        "explanation": "This installer's negative score indicates they have multiple serious red flags that outweigh any positive qualifications. This suggests either dangerous ignorance of safety standards or potentially fraudulent practices.\n\n<strong>Serious Problems Detected:</strong>\n\n• Multiple red flags or warning signs\n• Negative score from critical deficiencies\n• Potential fraud indicators\n• Dangerous lack of safety knowledge\n• Unprofessional or concerning practices\n\n<strong>Common Problems with Low-Scoring Installers:</strong>\n\n• Use of cheapest materials regardless of quality\n• Ignoring manufacturer requirements for ADAS\n• Improper adhesive application or curing\n• Mobile service in inappropriate conditions\n• Insurance fraud schemes\n• High-pressure or deceptive sales tactics\n• Dismissive of legitimate safety concerns\n\n<strong>The Risk is Not Worth It:</strong>\n\nEven if the price seems attractive, the safety risks and potential for:\n\n• Failed windshield in crash\n• Malfunctioning ADAS systems\n• Insurance fraud complications\n• Substandard work requiring re-installation\n• Water leaks and structural problems\n\n...far outweigh any cost savings.\n\n<strong>Find a Qualified Professional:</strong>\n\nSearch for AGSC-certified installers in your area. Verify their certification, confirm ADAS capability, and get everything in writing. Your safety is worth the extra effort.",
+        "nextSteps": [
+          "DO NOT proceed with this installer",
+          "Find AGSC-certified professional",
+          "Verify certification at autoglasssafetycouncil.org",
+          "Report any fraud schemes to insurance",
+          "Get multiple quotes from qualified shops"
         ]
       }
     }
   },
   "metadata": {
-    "relatedQuizzes": ["adas-calibration", "windshield-safety"],
-    "relatedWhitePapers": ["choosing-installer", "adas-calibration-guide"],
-    "ctaText": "Find Trusted Installers",
+    "relatedQuizzes": ["adas-calibration", "windshield-safety", "repair-replace"],
+    "relatedWhitePapers": ["choosing-installer", "adas-calibration-guide", "insurance-coverage-guide"],
+    "ctaText": "Find Certified Installers",
     "ctaUrl": "/find-installers"
   }
 }

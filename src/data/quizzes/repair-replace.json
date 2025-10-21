@@ -4,154 +4,349 @@
   "title": "Should I Repair or Replace?",
   "description": "Determine the safest and most cost-effective option",
   "icon": "wrench",
-  "duration": 2,
+  "duration": 4,
   "priority": 3,
   "featured": true,
   "questions": [
     {
       "id": "q1",
-      "text": "How large is the damaged area?",
+      "text": "How large is the damage?",
       "type": "radio",
       "required": true,
       "options": [
         {
           "id": "q1a1",
-          "text": "A chip smaller than a quarter",
-          "value": "small_chip",
-          "score": 0,
-          "recommendation": "repair"
+          "text": "Tiny chip (size of a dime or smaller)",
+          "value": "tiny_chip",
+          "score": 3
         },
         {
           "id": "q1a2",
-          "text": "A single crack shorter than a dollar bill (6 inches)",
-          "value": "short_crack",
-          "score": 0,
-          "recommendation": "repair"
+          "text": "About the size of a quarter",
+          "value": "quarter_size",
+          "score": 2
         },
         {
           "id": "q1a3",
-          "text": "A crack longer than a dollar bill",
-          "value": "long_crack",
-          "score": 1,
-          "recommendation": "replace"
+          "text": "Crack less than 3 inches",
+          "value": "crack_small",
+          "score": 2
         },
         {
           "id": "q1a4",
-          "text": "There are three or more separate chips/cracks",
-          "value": "multiple_damage",
-          "score": 1,
-          "recommendation": "replace"
+          "text": "Crack 3-6 inches",
+          "value": "crack_medium",
+          "score": 1
+        },
+        {
+          "id": "q1a5",
+          "text": "Crack longer than 6 inches",
+          "value": "crack_long",
+          "score": 0,
+          "criticalFailure": true
+        },
+        {
+          "id": "q1a6",
+          "text": "Multiple cracks or 3+ chips",
+          "value": "multiple",
+          "score": 0,
+          "criticalFailure": true
         }
       ]
     },
     {
       "id": "q2",
-      "text": "Where on the windshield is the damage?",
+      "text": "Where is the damage located?",
       "type": "radio",
       "required": true,
       "options": [
         {
           "id": "q2a1",
-          "text": "On the passenger's side, not near the edge",
-          "value": "passenger_side",
+          "text": "Directly in driver's primary viewing area",
+          "value": "driver_view",
           "score": 0,
-          "recommendation": "repair"
+          "criticalFailure": true
         },
         {
           "id": "q2a2",
-          "text": "Directly in the driver's line of sight",
-          "value": "driver_sight",
-          "score": 1,
-          "recommendation": "replace"
+          "text": "Behind rearview mirror / ADAS camera area",
+          "value": "adas_zone",
+          "score": 0,
+          "criticalFailure": true
         },
         {
           "id": "q2a3",
-          "text": "Within 2-3 inches of the windshield's edge",
-          "value": "near_edge",
-          "score": 1,
-          "recommendation": "replace"
+          "text": "At or touching the edge of windshield",
+          "value": "edge",
+          "score": 0,
+          "criticalFailure": true
         },
         {
           "id": "q2a4",
-          "text": "Over an internal antenna or ADAS camera sensor",
-          "value": "over_sensor",
-          "score": 1,
-          "recommendation": "replace"
+          "text": "Passenger side, away from edges",
+          "value": "passenger_safe",
+          "score": 3
+        },
+        {
+          "id": "q2a5",
+          "text": "Lower corner, away from camera",
+          "value": "lower_corner",
+          "score": 2
         }
       ]
     },
     {
       "id": "q3",
-      "text": "What does the damage look like?",
+      "text": "Has the damage penetrated through the glass?",
       "type": "radio",
       "required": true,
       "options": [
         {
           "id": "q3a1",
-          "text": "A simple round \"bullseye\" or small \"star\" break",
-          "value": "bullseye_star",
-          "score": 0,
-          "recommendation": "repair"
+          "text": "Only the outer layer is damaged",
+          "value": "outer_only",
+          "score": 3
         },
         {
           "id": "q3a2",
-          "text": "The glass is shattered or has a hole through it",
-          "value": "shattered",
-          "score": 1,
-          "recommendation": "replace"
+          "text": "I'm not sure",
+          "value": "unsure",
+          "score": 1
         },
         {
           "id": "q3a3",
-          "text": "The damage is on the inside surface of the windshield",
-          "value": "inside_surface",
-          "score": 1,
-          "recommendation": "replace"
+          "text": "Damage goes through both layers",
+          "value": "both_layers",
+          "score": 0,
+          "criticalFailure": true
         },
         {
           "id": "q3a4",
-          "text": "It's a single, clean crack",
-          "value": "single_crack",
+          "text": "Inner layer is cracked too",
+          "value": "inner_cracked",
           "score": 0,
-          "recommendation": "repair"
+          "criticalFailure": true
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "text": "How old is the damage?",
+      "type": "radio",
+      "required": true,
+      "options": [
+        {
+          "id": "q4a1",
+          "text": "Just happened (within last few days)",
+          "value": "fresh",
+          "score": 3
+        },
+        {
+          "id": "q4a2",
+          "text": "Within the last month",
+          "value": "recent",
+          "score": 2
+        },
+        {
+          "id": "q4a3",
+          "text": "Several months old",
+          "value": "old",
+          "score": 1
+        },
+        {
+          "id": "q4a4",
+          "text": "Over 6 months / not sure",
+          "value": "very_old",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "text": "Is there dirt, moisture, or debris in the damage?",
+      "type": "radio",
+      "required": true,
+      "options": [
+        {
+          "id": "q5a1",
+          "text": "No, it's clean and clear",
+          "value": "clean",
+          "score": 3
+        },
+        {
+          "id": "q5a2",
+          "text": "A little dirt or dust",
+          "value": "minor_dirt",
+          "score": 2
+        },
+        {
+          "id": "q5a3",
+          "text": "Visibly dirty or has moisture",
+          "value": "dirty",
+          "score": 1
+        },
+        {
+          "id": "q5a4",
+          "text": "Very dirty or tried DIY repair",
+          "value": "contaminated",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "text": "Is the damage spreading or has it changed?",
+      "type": "radio",
+      "required": true,
+      "options": [
+        {
+          "id": "q6a1",
+          "text": "No, it hasn't changed",
+          "value": "stable",
+          "score": 3
+        },
+        {
+          "id": "q6a2",
+          "text": "It's grown slightly",
+          "value": "growing",
+          "score": 1
+        },
+        {
+          "id": "q6a3",
+          "text": "Yes, it's actively spreading",
+          "value": "spreading",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "text": "Is this the original factory windshield?",
+      "type": "radio",
+      "required": true,
+      "options": [
+        {
+          "id": "q7a1",
+          "text": "Yes, original OEM windshield",
+          "value": "oem_original",
+          "score": 2
+        },
+        {
+          "id": "q7a2",
+          "text": "Replaced with OEM glass",
+          "value": "oem_replaced",
+          "score": 2
+        },
+        {
+          "id": "q7a3",
+          "text": "Replaced with aftermarket glass",
+          "value": "aftermarket",
+          "score": 1
+        },
+        {
+          "id": "q7a4",
+          "text": "I don't know",
+          "value": "unknown",
+          "score": 1
         }
       ]
     }
   ],
   "scoring": {
-    "type": "recommendation_based",
-    "method": "any_replace_wins",
+    "type": "threshold_based",
+    "severityThresholds": {
+      "excellent": {
+        "min": 15,
+        "max": 100,
+        "color": "green"
+      },
+      "likely": {
+        "min": 10,
+        "max": 14,
+        "color": "blue"
+      },
+      "borderline": {
+        "min": 5,
+        "max": 9,
+        "color": "yellow"
+      },
+      "replacement": {
+        "min": 0,
+        "max": 4,
+        "color": "red"
+      }
+    },
     "results": {
-      "repair": {
-        "severity": "safe",
-        "color": "green",
-        "title": "Repair is Your Best Option",
-        "summary": "Your windshield damage qualifies for a safe and effective repair.",
-        "explanation": "Based on industry standards like <strong>ROLAGS™ (Repair of Laminated Auto Glass Standard)</strong>, your windshield damage qualifies for a safe and effective repair. This is your most cost-effective choice.\n\n<strong>Why Repair?</strong> It's faster, significantly cheaper (often fully covered by insurance with no deductible), and better for the environment. Most importantly, it preserves the critical factory seal of your original windshield, which is vital for your car's structural integrity and ADAS system performance.\n\n<strong>Act quickly!</strong> Temperature changes and road vibrations can cause small chips to crack out, making a replacement necessary.",
+      "critical_failure": {
+        "title": "Replacement Required",
+        "severity": "critical",
+        "summary": "Based on your answers, repair is not a safe or effective option for your windshield damage.",
+        "explanation": "The damage characteristics you've described mean that repair would not be effective or safe. Your situation meets one or more criteria that make replacement necessary:\n\n<strong>Why Replacement is Required:</strong>\n\n• <strong>Location issues:</strong> Damage in the driver's view, ADAS camera zone, or at the edge compromises critical safety functions\n\n• <strong>Size limits exceeded:</strong> Cracks longer than 6 inches or multiple damage points cannot be reliably repaired\n\n• <strong>Structural penetration:</strong> Damage through both layers of laminated glass has compromised the windshield's structural integrity\n\n<strong>Replacement Requirements:</strong>\n\n• <strong>Use OEM glass for ADAS vehicles:</strong> Aftermarket glass can have optical distortions that prevent proper camera calibration\n\n• <strong>ADAS calibration is mandatory:</strong> Not optional—required for safety systems to function correctly\n\n• <strong>Choose AGSC-certified installer:</strong> Ensures proper techniques and materials\n\n• <strong>Respect Safe Drive-Away Time:</strong> Adhesive must cure completely (typically 1+ hours)\n\n• <strong>Get written warranty and calibration documentation:</strong> Proof that work was done correctly",
         "nextSteps": [
-          "Schedule repair within 1-2 days",
-          "Ask about ROLAGS™ certification",
-          "Check if insurance covers with no deductible",
+          "Get quotes from certified installers",
+          "Specify OEM glass for ADAS-equipped vehicles",
+          "Confirm ADAS calibration is included in quote",
+          "Review your insurance coverage",
+          "Request written warranty and calibration certificate"
+        ]
+      },
+      "excellent": {
+        "title": "Excellent Repair Candidate",
+        "severity": "safe",
+        "summary": "Your windshield damage meets all the criteria for professional repair.",
+        "explanation": "Great news! Your damage meets all the criteria for a successful professional repair. This is significantly better than replacement for several reasons:\n\n<strong>Benefits of Repair:</strong>\n\n• <strong>Cost savings:</strong> $50-100 vs $500-1,000+ for replacement\n\n• <strong>Preserves factory seal:</strong> Keeps your original OEM glass and its perfect fit\n\n• <strong>Quick service:</strong> 30-60 minutes vs 2+ hours for replacement\n\n• <strong>Often $0 insurance deductible:</strong> Most insurers waive deductible for repairs\n\n• <strong>No ADAS calibration needed:</strong> Saves $150-300 and avoids calibration risks\n\n• <strong>Environmental benefit:</strong> Prevents 60+ lbs of glass from landfills\n\n<strong>⚠️ Critical DIY Warning:</strong>\n\nDo NOT attempt DIY repair kits. They use inferior materials, create permanent contamination if they fail, and make professional repair impossible—forcing expensive replacement. You only get one chance to repair damage correctly.\n\n<strong>Act Quickly:</strong>\n\nTemperature changes and road vibrations cause chips to spread. What's repairable today may require replacement tomorrow.",
+        "nextSteps": [
+          "Contact AGSC-certified technician immediately",
+          "Don't let moisture or dirt enter the damage",
+          "Check if your insurance covers repair with $0 deductible",
+          "Act within 24-48 hours before damage spreads",
           "Avoid DIY repair kits"
         ]
       },
-      "replace": {
+      "likely": {
+        "title": "Repair Likely Possible",
         "severity": "caution",
-        "color": "red",
-        "title": "Replacement is Required",
-        "summary": "Due to the size, location, or severity of the damage, a repair is not a safe option.",
-        "explanation": "Due to the size, location, or severity of the damage, a repair is not a safe option. Your windshield's structural integrity is compromised, and a full replacement is necessary to ensure your safety.\n\n<strong>Key Considerations for Replacement:</strong>\n\n• <strong>Glass Quality:</strong> Discuss OEM (Original Equipment Manufacturer) vs. Aftermarket glass with your technician. OEM is guaranteed to match your car's specifications.\n\n• <strong>Adhesives:</strong> Ensure the shop uses OEM-approved urethane and respects the safe drive-away time.\n\n• <strong>ADAS Calibration:</strong> If your car has safety features like lane-keep assist, a post-replacement ADAS camera calibration is <strong>mandatory</strong> for them to function correctly.",
+        "summary": "Your damage appears repairable, but some factors may affect success.",
+        "explanation": "Your windshield damage appears to be within repairable limits, but the age, contamination, or spreading may affect the repair's success rate. Professional inspection is needed to make a final determination.\n\n<strong>Why Act Quickly:</strong>\n\n• <strong>Age matters:</strong> Older damage has more contamination and is harder to clean\n\n• <strong>Spreading risk:</strong> Any crack that has grown is under stress and will continue to spread\n\n• <strong>Contamination concerns:</strong> Dirt and moisture reduce repair bond strength\n\n<strong>Benefits of Successful Repair:</strong>\n\n• <strong>Cost:</strong> $50-100 vs $500-1,000+ for replacement\n\n• <strong>Preserves factory OEM glass and seal</strong>\n\n• <strong>Quick:</strong> 30-60 minutes\n\n• <strong>Often $0 insurance deductible</strong>\n\n• <strong>No ADAS calibration needed</strong>\n\n<strong>⚠️ DIY Warning:</strong>\n\nNever use DIY repair kits. Failed DIY repairs contaminate the damage permanently and force expensive replacement. Professional technicians have the tools to clean and properly bond the repair.\n\n<strong>Be Prepared:</strong>\n\nGet evaluated quickly, but understand that the technician may recommend replacement if contamination is too severe or the damage has spread beyond repairable limits.",
+        "nextSteps": [
+          "Schedule professional inspection within 24 hours",
+          "Ask about ROLAGS™ certification",
+          "Prepare for possible replacement recommendation",
+          "Check insurance coverage for both repair and replacement",
+          "Do not attempt DIY repair"
+        ]
+      },
+      "borderline": {
+        "title": "Borderline Case - Evaluation Needed",
+        "severity": "caution",
+        "summary": "Your damage is near the limits of repairability. Professional evaluation needed urgently.",
+        "explanation": "Your windshield damage is at or near the limits of what can be safely and effectively repaired. A professional technician needs to evaluate it in person to determine if repair is possible.\n\n<strong>Borderline Factors:</strong>\n\n• <strong>Size or location:</strong> Approaching the edge of repairable zones\n\n• <strong>Age and contamination:</strong> May have too much dirt or moisture intrusion\n\n• <strong>Spreading:</strong> Active crack growth indicates structural stress\n\n• <strong>Old damage:</strong> Contamination and bonding challenges increase over time\n\n<strong>Get Evaluated Immediately:</strong>\n\nTime is critical. Every hour of delay allows more contamination, moisture intrusion, and spreading. What might be barely repairable today could require replacement tomorrow.\n\n<strong>If Repair is Possible:</strong>\n\n• Cost: $50-100 vs $500-1,000+\n• Preserves factory seal\n• No ADAS calibration needed\n• Often $0 insurance deductible\n\n<strong>If Replacement is Needed:</strong>\n\nReplacement restores full structural integrity and ADAS function. Ensure you use OEM glass and get proper ADAS calibration.\n\n<strong>⚠️ DIY Warning:</strong>\n\nDo NOT try DIY repair. Borderline damage requires professional equipment and expertise. DIY failure will force expensive replacement.",
+        "nextSteps": [
+          "Get professional evaluation TODAY—not tomorrow",
+          "Find AGSC-certified technician",
+          "Prepare for possible replacement",
+          "Review insurance coverage options",
+          "If replaced: verify OEM glass and ADAS calibration included"
+        ]
+      },
+      "replacement": {
+        "title": "Replacement Recommended",
+        "severity": "critical",
+        "summary": "Based on your answers, replacement is the recommended option.",
+        "explanation": "The damage you've described is beyond the limits of safe and effective repair. While this may not be a critical safety failure, the characteristics suggest that repair would likely fail or provide inadequate structural restoration.\n\n<strong>Why Replacement is Recommended:</strong>\n\n• <strong>Very old damage (6+ months):</strong> Severe contamination makes bonding unreliable\n\n• <strong>Heavy contamination or failed DIY attempt:</strong> Permanent damage to repair potential\n\n• <strong>Active spreading:</strong> Indicates ongoing structural failure\n\n• <strong>Low total score:</strong> Multiple marginal factors that collectively exceed repair limits\n\n<strong>Replacement Requirements:</strong>\n\n• <strong>Use OEM glass for ADAS vehicles:</strong> Ensures proper camera calibration and safety system function\n\n• <strong>ADAS calibration is mandatory:</strong> Not optional—required by vehicle manufacturers\n\n• <strong>AGSC-certified installer:</strong> Proper training in modern windshield safety standards\n\n• <strong>Respect Safe Drive-Away Time:</strong> Adhesive cure time (typically 1+ hours) is critical for safety\n\n• <strong>Written warranty and calibration documentation:</strong> Proof of proper installation\n\n<strong>Cost Considerations:</strong>\n\nReplacement costs $500-1,000+, but insurance may cover it with just your comprehensive deductible (often $100-500). Check if you're in a zero-deductible state (FL, KY, SC) or have full glass coverage.",
         "nextSteps": [
           "Get quotes from certified installers",
-          "Ask about OEM vs aftermarket glass",
-          "Verify ADAS calibration is included",
-          "Confirm safe drive-away time policy"
+          "Specify OEM glass for ADAS-equipped vehicles",
+          "Confirm ADAS calibration is included",
+          "Review insurance coverage and deductible",
+          "Request written warranty and calibration certificate"
         ]
       }
     }
   },
   "metadata": {
-    "relatedQuizzes": ["windshield-safety", "installer-qualified"],
-    "relatedWhitePapers": ["repair-vs-replace", "oem-vs-aftermarket"],
+    "relatedQuizzes": ["windshield-safety", "installer-qualified", "insurance-coverage"],
+    "relatedWhitePapers": ["repair-vs-replace", "oem-vs-aftermarket", "adas-calibration-guide"],
     "ctaText": "Find Certified Installers",
     "ctaUrl": "/find-installers"
   }

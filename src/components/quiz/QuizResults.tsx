@@ -15,6 +15,47 @@ export function QuizResults({ quiz, result, onEmailSubmit }: QuizResultsProps) {
   const [email, setEmail] = useState('');
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [localPartner, setLocalPartner] = useState<{
+    hasPartner: boolean;
+    name?: string;
+    phone?: string;
+    city: string;
+    state: string;
+    serviceArea?: string;
+  } | null>(null);
+
+  // Fetch local partner on mount
+  React.useEffect(() => {
+    async function fetchLocalPartner() {
+      try {
+        const response = await fetch('/api/geolocation');
+        if (response.ok) {
+          const data = await response.json();
+          setLocalPartner(data);
+
+          // Track lead if no partner in area
+          if (!data.hasPartner) {
+            await fetch('/api/lead-tracking', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                quizId: quiz.id,
+                location: {
+                  city: data.city,
+                  state: data.state,
+                  regionName: data.regionName
+                },
+                timestamp: new Date().toISOString()
+              })
+            });
+          }
+        }
+      } catch (error) {
+        console.error('Failed to fetch local partner:', error);
+      }
+    }
+    fetchLocalPartner();
+  }, [quiz.id]);
 
   // Determine severity for banner
   const getSeverity = (): Severity => {
@@ -76,8 +117,47 @@ export function QuizResults({ quiz, result, onEmailSubmit }: QuizResultsProps) {
 
         {/* Result Content */}
         <div className="mt-8 bg-white rounded-lg shadow-card p-6 md:p-8 animate-fade-in-up animation-delay-100">
-          {/* Result Message */}
-          {result.result.message && (
+          {/* Summary */}
+          {result.result.summary && (
+            <div className="mb-6">
+              <p className="text-lg text-gray-700 leading-relaxed">
+                {result.result.summary}
+              </p>
+            </div>
+          )}
+
+          {/* Explanation */}
+          {result.result.explanation && (
+            <div className="mb-8 prose prose-lg max-w-none">
+              <div
+                className="text-gray-700 leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: result.result.explanation.replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br/>') }}
+              />
+            </div>
+          )}
+
+          {/* Next Steps */}
+          {result.result.nextSteps && result.result.nextSteps.length > 0 && (
+            <div className="mb-8 bg-safety-blue-50 border-2 border-safety-blue-800 rounded-lg p-6">
+              <h3 className="text-xl font-bold text-deep-navy-900 mb-4 flex items-center gap-2">
+                <svg className="w-6 h-6 text-safety-blue-800" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Recommended Next Steps
+              </h3>
+              <ul className="space-y-3">
+                {result.result.nextSteps.map((step: string, index: number) => (
+                  <li key={index} className="flex items-start gap-3 text-gray-700 animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
+                    <span className="text-safety-blue-800 font-bold mt-1">•</span>
+                    <span className="flex-1">{step}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Result Message (legacy support) */}
+          {result.result.message && !result.result.summary && (
             <div className="mb-8">
               <h2 className="text-2xl font-bold text-deep-navy-900 mb-4">
                 Your Results
@@ -135,6 +215,48 @@ export function QuizResults({ quiz, result, onEmailSubmit }: QuizResultsProps) {
                   <SeverityBadge severity={severity} size="lg" />
                 </div>
               </div>
+            </div>
+          )}
+
+          {/* Cost Breakdown (for insurance quiz) */}
+          {result.result.costBreakdown && (
+            <div className="mb-8 bg-gray-50 rounded-lg p-6 border-2 border-gray-200">
+              <h3 className="text-xl font-bold text-deep-navy-900 mb-4">Cost Breakdown</h3>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-white rounded-lg p-4 border border-gray-200">
+                  <p className="text-sm text-gray-600 mb-1">Insurance Coverage</p>
+                  <p className="text-lg font-semibold">
+                    {result.result.costBreakdown.covered ? '✓ Yes' : '✗ No'}
+                  </p>
+                </div>
+                <div className="bg-white rounded-lg p-4 border border-gray-200">
+                  <p className="text-sm text-gray-600 mb-1">Your Deductible</p>
+                  <p className="text-lg font-semibold">${result.result.costBreakdown.deductible}</p>
+                </div>
+                <div className="bg-white rounded-lg p-4 border border-gray-200">
+                  <p className="text-sm text-gray-600 mb-1">Estimated Total Cost</p>
+                  <p className="text-lg font-semibold">${result.result.costBreakdown.estimatedCost}</p>
+                </div>
+                <div className="bg-blue-50 rounded-lg p-4 border-2 border-safety-blue-800">
+                  <p className="text-sm text-gray-600 mb-1">Your Out of Pocket</p>
+                  <p className="text-2xl font-bold text-safety-blue-800">${result.result.costBreakdown.yourCost}</p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Notes (for insurance quiz) */}
+          {result.result.notes && result.result.notes.length > 0 && (
+            <div className="mb-8 bg-blue-50 border-2 border-blue-200 rounded-lg p-6">
+              <h3 className="font-semibold text-deep-navy-900 mb-3">Important Notes:</h3>
+              <ul className="space-y-2">
+                {result.result.notes.map((note: string, index: number) => (
+                  <li key={index} className="text-sm text-gray-700 flex items-start gap-2">
+                    <span className="text-blue-600 font-bold mt-0.5">•</span>
+                    <span className="flex-1">{note}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           )}
 
@@ -200,6 +322,45 @@ export function QuizResults({ quiz, result, onEmailSubmit }: QuizResultsProps) {
                   <h4 className="font-bold text-success-green-900">Results Sent!</h4>
                   <p className="text-success-green-800">Check your inbox at {email}</p>
                 </div>
+              </div>
+            </div>
+          )}
+
+          {/* Local Partner CTA or Educational Message */}
+          {localPartner && localPartner.hasPartner && (
+            <div className="mb-8 bg-gradient-to-r from-safety-blue-700 to-safety-blue-800 rounded-lg p-8 text-center text-white shadow-lg">
+              <h3 className="text-2xl font-bold mb-3">Call Your Local Windshield Advisor Partner</h3>
+              <p className="text-lg mb-4 text-blue-100">
+                {localPartner.serviceArea}
+              </p>
+              <div className="bg-white/10 backdrop-blur rounded-lg p-6 mb-4">
+                <div className="text-sm text-blue-200 mb-2">{localPartner.name}</div>
+                <a
+                  href={`tel:${localPartner.phone?.replace(/[^0-9]/g, '')}`}
+                  className="text-4xl font-bold text-white hover:text-blue-200 transition-colors"
+                >
+                  {localPartner.phone}
+                </a>
+              </div>
+              <p className="text-sm text-blue-200">
+                AGSC-Certified • ADAS Calibration • OEM Glass Available
+              </p>
+            </div>
+          )}
+
+          {localPartner && !localPartner.hasPartner && (
+            <div className="mb-8 bg-gradient-to-r from-deep-navy-800 to-deep-navy-900 rounded-lg p-8 text-center text-white shadow-lg">
+              <h3 className="text-2xl font-bold mb-4">You're Now Informed!</h3>
+              <p className="text-lg mb-6 text-gray-300 leading-relaxed">
+                Now you're informed to make great decisions regarding the care of your car's most important safety feature: its windshield.
+              </p>
+              <div className="bg-white/5 backdrop-blur rounded-lg p-6 border border-white/10">
+                <p className="text-sm text-gray-400 mb-3">
+                  We're tracking interest in your area ({localPartner.city}, {localPartner.state})
+                </p>
+                <p className="text-base text-gray-300">
+                  Use the knowledge from this quiz to find a qualified AGSC-certified installer who can provide proper ADAS calibration and OEM glass options.
+                </p>
               </div>
             </div>
           )}
