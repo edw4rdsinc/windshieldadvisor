@@ -117,7 +117,6 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({
         hasPartner: true,
         state: geoData.region,
-        city: geoData.city,
         regionName: geoData.regionName,
         ...partner
       });

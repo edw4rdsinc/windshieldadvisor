@@ -74,8 +74,8 @@ export function QuizResults({ quiz, result, onEmailSubmit }: QuizResultsProps) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email,
-          quizId: quiz.id,
-          resultId: result.completedAt, // Use timestamp as ID
+          quiz,
+          result,
         }),
       });
 
