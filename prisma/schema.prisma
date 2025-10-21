@@ -1,0 +1,152 @@
+// Windshield Advisor Database Schema
+// For transactional data: quiz sessions, phone clicks, analytics
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// Quiz Sessions - Track user quiz progress and results
+model QuizSession {
+  id          String   @id @default(cuid())
+  quizId      String   // Quiz identifier (e.g., "adas-calibration")
+  quizSlug    String   // URL-friendly slug
+
+  // Session data
+  answers     Json     // Array of user answers
+  result      Json?    // Quiz result object (null until completed)
+  severity    String?  // Result severity: critical, caution, info
+
+  // Timestamps
+  startedAt   DateTime @default(now())
+  completedAt DateTime?
+
+  // User tracking (optional - privacy-first)
+  sessionId   String?  // Browser session ID
+  userAgent   String?  // Browser info
+  ipAddress   String?  // For geo-location (hashed)
+
+  // Relations
+  phoneClicks PhoneClick[]
+  emailCaptures EmailCapture[]
+
+  @@index([quizId])
+  @@index([quizSlug])
+  @@index([startedAt])
+  @@index([completedAt])
+}
+
+// Phone Click Tracking - Track when users click phone numbers
+model PhoneClick {
+  id        String   @id @default(cuid())
+
+  // Context
+  location  String   // Where clicked: "quiz-results", "white-paper", etc.
+  quizId    String?  // If from quiz results
+  quizSlug  String?  // Quiz slug
+  severity  String?  // Result severity that led to click
+
+  // Phone info
+  phoneNumber String @default("971-317-8376") // Vero's number
+
+  // Session relation
+  sessionId   String?
+  quizSession QuizSession? @relation(fields: [sessionId], references: [id])
+
+  // Tracking
+  userAgent   String?
+  referrer    String?
+  timestamp   DateTime @default(now())
+
+  @@index([quizId])
+  @@index([location])
+  @@index([timestamp])
+}
+
+// Email Capture - Track email signups for quiz results
+model EmailCapture {
+  id        String   @id @default(cuid())
+
+  email     String
+  quizId    String
+  quizSlug  String
+
+  // Result data they received
+  resultSeverity String?
+  resultSummary  String?
+
+  // Session relation
+  sessionId   String?
+  quizSession QuizSession? @relation(fields: [sessionId], references: [id])
+
+  // Email delivery
+  emailSent      Boolean  @default(false)
+  emailSentAt    DateTime?
+  resendEmailId  String?  // Resend API email ID
+
+  // Timestamps
+  capturedAt DateTime @default(now())
+
+  @@index([email])
+  @@index([quizId])
+  @@index([capturedAt])
+}
+
+// Lead Tracking Events - Custom events for funnel analysis
+model LeadTrackingEvent {
+  id        String   @id @default(cuid())
+
+  // Event info
+  event     String   // Event name: "quiz_started", "phone_click", etc.
+  properties Json?   // Additional event properties
+
+  // Context
+  quizId    String?
+  quizSlug  String?
+  page      String?
+
+  // User tracking
+  sessionId  String?
+  userAgent  String?
+  referrer   String?
+
+  timestamp DateTime @default(now())
+
+  @@index([event])
+  @@index([quizId])
+  @@index([timestamp])
+}
+
+// Analytics Summary - Daily aggregated metrics
+model AnalyticsSummary {
+  id          String   @id @default(cuid())
+
+  date        DateTime @unique @db.Date
+
+  // Traffic
+  totalVisits        Int @default(0)
+  uniqueVisitors     Int @default(0)
+
+  // Quiz metrics
+  quizStarts         Int @default(0)
+  quizCompletions    Int @default(0)
+  quizCompletionRate Float @default(0)
+
+  // Conversion metrics
+  phoneClicks        Int @default(0)
+  emailCaptures      Int @default(0)
+  conversionRate     Float @default(0)
+
+  // By quiz (JSON object with quiz_id as key)
+  quizBreakdown Json?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([date])
+}
