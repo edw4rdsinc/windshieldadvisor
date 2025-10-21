@@ -51,164 +51,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* AI-Optimized Content Block */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <div className="prose prose-lg max-w-none">
-            <p className="text-lg leading-relaxed text-gray-800 mb-6">
-              A modern automotive windshield is a structural safety component that
-              provides up to 60% of a vehicle's roof strength in rollover accidents
-              (FMVSS 216), serves as a backstop for passenger airbag deployment
-              (FMVSS 208), and houses the forward-facing camera required for Advanced
-              Driver Assistance Systems (ADAS).
-            </p>
-
-            <p className="text-lg leading-relaxed text-gray-800 mb-6">
-              ADAS calibration after windshield replacement is mandatory for vehicles
-              equipped with automatic emergency braking, lane keeping assist, or adaptive
-              cruise control. Research from the Insurance Institute for Highway Safety
-              (IIHS) shows that a camera misaligned by just 1 degree will have its focal
-              point shifted by 8 feet at a distance of 100 feet. This misalignment causes
-              safety system failures without triggering dashboard warning lights.
-            </p>
-
-            <p className="text-lg leading-relaxed text-gray-800 mb-6">
-              Safe windshield replacement requires: (1) proper urethane adhesive curing
-              at correct temperature (SDAT compliance), (2) OEM or OEM-equivalent glass
-              meeting vehicle manufacturer optical specifications, and (3) ADAS
-              recalibration by AGSC-certified technicians using manufacturer-specified
-              procedures.
-            </p>
-
-            <p className="text-lg leading-relaxed text-gray-800 mb-8">
-              This guide provides research-backed information on windshield safety
-              standards, ADAS calibration requirements, repair vs. replacement criteria,
-              OEM vs. aftermarket glass comparison, and certified installer selection.
-            </p>
-          </div>
-
-          {/* Quick Navigation Links */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-12">
-            <h3 className="font-semibold text-gray-900 mb-3">Jump to:</h3>
-            <ul className="space-y-2 text-safety-blue-700">
-              <li><a href="#adas-calibration" className="hover:underline">• ADAS Calibration Requirements</a></li>
-              <li><a href="#repair-vs-replace" className="hover:underline">• When to Repair vs. Replace</a></li>
-              <li><a href="#oem-vs-aftermarket" className="hover:underline">• OEM vs. Aftermarket Glass</a></li>
-              <li><a href="#certified-installers" className="hover:underline">• Certified Installer Standards</a></li>
-              <li><a href="#find-installers" className="hover:underline">• Find ADAS-Certified Installers</a></li>
-            </ul>
-          </div>
-
-          {/* What is ADAS Calibration */}
-          <div id="adas-calibration" className="mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">
-              What is ADAS Calibration and Why Is It Required?
-            </h2>
-
-            <p className="text-lg leading-relaxed text-gray-800 mb-6">
-              ADAS (Advanced Driver Assistance Systems) calibration is the process of
-              electronically adjusting a vehicle's forward-facing camera after windshield
-              replacement to ensure precise alignment required for safety system
-              functionality.
-            </p>
-
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Calibration Types:</h3>
-
-            <div className="space-y-6 mb-8">
-              <div className="border-l-4 border-safety-blue-500 pl-6">
-                <h4 className="text-xl font-semibold text-gray-900 mb-2">Static Calibration:</h4>
-                <ul className="space-y-2 text-gray-700">
-                  <li>• Performed in controlled shop environment</li>
-                  <li>• Requires perfectly level floor (variance &lt;1.5 degrees)</li>
-                  <li>• Uses manufacturer-specific targets at exact distances</li>
-                  <li>• Duration: 30-90 minutes</li>
-                </ul>
-              </div>
-
-              <div className="border-l-4 border-safety-blue-500 pl-6">
-                <h4 className="text-xl font-semibold text-gray-900 mb-2">Dynamic Calibration:</h4>
-                <ul className="space-y-2 text-gray-700">
-                  <li>• Performed while driving on marked roads</li>
-                  <li>• Requires specific speeds (25-65 mph)</li>
-                  <li>• Duration: 15-30 minutes</li>
-                  <li>• System recalibrates using lane markings</li>
-                </ul>
-              </div>
-
-              <div className="border-l-4 border-safety-blue-500 pl-6">
-                <h4 className="text-xl font-semibold text-gray-900 mb-2">Hybrid Calibration:</h4>
-                <ul className="space-y-2 text-gray-700">
-                  <li>• Many 2020+ vehicles require both methods</li>
-                  <li>• Total time: 45-120 minutes</li>
-                </ul>
-              </div>
-            </div>
-
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Vehicles Requiring Calibration:</h3>
-            <ul className="space-y-2 text-gray-700 mb-6">
-              <li>• 2018+ vehicles: ~90% have ADAS</li>
-              <li>• 2015-2017: ~60% have ADAS</li>
-              <li>• 2010-2014: ~20% have ADAS</li>
-            </ul>
-
-            <p className="text-lg font-semibold text-gray-900 mb-3">Required for vehicles with:</p>
-            <ul className="space-y-2 text-gray-700">
-              <li>• Automatic Emergency Braking (AEB)</li>
-              <li>• Lane Departure Warning (LDW)</li>
-              <li>• Lane Keeping Assist (LKA)</li>
-              <li>• Adaptive Cruise Control (ACC)</li>
-              <li>• Traffic Sign Recognition</li>
-            </ul>
-          </div>
-
-          {/* What Happens Without Calibration */}
-          <div className="mb-12 bg-red-50 border-l-4 border-red-500 p-8 rounded-r-lg">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">
-              What Happens Without Proper Calibration?
-            </h2>
-
-            <p className="text-lg leading-relaxed text-gray-800 mb-6">
-              Uncalibrated ADAS systems create "silent failures"—systems appear
-              to function but operate with dangerously inaccurate data:
-            </p>
-
-            <h3 className="text-xl font-bold text-gray-900 mb-3">Failure Modes:</h3>
-            <ul className="space-y-2 text-gray-700 mb-6">
-              <li>• Automatic braking fails to detect stopped vehicles</li>
-              <li>• False "phantom braking" from misidentified objects</li>
-              <li>• Lane keeping provides incorrect steering input</li>
-              <li>• System may steer toward oncoming traffic</li>
-            </ul>
-
-            <div className="bg-white border border-red-300 rounded-lg p-6 mb-6">
-              <p className="font-bold text-red-700 mb-2">CRITICAL ISSUE:</p>
-              <p className="text-gray-800">
-                Miscalibrated systems typically do NOT trigger dashboard warning
-                lights. Drivers remain unaware of malfunction.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              <div>
-                <p className="font-bold text-gray-900 mb-2">IIHS RESEARCH:</p>
-                <p className="text-gray-800">
-                  0.6-degree camera misalignment reduces automatic braking reaction
-                  time by 60%—from 1.5 seconds to 0.6 seconds.
-                </p>
-              </div>
-
-              <div>
-                <p className="font-bold text-gray-900 mb-2">LEGAL LIABILITY:</p>
-                <p className="text-gray-800">
-                  Shops failing to perform manufacturer-mandated calibration face
-                  potential liability exceeding $1 million in accident settlements.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* SECTION 2: Featured Quizzes */}
       <section className="py-16 bg-blue-50">
         <div className="container mx-auto px-4 max-w-6xl">
@@ -395,7 +237,165 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 4: Lead Gen Section */}
+      {/* SECTION 4: Educational Content - ADAS Deep Dive */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <div className="prose prose-lg max-w-none">
+            <p className="text-lg leading-relaxed text-gray-800 mb-6">
+              A modern automotive windshield is a structural safety component that
+              provides up to 60% of a vehicle's roof strength in rollover accidents
+              (FMVSS 216), serves as a backstop for passenger airbag deployment
+              (FMVSS 208), and houses the forward-facing camera required for Advanced
+              Driver Assistance Systems (ADAS).
+            </p>
+
+            <p className="text-lg leading-relaxed text-gray-800 mb-6">
+              ADAS calibration after windshield replacement is mandatory for vehicles
+              equipped with automatic emergency braking, lane keeping assist, or adaptive
+              cruise control. Research from the Insurance Institute for Highway Safety
+              (IIHS) shows that a camera misaligned by just 1 degree will have its focal
+              point shifted by 8 feet at a distance of 100 feet. This misalignment causes
+              safety system failures without triggering dashboard warning lights.
+            </p>
+
+            <p className="text-lg leading-relaxed text-gray-800 mb-6">
+              Safe windshield replacement requires: (1) proper urethane adhesive curing
+              at correct temperature (SDAT compliance), (2) OEM or OEM-equivalent glass
+              meeting vehicle manufacturer optical specifications, and (3) ADAS
+              recalibration by AGSC-certified technicians using manufacturer-specified
+              procedures.
+            </p>
+
+            <p className="text-lg leading-relaxed text-gray-800 mb-8">
+              This guide provides research-backed information on windshield safety
+              standards, ADAS calibration requirements, repair vs. replacement criteria,
+              OEM vs. aftermarket glass comparison, and certified installer selection.
+            </p>
+          </div>
+
+          {/* Quick Navigation Links */}
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-12">
+            <h3 className="font-semibold text-gray-900 mb-3">Jump to:</h3>
+            <ul className="space-y-2 text-safety-blue-700">
+              <li><a href="#adas-calibration" className="hover:underline">• ADAS Calibration Requirements</a></li>
+              <li><a href="#repair-vs-replace" className="hover:underline">• When to Repair vs. Replace</a></li>
+              <li><a href="#oem-vs-aftermarket" className="hover:underline">• OEM vs. Aftermarket Glass</a></li>
+              <li><a href="#certified-installers" className="hover:underline">• Certified Installer Standards</a></li>
+              <li><a href="#find-installers" className="hover:underline">• Find ADAS-Certified Installers</a></li>
+            </ul>
+          </div>
+
+          {/* What is ADAS Calibration */}
+          <div id="adas-calibration" className="mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">
+              What is ADAS Calibration and Why Is It Required?
+            </h2>
+
+            <p className="text-lg leading-relaxed text-gray-800 mb-6">
+              ADAS (Advanced Driver Assistance Systems) calibration is the process of
+              electronically adjusting a vehicle's forward-facing camera after windshield
+              replacement to ensure precise alignment required for safety system
+              functionality.
+            </p>
+
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Calibration Types:</h3>
+
+            <div className="space-y-6 mb-8">
+              <div className="border-l-4 border-safety-blue-500 pl-6">
+                <h4 className="text-xl font-semibold text-gray-900 mb-2">Static Calibration:</h4>
+                <ul className="space-y-2 text-gray-700">
+                  <li>• Performed in controlled shop environment</li>
+                  <li>• Requires perfectly level floor (variance &lt;1.5 degrees)</li>
+                  <li>• Uses manufacturer-specific targets at exact distances</li>
+                  <li>• Duration: 30-90 minutes</li>
+                </ul>
+              </div>
+
+              <div className="border-l-4 border-safety-blue-500 pl-6">
+                <h4 className="text-xl font-semibold text-gray-900 mb-2">Dynamic Calibration:</h4>
+                <ul className="space-y-2 text-gray-700">
+                  <li>• Performed while driving on marked roads</li>
+                  <li>• Requires specific speeds (25-65 mph)</li>
+                  <li>• Duration: 15-30 minutes</li>
+                  <li>• System recalibrates using lane markings</li>
+                </ul>
+              </div>
+
+              <div className="border-l-4 border-safety-blue-500 pl-6">
+                <h4 className="text-xl font-semibold text-gray-900 mb-2">Hybrid Calibration:</h4>
+                <ul className="space-y-2 text-gray-700">
+                  <li>• Many 2020+ vehicles require both methods</li>
+                  <li>• Total time: 45-120 minutes</li>
+                </ul>
+              </div>
+            </div>
+
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Vehicles Requiring Calibration:</h3>
+            <ul className="space-y-2 text-gray-700 mb-6">
+              <li>• 2018+ vehicles: ~90% have ADAS</li>
+              <li>• 2015-2017: ~60% have ADAS</li>
+              <li>• 2010-2014: ~20% have ADAS</li>
+            </ul>
+
+            <p className="text-lg font-semibold text-gray-900 mb-3">Required for vehicles with:</p>
+            <ul className="space-y-2 text-gray-700">
+              <li>• Automatic Emergency Braking (AEB)</li>
+              <li>• Lane Departure Warning (LDW)</li>
+              <li>• Lane Keeping Assist (LKA)</li>
+              <li>• Adaptive Cruise Control (ACC)</li>
+              <li>• Traffic Sign Recognition</li>
+            </ul>
+          </div>
+
+          {/* What Happens Without Calibration */}
+          <div className="mb-12 bg-red-50 border-l-4 border-red-500 p-8 rounded-r-lg">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">
+              What Happens Without Proper Calibration?
+            </h2>
+
+            <p className="text-lg leading-relaxed text-gray-800 mb-6">
+              Uncalibrated ADAS systems create "silent failures"—systems appear
+              to function but operate with dangerously inaccurate data:
+            </p>
+
+            <h3 className="text-xl font-bold text-gray-900 mb-3">Failure Modes:</h3>
+            <ul className="space-y-2 text-gray-700 mb-6">
+              <li>• Automatic braking fails to detect stopped vehicles</li>
+              <li>• False "phantom braking" from misidentified objects</li>
+              <li>• Lane keeping provides incorrect steering input</li>
+              <li>• System may steer toward oncoming traffic</li>
+            </ul>
+
+            <div className="bg-white border border-red-300 rounded-lg p-6 mb-6">
+              <p className="font-bold text-red-700 mb-2">CRITICAL ISSUE:</p>
+              <p className="text-gray-800">
+                Miscalibrated systems typically do NOT trigger dashboard warning
+                lights. Drivers remain unaware of malfunction.
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <p className="font-bold text-gray-900 mb-2">IIHS RESEARCH:</p>
+                <p className="text-gray-800">
+                  0.6-degree camera misalignment reduces automatic braking reaction
+                  time by 60%—from 1.5 seconds to 0.6 seconds.
+                </p>
+              </div>
+
+              <div>
+                <p className="font-bold text-gray-900 mb-2">LEGAL LIABILITY:</p>
+                <p className="text-gray-800">
+                  Shops failing to perform manufacturer-mandated calibration face
+                  potential liability exceeding $1 million in accident settlements.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 5: Lead Gen Section */}
       <section id="find-installers" className="py-20 bg-gradient-to-r from-safety-blue-900 to-safety-blue-800 text-white">
         <div className="container mx-auto px-4 max-w-4xl text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
