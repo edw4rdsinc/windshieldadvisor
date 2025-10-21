@@ -15,47 +15,33 @@ export function QuizResults({ quiz, result, onEmailSubmit }: QuizResultsProps) {
   const [email, setEmail] = useState('');
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [localPartner, setLocalPartner] = useState<{
-    hasPartner: boolean;
-    name?: string;
-    phone?: string;
-    city: string;
-    state: string;
-    serviceArea?: string;
-  } | null>(null);
-
-  // Fetch local partner on mount
-  React.useEffect(() => {
-    async function fetchLocalPartner() {
-      try {
-        const response = await fetch('/api/geolocation');
-        if (response.ok) {
-          const data = await response.json();
-          setLocalPartner(data);
-
-          // Track lead if no partner in area
-          if (!data.hasPartner) {
-            await fetch('/api/lead-tracking', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                quizId: quiz.id,
-                location: {
-                  city: data.city,
-                  state: data.state,
-                  regionName: data.regionName
-                },
-                timestamp: new Date().toISOString()
-              })
-            });
-          }
+  // Track phone clicks with quiz context
+  const handlePhoneClick = () => {
+    // Track in analytics
+    if (typeof window !== 'undefined' && (window as any).plausible) {
+      (window as any).plausible('Phone Click', {
+        props: {
+          location: 'quiz-results',
+          quiz_id: quiz.id,
+          quiz_slug: quiz.slug,
+          severity: getSeverity()
         }
-      } catch (error) {
-        console.error('Failed to fetch local partner:', error);
-      }
+      });
     }
-    fetchLocalPartner();
-  }, [quiz.id]);
+
+    // Also track via API for detailed analytics
+    fetch('/api/lead-tracking', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        event: 'phone_click',
+        quizId: quiz.id,
+        quizSlug: quiz.slug,
+        severity: getSeverity(),
+        timestamp: new Date().toISOString()
+      })
+    }).catch(err => console.error('Failed to track phone click:', err));
+  };
 
   // Determine severity for banner
   const getSeverity = (): Severity => {
@@ -326,57 +312,46 @@ export function QuizResults({ quiz, result, onEmailSubmit }: QuizResultsProps) {
             </div>
           )}
 
-          {/* Local Partner CTA or Educational Message */}
-          {localPartner && localPartner.hasPartner && (
-            <div className="mb-8 bg-gradient-to-r from-safety-blue-700 to-safety-blue-800 rounded-lg p-8 text-center text-white shadow-lg">
-              <h3 className="text-2xl font-bold mb-3">Call Your Local Windshield Advisor Partner</h3>
-              <p className="text-lg mb-4 text-blue-100">
-                {localPartner.serviceArea}
-              </p>
-              <div className="bg-white/10 backdrop-blur rounded-lg p-6 mb-4">
-                <div className="text-sm text-blue-200 mb-2">{localPartner.name}</div>
-                <a
-                  href={`tel:${localPartner.phone?.replace(/[^0-9]/g, '')}`}
-                  className="text-4xl font-bold text-white hover:text-blue-200 transition-colors"
-                >
-                  {localPartner.phone}
-                </a>
-              </div>
-              <p className="text-sm text-blue-200">
-                AGSC-Certified • ADAS Calibration • OEM Glass Available
-              </p>
+          {/* Call Vero Autoglass - Primary Conversion CTA */}
+          <div className="mb-8 bg-gradient-to-r from-safety-blue-700 to-safety-blue-800 rounded-lg p-8 text-center text-white shadow-xl">
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <h3 className="text-3xl font-bold">Ready for Expert Service?</h3>
             </div>
-          )}
 
-          {localPartner && !localPartner.hasPartner && (
-            <div className="mb-8 bg-gradient-to-r from-deep-navy-800 to-deep-navy-900 rounded-lg p-8 text-center text-white shadow-lg">
-              <h3 className="text-2xl font-bold mb-4">You're Now Informed!</h3>
-              <p className="text-lg mb-6 text-gray-300 leading-relaxed">
-                Now you're informed to make great decisions regarding the care of your car's most important safety feature: its windshield.
-              </p>
-              <div className="bg-white/5 backdrop-blur rounded-lg p-6 border border-white/10">
-                <p className="text-sm text-gray-400 mb-3">
-                  We're tracking interest in your area ({localPartner.city}, {localPartner.state})
-                </p>
-                <p className="text-base text-gray-300">
-                  Use the knowledge from this quiz to find a qualified AGSC-certified installer who can provide proper ADAS calibration and OEM glass options.
-                </p>
-              </div>
-            </div>
-          )}
-
-          {/* Primary CTA */}
-          <div className="mb-8 bg-gradient-to-r from-accent-orange-500 to-accent-orange-600 rounded-lg p-8 text-center text-white shadow-lg">
-            <h3 className="text-2xl font-bold mb-3">Ready to Take Action?</h3>
-            <p className="text-lg mb-6 text-orange-100">
-              Connect with qualified installers in your area who can address your windshield needs
+            <p className="text-xl mb-6 text-blue-100 font-semibold">
+              Talk to a certified windshield specialist who understands your needs
             </p>
-            <Link
-              href="/find-installers"
-              className="btn-primary inline-block bg-white text-accent-orange-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-all hover:scale-105"
-            >
-              Find Qualified Installers →
-            </Link>
+
+            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 mb-6 border-2 border-white/20">
+              <p className="text-sm text-blue-200 mb-2 uppercase tracking-wide font-semibold">Call Vero Autoglass</p>
+              <a
+                href="tel:971-317-8376"
+                onClick={handlePhoneClick}
+                data-phone
+                data-quiz={quiz.slug}
+                className="block text-5xl md:text-6xl font-bold text-white hover:text-blue-200 transition-colors mb-4 tracking-tight"
+              >
+                971-317-8376
+              </a>
+              <p className="text-base text-blue-100 mb-4">
+                Portland Metro Area • Mobile Service Available
+              </p>
+              <div className="flex flex-wrap justify-center gap-3 text-sm">
+                <span className="bg-white/20 px-3 py-1 rounded-full">✓ AGSC Certified</span>
+                <span className="bg-white/20 px-3 py-1 rounded-full">✓ ADAS Calibration</span>
+                <span className="bg-white/20 px-3 py-1 rounded-full">✓ OEM Glass</span>
+                <span className="bg-white/20 px-3 py-1 rounded-full">✓ Lifetime Warranty</span>
+              </div>
+            </div>
+
+            <div className="text-sm text-blue-200 space-y-2">
+              <p>• Free quotes over the phone</p>
+              <p>• Insurance claims handled for you</p>
+              <p>• Same-day service available</p>
+            </div>
           </div>
 
           {/* Related Content - TODO: Implement when we have white paper objects */}
