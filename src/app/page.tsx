@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import FloatingQuizButton from '@/components/FloatingQuizButton';
+import { OrganizationSchema, WebPageSchema, HowToSchema } from '@/components/StructuredData';
 
 export const metadata: Metadata = {
   title: 'Windshield Safety and ADAS Calibration Guide | Windshield Advisor',
@@ -21,6 +22,11 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
+      {/* Schema.org Structured Data for AI Search */}
+      <OrganizationSchema />
+      <WebPageSchema />
+      <HowToSchema />
+
       {/* SECTION 1: Hero & AI-Optimized Introduction */}
       <section className="bg-gradient-to-r from-safety-blue-900 to-safety-blue-800 text-white py-16 md:py-24 animate-fade-in-down">
         <div className="container mx-auto px-4 max-w-4xl">
@@ -946,10 +952,10 @@ export default function HomePage() {
             <div>
               <h4 className="text-white font-semibold mb-4">Resources</h4>
               <ul className="space-y-2 text-sm">
-                <li><Link href="/resources/glossary" className="hover:text-white">Glossary</Link></li>
-                <li><Link href="/resources/faq" className="hover:text-white">FAQ</Link></li>
-                <li><Link href="/resources/state-laws" className="hover:text-white">State Insurance Laws</Link></li>
-                <li><Link href="/resources/certifications" className="hover:text-white">Certification Directory</Link></li>
+                <li><Link href="/safety-guides" className="hover:text-white">Safety Guides</Link></li>
+                <li><Link href="/blog" className="hover:text-white">Blog</Link></li>
+                <li><Link href="/resources" className="hover:text-white">Resources</Link></li>
+                <li><Link href="/about/certifications" className="hover:text-white">Certifications</Link></li>
               </ul>
             </div>
 
