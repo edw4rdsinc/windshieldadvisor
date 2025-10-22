@@ -101,6 +101,17 @@ export function QuizWidget({ quiz, theme, config }: QuizWidgetProps) {
       title: quiz.title,
       totalQuestions,
     });
+
+    // Track quiz start in Plausible
+    if (typeof window !== 'undefined' && (window as any).plausible) {
+      (window as any).plausible('Quiz Started', {
+        props: {
+          quiz: quiz.slug,
+          title: quiz.title,
+          partnerId: config.partnerId,
+        },
+      });
+    }
   }, []);
 
   const handleAnswer = (answer: string | string[]) => {
@@ -168,6 +179,20 @@ export function QuizWidget({ quiz, theme, config }: QuizWidgetProps) {
       duration,
       answersCount: finalAnswers.length,
     });
+
+    // Track quiz completion in Plausible
+    if (typeof window !== 'undefined' && (window as any).plausible) {
+      (window as any).plausible('Quiz Completed', {
+        props: {
+          quiz: quiz.slug,
+          title: quiz.title,
+          partnerId: config.partnerId,
+          severity: calculatedResult.severity,
+          duration: duration,
+          questionsAnswered: finalAnswers.length,
+        },
+      });
+    }
 
     // Call partner callback if provided
     if (config.callbackUrl) {
