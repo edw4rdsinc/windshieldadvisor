@@ -79,7 +79,7 @@ export function QuizQuestion({
         </div>
 
         <h2 className="text-2xl md:text-3xl font-bold text-deep-navy-900 mb-3">
-          {question.question}
+          {question.question || question.text}
         </h2>
 
         {question.description && (
