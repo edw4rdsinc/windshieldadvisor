@@ -35,14 +35,14 @@ export function QuizQuestion({
   };
 
   const handleOptionSelect = (optionId: string) => {
-    if (question.type === 'multiple_choice') {
+    if (question.type === 'multiple_choice' || question.type === 'radio') {
       setSelectedAnswer(optionId);
       setShowValidation(false);
     }
   };
 
   const handleMultipleSelect = (optionId: string) => {
-    if (question.type === 'multiple_select') {
+    if (question.type === 'multiple_select' || question.type === 'checkbox') {
       const current = (selectedAnswer as string[]) || [];
       if (current.includes(optionId)) {
         setSelectedAnswer(current.filter(id => id !== optionId));
@@ -59,7 +59,7 @@ export function QuizQuestion({
   };
 
   const isSelected = (optionId: string) => {
-    if (question.type === 'multiple_select') {
+    if (question.type === 'multiple_select' || question.type === 'checkbox') {
       return (selectedAnswer as string[] || []).includes(optionId);
     }
     return selectedAnswer === optionId;
@@ -88,7 +88,7 @@ export function QuizQuestion({
           </p>
         )}
 
-        {question.type === 'multiple_select' && (
+        {(question.type === 'multiple_select' || question.type === 'checkbox') && (
           <p className="text-sm text-gray-500 mt-2 italic">
             Select all that apply
           </p>
@@ -97,7 +97,7 @@ export function QuizQuestion({
 
       {/* Answer Options */}
       <div className="space-y-3 mb-8">
-        {question.type === 'multiple_choice' && (
+        {(question.type === 'multiple_choice' || question.type === 'radio') && (
           <>
             {question.options.map((option, index) => (
               <button
@@ -144,7 +144,7 @@ export function QuizQuestion({
           </>
         )}
 
-        {question.type === 'multiple_select' && (
+        {(question.type === 'multiple_select' || question.type === 'checkbox') && (
           <>
             {question.options.map((option, index) => (
               <button
