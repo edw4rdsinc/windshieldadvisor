@@ -2,10 +2,12 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { useGeolocation } from '@/hooks/useGeolocation';
 
 export default function FindInstallersPage() {
   const [zipCode, setZipCode] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const { location, isLoading } = useGeolocation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,7 +35,37 @@ export default function FindInstallersPage() {
       {/* Main Content */}
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-4xl">
-          {!isSubmitted ? (
+          {/* Partner Service Area - Show Phone Number */}
+          {!isLoading && location?.hasPartner && location.phone ? (
+            <div className="bg-green-50 border-2 border-green-500 rounded-lg p-8 mb-12 text-center">
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-green-100 rounded-full text-green-600 mb-6">
+                <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                </svg>
+              </div>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                We're in Your Area!
+              </h2>
+              <p className="text-lg text-gray-700 mb-2">
+                {location.name}
+              </p>
+              <p className="text-gray-600 mb-6">
+                {location.serviceArea}
+              </p>
+              <a
+                href={`tel:${location.phone.replace(/\D/g, '')}`}
+                className="inline-flex items-center justify-center px-12 py-6 bg-accent-orange-500 hover:bg-accent-orange-600 text-white font-bold rounded-lg transition-colors text-2xl shadow-lg hover:shadow-xl mb-4"
+              >
+                <svg className="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                {location.phone}
+              </a>
+              <p className="text-sm text-gray-600">
+                Call now for a free quote and same-day service availability
+              </p>
+            </div>
+          ) : !isSubmitted ? (
             <>
               {/* Search Form */}
               <div className="bg-white rounded-lg shadow-xl p-8 mb-12">

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import FloatingQuizButton from '@/components/FloatingQuizButton';
+import GeolocationCTA from '@/components/GeolocationCTA';
 import { OrganizationSchema, WebPageSchema, HowToSchema } from '@/components/StructuredData';
 
 export const metadata: Metadata = {
@@ -48,12 +49,7 @@ export default function HomePage() {
             >
               Take the Safety Quiz →
             </Link>
-            <Link
-              href="/find-installers"
-              className="inline-flex items-center justify-center px-8 py-4 text-blue-100 hover:text-white font-medium transition-colors text-lg underline"
-            >
-              Find certified installers
-            </Link>
+            <GeolocationCTA variant="text" />
           </div>
         </div>
       </section>
@@ -905,12 +901,9 @@ export default function HomePage() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-            <Link
-              href="/find-installers"
-              className="inline-flex items-center justify-center px-8 py-4 bg-accent-orange-500 hover:bg-accent-orange-600 text-white font-semibold rounded-lg transition-colors text-lg"
-            >
+            <GeolocationCTA variant="primary">
               Find Certified Installers →
-            </Link>
+            </GeolocationCTA>
             <Link
               href="/quizzes"
               className="inline-flex items-center justify-center px-8 py-4 bg-white hover:bg-gray-100 text-safety-blue-900 font-semibold rounded-lg transition-colors text-lg"

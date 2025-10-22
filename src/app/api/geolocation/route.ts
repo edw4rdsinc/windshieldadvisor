@@ -15,7 +15,7 @@ const PARTNER_SHOPS = {
   // Las Vegas Metro (NV: Clark County)
   lasVegas: {
     name: 'Vero Auto Glass',
-    phone: '(725) 234-6955',
+    phone: '(702) 276-7448',
     city: 'Las Vegas Metro',
     serviceArea: 'Serving Clark County'
   },
