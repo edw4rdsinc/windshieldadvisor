@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { SeverityBanner, SeverityBadge } from '@/components/shared/SeverityBadge';
+import { useGeolocation } from '@/hooks/useGeolocation';
 import type { Quiz, QuizResult, Severity } from '@/types/quiz';
 
 interface QuizResultsProps {
@@ -15,6 +16,7 @@ export function QuizResults({ quiz, result, onEmailSubmit }: QuizResultsProps) {
   const [email, setEmail] = useState('');
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { location, isLoading } = useGeolocation();
   // Track phone clicks with quiz context
   const handlePhoneClick = () => {
     // Track in analytics
@@ -312,47 +314,80 @@ export function QuizResults({ quiz, result, onEmailSubmit }: QuizResultsProps) {
             </div>
           )}
 
-          {/* Call Vero Autoglass - Primary Conversion CTA */}
-          <div className="mb-8 bg-gradient-to-r from-safety-blue-700 to-safety-blue-800 rounded-lg p-8 text-center text-white shadow-xl">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <h3 className="text-3xl font-bold">Ready for Expert Service?</h3>
-            </div>
+          {/* Geo-Specific CTA */}
+          {!isLoading && location?.hasPartner && location.phone ? (
+            /* Partner Area - Call to Action */
+            <div className="mb-8 bg-gradient-to-r from-safety-blue-700 to-safety-blue-800 rounded-lg p-8 text-center text-white shadow-xl">
+              <div className="flex items-center justify-center gap-2 mb-4">
+                <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h3 className="text-3xl font-bold">Ready for Expert Service?</h3>
+              </div>
 
-            <p className="text-xl mb-6 text-blue-100 font-semibold">
-              Talk to a certified windshield specialist who understands your needs
-            </p>
-
-            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 mb-6 border-2 border-white/20">
-              <p className="text-sm text-blue-200 mb-2 uppercase tracking-wide font-semibold">Call Vero Autoglass</p>
-              <a
-                href="tel:971-317-8376"
-                onClick={handlePhoneClick}
-                data-phone
-                data-quiz={quiz.slug}
-                className="block text-5xl md:text-6xl font-bold text-white hover:text-blue-200 transition-colors mb-4 tracking-tight"
-              >
-                971-317-8376
-              </a>
-              <p className="text-base text-blue-100 mb-4">
-                Portland Metro Area • Mobile Service Available
+              <p className="text-xl mb-6 text-blue-100 font-semibold">
+                Talk to a certified windshield specialist who understands your needs
               </p>
-              <div className="flex flex-wrap justify-center gap-3 text-sm">
-                <span className="bg-white/20 px-3 py-1 rounded-full">✓ AGSC Certified</span>
-                <span className="bg-white/20 px-3 py-1 rounded-full">✓ ADAS Calibration</span>
-                <span className="bg-white/20 px-3 py-1 rounded-full">✓ OEM Glass</span>
-                <span className="bg-white/20 px-3 py-1 rounded-full">✓ Lifetime Warranty</span>
+
+              <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 mb-6 border-2 border-white/20">
+                <p className="text-sm text-blue-200 mb-2 uppercase tracking-wide font-semibold">
+                  {location.name}
+                </p>
+                <a
+                  href={`tel:${location.phone.replace(/\D/g, '')}`}
+                  onClick={handlePhoneClick}
+                  data-phone
+                  data-quiz={quiz.slug}
+                  className="block text-5xl md:text-6xl font-bold text-white hover:text-blue-200 transition-colors mb-4 tracking-tight"
+                >
+                  {location.phone}
+                </a>
+                <p className="text-base text-blue-100 mb-4">
+                  {location.serviceArea} • Mobile Service Available
+                </p>
+                <div className="flex flex-wrap justify-center gap-3 text-sm">
+                  <span className="bg-white/20 px-3 py-1 rounded-full">✓ AGSC Certified</span>
+                  <span className="bg-white/20 px-3 py-1 rounded-full">✓ ADAS Calibration</span>
+                  <span className="bg-white/20 px-3 py-1 rounded-full">✓ OEM Glass</span>
+                  <span className="bg-white/20 px-3 py-1 rounded-full">✓ Lifetime Warranty</span>
+                </div>
+              </div>
+
+              <div className="text-sm text-blue-200 space-y-2">
+                <p>• Free quotes over the phone</p>
+                <p>• Insurance claims handled for you</p>
+                <p>• Same-day service available</p>
               </div>
             </div>
+          ) : (
+            /* Non-Partner Area - Simple Encouragement */
+            <div className="mb-8 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-8 text-center border-2 border-gray-200">
+              <div className="flex items-center justify-center gap-2 mb-4">
+                <svg className="w-8 h-8 text-safety-blue-800" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h3 className="text-3xl font-bold text-gray-900">You're All Set!</h3>
+              </div>
 
-            <div className="text-sm text-blue-200 space-y-2">
-              <p>• Free quotes over the phone</p>
-              <p>• Insurance claims handled for you</p>
-              <p>• Same-day service available</p>
+              <p className="text-xl mb-6 text-gray-700">
+                You now have the information you need to make an informed decision about your windshield
+              </p>
+
+              <div className="bg-safety-blue-50 rounded-xl p-6 mb-6 border-2 border-safety-blue-200">
+                <h4 className="font-bold text-safety-blue-900 mb-3">When Choosing a Shop, Look For:</h4>
+                <div className="flex flex-wrap justify-center gap-3 text-sm">
+                  <span className="bg-white px-3 py-2 rounded-lg border border-safety-blue-300 text-gray-800">✓ AGSC Certified Technicians</span>
+                  <span className="bg-white px-3 py-2 rounded-lg border border-safety-blue-300 text-gray-800">✓ In-House ADAS Equipment</span>
+                  <span className="bg-white px-3 py-2 rounded-lg border border-safety-blue-300 text-gray-800">✓ OEM or Premium Glass</span>
+                  <span className="bg-white px-3 py-2 rounded-lg border border-safety-blue-300 text-gray-800">✓ Written Warranty</span>
+                </div>
+              </div>
+
+              <p className="text-gray-600 text-sm">
+                Best of luck with your windshield service! Drive safely.
+              </p>
             </div>
-          </div>
+          )}
 
           {/* Related Content - TODO: Implement when we have white paper objects */}
 
