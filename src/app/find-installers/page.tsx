@@ -7,6 +7,8 @@ import { useGeolocation } from '@/hooks/useGeolocation';
 export default function FindInstallersPage() {
   const [zipCode, setZipCode] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [zipOverride, setZipOverride] = useState('');
+  const [showZipOverride, setShowZipOverride] = useState(false);
   const { location, isLoading } = useGeolocation();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -15,6 +17,13 @@ export default function FindInstallersPage() {
 
     // TODO: Implement actual installer search/lead gen
     console.log('Searching for installers in:', zipCode);
+  };
+
+  const handleZipOverride = (e: React.FormEvent) => {
+    e.preventDefault();
+    setZipOverride(zipCode);
+    // TODO: Look up ZIP code and determine service area
+    console.log('ZIP override:', zipCode);
   };
 
   return (
@@ -61,17 +70,50 @@ export default function FindInstallersPage() {
                 </svg>
                 {location.phone}
               </a>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-600 mb-6">
                 Call now for a free quote and same-day service availability
               </p>
+
+              {/* ZIP Override Option */}
+              <div className="border-t border-green-200 pt-6 mt-6">
+                <button
+                  onClick={() => setShowZipOverride(!showZipOverride)}
+                  className="text-gray-600 hover:text-gray-800 text-sm underline mb-4"
+                >
+                  Looking for service in a different area? Enter ZIP code
+                </button>
+
+                {showZipOverride && (
+                  <form onSubmit={handleZipOverride} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                    <input
+                      type="text"
+                      value={zipCode}
+                      onChange={(e) => setZipCode(e.target.value)}
+                      placeholder="Enter ZIP Code"
+                      pattern="[0-9]{5}"
+                      required
+                      className="flex-1 px-4 py-2 border-2 border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-safety-blue-500 focus:border-transparent"
+                    />
+                    <button
+                      type="submit"
+                      className="px-6 py-2 bg-safety-blue-600 hover:bg-safety-blue-700 text-white font-semibold rounded-lg transition-colors"
+                    >
+                      Check Area
+                    </button>
+                  </form>
+                )}
+              </div>
             </div>
           ) : !isSubmitted ? (
             <>
               {/* Search Form */}
               <div className="bg-white rounded-lg shadow-xl p-8 mb-12">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-                  Enter Your Location
+                <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">
+                  Find Certified Installers in Your Area
                 </h2>
+                <p className="text-gray-600 text-center mb-6">
+                  If you'd like information on shops in a different area, enter your ZIP code below
+                </p>
                 <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
                   <input
                     type="text"
