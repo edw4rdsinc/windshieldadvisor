@@ -11,7 +11,7 @@ export const sanityClient = createClient({
 // Helper to fetch all white papers
 export async function getWhitePapers() {
   return sanityClient.fetch(`
-    *[_type == "whitepaper"] | order(publishedAt desc) {
+    *[_type == "whitepaper" && defined(publishedAt)] | order(publishedAt desc) {
       _id,
       title,
       slug,
@@ -53,7 +53,7 @@ export async function getWhitePapers() {
 export async function getWhitePaper(slug: string) {
   return sanityClient.fetch(
     `
-    *[_type == "whitepaper" && slug.current == $slug][0] {
+    *[_type == "whitepaper" && slug.current == $slug && defined(publishedAt)][0] {
       _id,
       title,
       slug,
@@ -96,7 +96,7 @@ export async function getWhitePaper(slug: string) {
 // Helper to fetch blog posts
 export async function getBlogPosts() {
   return sanityClient.fetch(`
-    *[_type == "blog"] | order(publishedAt desc) {
+    *[_type == "blog" && defined(publishedAt)] | order(publishedAt desc) {
       _id,
       title,
       slug,

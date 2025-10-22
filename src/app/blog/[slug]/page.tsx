@@ -33,7 +33,7 @@ interface BlogPost {
 }
 
 async function getBlogPost(slug: string): Promise<BlogPost | null> {
-  const query = `*[_type == "blog" && slug.current == $slug][0] {
+  const query = `*[_type == "blog" && slug.current == $slug && defined(publishedAt)][0] {
     _id,
     title,
     slug,
@@ -58,7 +58,7 @@ async function getBlogPost(slug: string): Promise<BlogPost | null> {
 }
 
 async function getRelatedPosts(blogId: string, category: string) {
-  const query = `*[_type == "blog" && category == $category && _id != $blogId] {
+  const query = `*[_type == "blog" && defined(publishedAt) && category == $category && _id != $blogId] {
     _id,
     title,
     slug,

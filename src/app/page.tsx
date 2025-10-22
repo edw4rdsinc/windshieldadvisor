@@ -463,21 +463,20 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 5: Featured White Papers */}
+      {/* SECTION 5: Featured White Paper */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              The Complete Windshield Safety Library
+              Expert Research & Safety Guides
             </h2>
             <p className="text-xl text-gray-600">
-              Research-backed guides covering every aspect of windshield safety,
-              from ADAS calibration to choosing certified installers.
+              Research-backed guides on windshield safety and ADAS calibration.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 mb-8">
-            {/* White Paper Card 1 */}
+          <div className="max-w-2xl mx-auto mb-8">
+            {/* Featured White Paper Card */}
             <div className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow">
               <div className="flex items-center gap-3 mb-4">
                 <span className="bg-safety-blue-100 text-safety-blue-700 text-xs font-bold px-3 py-1 rounded">
@@ -500,90 +499,7 @@ export default function HomePage() {
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-500">📖 15 min read</span>
                 <Link
-                  href="/safety-guides/mandatory-adas-calibration-windshield-replacement"
-                  className="text-safety-blue-600 hover:text-safety-blue-700 font-semibold"
-                >
-                  Read Full Guide →
-                </Link>
-              </div>
-            </div>
-
-            {/* White Paper Card 2 */}
-            <div className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="bg-safety-blue-100 text-safety-blue-700 text-xs font-bold px-3 py-1 rounded">
-                  WHITE PAPER
-                </span>
-              </div>
-
-              <h3 className="text-2xl font-bold text-gray-900 mb-3" id="oem-vs-aftermarket">
-                OEM vs. Aftermarket Windshields: A Safety Analysis
-              </h3>
-
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                Material and manufacturing differences impacting ADAS. Why
-                23% of aftermarket glass fails calibration.
-              </p>
-
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-500">📖 18 min read</span>
-                <Link
-                  href="/safety-guides/oem-vs-aftermarket-windshields-safety-adas-compatibility"
-                  className="text-safety-blue-600 hover:text-safety-blue-700 font-semibold"
-                >
-                  Read Full Guide →
-                </Link>
-              </div>
-            </div>
-
-            {/* White Paper Card 3 */}
-            <div className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="bg-safety-blue-100 text-safety-blue-700 text-xs font-bold px-3 py-1 rounded">
-                  WHITE PAPER
-                </span>
-              </div>
-
-              <h3 className="text-2xl font-bold text-gray-900 mb-3" id="repair-vs-replace">
-                When to Repair vs. Replace Your Windshield
-              </h3>
-
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                ROLAGS™ repairability standards, why repair preserves factory seal,
-                and DIY repair kit dangers.
-              </p>
-
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-500">📖 12 min read</span>
-                <Link
-                  href="/safety-guides/windshield-repair-vs-replacement-rolags-standards"
-                  className="text-safety-blue-600 hover:text-safety-blue-700 font-semibold"
-                >
-                  Read Full Guide →
-                </Link>
-              </div>
-            </div>
-
-            {/* White Paper Card 4 */}
-            <div className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="bg-safety-blue-100 text-safety-blue-700 text-xs font-bold px-3 py-1 rounded">
-                  WHITE PAPER
-                </span>
-              </div>
-
-              <h3 className="text-2xl font-bold text-gray-900 mb-3" id="certified-installers">
-                Best Practices for Windshield Care and Maintenance
-              </h3>
-
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                Proper cleaning techniques, seasonal protection, wiper blade care, and damage prevention strategies to extend windshield lifespan.
-              </p>
-
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-500">📖 10 min read</span>
-                <Link
-                  href="/safety-guides/windshield-care-maintenance-best-practices"
+                  href="/white-papers/mandatory-adas-calibration-windshield-replacement"
                   className="text-safety-blue-600 hover:text-safety-blue-700 font-semibold"
                 >
                   Read Full Guide →
@@ -594,10 +510,10 @@ export default function HomePage() {
 
           <div className="text-center">
             <Link
-              href="/safety-guides"
+              href="/white-papers"
               className="inline-flex items-center text-safety-blue-600 hover:text-safety-blue-700 font-semibold text-lg"
             >
-              VIEW ALL 9 SAFETY GUIDES →
+              VIEW ALL RESEARCH & GUIDES →
             </Link>
           </div>
         </div>
@@ -662,123 +578,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 7: All White Papers Grid */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-12">
-            Explore the Complete Research Library
-          </h2>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Cards 1-4 are featured above, cards 5-10 here */}
-
-            {/* Card 5 */}
-            <div className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
-              <div className="text-safety-blue-600 mb-3">
-                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                The Science Behind Windshield Lamination
-              </h3>
-              <p className="text-gray-600 text-sm mb-4">
-                How PVB interlayer technology creates structural integrity and prevents ejection.
-              </p>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-500">📖 10 min read</span>
-                <Link href="/safety-guides/the-science-and-safety-of-laminated-automotive-glass" className="text-safety-blue-600 hover:text-safety-blue-700 font-semibold">
-                  Read →
-                </Link>
-              </div>
-            </div>
-
-            {/* Card 6 */}
-            <div className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
-              <div className="text-safety-blue-600 mb-3">
-                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                Temperature's Impact on Windshield Installation
-              </h3>
-              <p className="text-gray-600 text-sm mb-4">
-                Why SDAT compliance matters and how temperature affects adhesive curing time.
-              </p>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-500">📖 11 min read</span>
-                <Link href="/safety-guides/temperature-automotive-adhesive-curing-windshield-safety" className="text-safety-blue-600 hover:text-safety-blue-700 font-semibold">
-                  Read →
-                </Link>
-              </div>
-            </div>
-
-            {/* Card 7 */}
-            <div className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
-              <div className="text-safety-blue-600 mb-3">
-                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                Understanding Windshield Insurance & Warranties
-              </h3>
-              <p className="text-gray-600 text-sm mb-4">
-                Coverage differences, zero-deductible states, and what warranties actually cover.
-              </p>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-500">📖 13 min read</span>
-                <Link href="/safety-guides/windshield-warranties-insurance-consumer-guide" className="text-safety-blue-600 hover:text-safety-blue-700 font-semibold">
-                  Read →
-                </Link>
-              </div>
-            </div>
-
-            {/* Card 8 */}
-            <div className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
-              <div className="text-safety-blue-600 mb-3">
-                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                The Future of Windshield Technology
-              </h3>
-              <p className="text-gray-600 text-sm mb-4">
-                Heads-up displays, acoustic interlayers, heated glass, and emerging innovations.
-              </p>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-500">📖 12 min read</span>
-                <Link href="/safety-guides/future-windshield-technology-huds-smart-glass" className="text-safety-blue-600 hover:text-safety-blue-700 font-semibold">
-                  Read →
-                </Link>
-              </div>
-            </div>
-
-            {/* Card 9 */}
-            <div className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
-              <div className="text-safety-blue-600 mb-3">
-                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                Environmental Benefits of Windshield Recycling
-              </h3>
-              <p className="text-gray-600 text-sm mb-4">
-                Glass recycling processes, environmental impact, and sustainable disposal practices.
-              </p>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-500">📖 9 min read</span>
-                <Link href="/safety-guides/circular-economy-automotive-glass-recycling" className="text-safety-blue-600 hover:text-safety-blue-700 font-semibold">
-                  Read →
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* SECTION 8: FAQ */}
       <section className="py-16 bg-white">

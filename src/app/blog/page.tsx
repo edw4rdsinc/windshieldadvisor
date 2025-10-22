@@ -34,7 +34,7 @@ interface BlogPost {
 
 async function getAllBlogs(): Promise<BlogPost[]> {
   const now = new Date().toISOString();
-  const query = `*[_type == "blog" && publishedAt <= $now] | order(publishedAt desc) {
+  const query = `*[_type == "blog" && defined(publishedAt) && publishedAt <= $now] | order(publishedAt desc) {
     _id,
     title,
     slug,
@@ -55,7 +55,7 @@ async function getAllBlogs(): Promise<BlogPost[]> {
 
 async function getFeaturedBlogs(): Promise<BlogPost[]> {
   const now = new Date().toISOString();
-  const query = `*[_type == "blog" && publishedAt <= $now] | order(publishedAt desc) [0...3] {
+  const query = `*[_type == "blog" && defined(publishedAt) && publishedAt <= $now] | order(publishedAt desc) [0...3] {
     _id,
     title,
     slug,

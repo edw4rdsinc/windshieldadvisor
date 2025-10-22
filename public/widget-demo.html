@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Windshield Advisor Quiz Widget - Demo</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 3rem;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .demo-section {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .demo-section h2 {
+      margin-bottom: 1rem;
+      color: #667eea;
+    }
+
+    .demo-section p {
+      margin-bottom: 1.5rem;
+      color: #666;
+    }
+
+    .code-block {
+      background: #2d3748;
+      color: #e2e8f0;
+      padding: 1.5rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .quiz-container {
+      margin: 2rem 0;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .theme-selector {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .theme-option {
+      padding: 1rem;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .theme-option:hover {
+      border-color: #667eea;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+    }
+
+    .theme-option.active {
+      border-color: #667eea;
+      background: #f7fafc;
+    }
+
+    .theme-option h3 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .color-preview {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .color-swatch {
+      width: 40px;
+      height: 40px;
+      border-radius: 4px;
+      border: 2px solid white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .event-log {
+      background: #1a202c;
+      color: #48bb78;
+      padding: 1rem;
+      border-radius: 8px;
+      max-height: 300px;
+      overflow-y: auto;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.85rem;
+      line-height: 1.8;
+    }
+
+    .event-log-entry {
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      animation: fadeIn 0.3s forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .event-time {
+      color: #90cdf4;
+      margin-right: 0.5rem;
+    }
+
+    .event-type {
+      color: #fbd38d;
+      font-weight: bold;
+      margin-right: 0.5rem;
+    }
+
+    .button {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .button:hover {
+      background: #5a67d8;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    footer {
+      text-align: center;
+      color: white;
+      margin-top: 3rem;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🚗 Windshield Advisor Quiz Widget</h1>
+      <p>Interactive Demo & Integration Examples</p>
+    </div>
+
+    <!-- Demo 1: Basic Integration -->
+    <div class="demo-section">
+      <h2>1. Basic Integration</h2>
+      <p>The simplest way to embed a quiz with default styling:</p>
+
+      <div class="code-block">
+&lt;!-- Add this where you want the quiz --&gt;
+&lt;div class="windshield-advisor-quiz"
+     data-quiz="adas-calibration"
+     data-partner-id="demo-partner"&gt;&lt;/div&gt;
+
+&lt;!-- Load the embed script --&gt;
+&lt;script src="https://windshieldadvisor.info/quiz-embed.js"&gt;&lt;/script&gt;
+      </div>
+
+      <div class="quiz-container">
+        <div class="windshield-advisor-quiz"
+             data-quiz="adas-calibration"
+             data-partner-id="demo-partner"
+             id="quiz-basic"></div>
+      </div>
+    </div>
+
+    <!-- Demo 2: Custom Themes -->
+    <div class="demo-section">
+      <h2>2. Custom Brand Styling</h2>
+      <p>Choose a theme to see how the quiz adapts to your brand colors:</p>
+
+      <div class="theme-selector">
+        <div class="theme-option active" data-theme="default">
+          <h3>Default Blue</h3>
+          <div class="color-preview">
+            <div class="color-swatch" style="background: #2563eb;"></div>
+            <div class="color-swatch" style="background: #1e40af;"></div>
+          </div>
+        </div>
+
+        <div class="theme-option" data-theme="green">
+          <h3>Eco Green</h3>
+          <div class="color-preview">
+            <div class="color-swatch" style="background: #059669;"></div>
+            <div class="color-swatch" style="background: #047857;"></div>
+          </div>
+        </div>
+
+        <div class="theme-option" data-theme="purple">
+          <h3>Professional Purple</h3>
+          <div class="color-preview">
+            <div class="color-swatch" style="background: #7c3aed;"></div>
+            <div class="color-swatch" style="background: #6d28d9;"></div>
+          </div>
+        </div>
+
+        <div class="theme-option" data-theme="orange">
+          <h3>Energetic Orange</h3>
+          <div class="color-preview">
+            <div class="color-swatch" style="background: #ea580c;"></div>
+            <div class="color-swatch" style="background: #c2410c;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="quiz-container">
+        <div class="windshield-advisor-quiz"
+             data-quiz="repair-replace"
+             data-partner-id="demo-partner"
+             data-primary-color="2563eb"
+             data-accent-color="1e40af"
+             id="quiz-themed"></div>
+      </div>
+    </div>
+
+    <!-- Demo 3: Event Tracking -->
+    <div class="demo-section">
+      <h2>3. Event Tracking & Analytics</h2>
+      <p>Monitor quiz interactions in real-time:</p>
+
+      <div class="code-block">
+document.addEventListener('windshieldAdvisorQuiz:completed', (e) => {
+  console.log('Quiz completed:', e.detail);
+  // Send to your analytics, show thank you page, etc.
+});
+      </div>
+
+      <button class="button" onclick="clearEventLog()">Clear Log</button>
+      <div class="event-log" id="event-log">
+        <div class="event-log-entry">
+          <span class="event-type">READY</span>
+          <span>Event log initialized. Start a quiz to see events...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Demo 4: All Available Quizzes -->
+    <div class="demo-section">
+      <h2>4. Available Quizzes</h2>
+      <p>Choose different quizzes for different pages on your site:</p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+        <div style="padding: 1rem; border: 2px solid #e2e8f0; border-radius: 8px;">
+          <h3 style="margin-bottom: 0.5rem;">ADAS Calibration</h3>
+          <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem;">Does my car need calibration?</p>
+          <code style="background: #f7fafc; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">adas-calibration</code>
+        </div>
+
+        <div style="padding: 1rem; border: 2px solid #e2e8f0; border-radius: 8px;">
+          <h3 style="margin-bottom: 0.5rem;">Repair vs Replace</h3>
+          <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem;">Expert damage assessment</p>
+          <code style="background: #f7fafc; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">repair-replace</code>
+        </div>
+
+        <div style="padding: 1rem; border: 2px solid #e2e8f0; border-radius: 8px;">
+          <h3 style="margin-bottom: 0.5rem;">Insurance Coverage</h3>
+          <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem;">Calculate your costs</p>
+          <code style="background: #f7fafc; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">insurance-coverage</code>
+        </div>
+
+        <div style="padding: 1rem; border: 2px solid #e2e8f0; border-radius: 8px;">
+          <h3 style="margin-bottom: 0.5rem;">Installer Qualifications</h3>
+          <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem;">Verify installer credentials</p>
+          <code style="background: #f7fafc; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">installer-qualified</code>
+        </div>
+
+        <div style="padding: 1rem; border: 2px solid #e2e8f0; border-radius: 8px;">
+          <h3 style="margin-bottom: 0.5rem;">Windshield Safety</h3>
+          <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem;">Complete safety assessment</p>
+          <code style="background: #f7fafc; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">windshield-safety</code>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>Full documentation: <strong>WIDGET_INTEGRATION_GUIDE.md</strong></p>
+      <p style="margin-top: 0.5rem;">Contact: integrations@windshieldadvisor.info</p>
+    </footer>
+  </div>
+
+  <!-- Load the quiz embed script -->
+  <script src="/quiz-embed.js"></script>
+
+  <script>
+    // Event logging
+    const eventLog = document.getElementById('event-log');
+
+    function logEvent(type, detail) {
+      const entry = document.createElement('div');
+      entry.className = 'event-log-entry';
+
+      const time = new Date().toLocaleTimeString();
+      entry.innerHTML = `
+        <span class="event-time">[${time}]</span>
+        <span class="event-type">${type.toUpperCase()}</span>
+        ${JSON.stringify(detail, null, 0)}
+      `;
+
+      eventLog.appendChild(entry);
+      eventLog.scrollTop = eventLog.scrollHeight;
+
+      // Keep only last 20 entries
+      while (eventLog.children.length > 20) {
+        eventLog.removeChild(eventLog.children[1]); // Skip first "READY" message
+      }
+    }
+
+    function clearEventLog() {
+      eventLog.innerHTML = '<div class="event-log-entry"><span class="event-type">CLEARED</span> Event log cleared</div>';
+    }
+
+    // Listen to all quiz events
+    ['started', 'answer', 'back', 'completed', 'resize'].forEach(eventType => {
+      document.addEventListener(`windshieldAdvisorQuiz:${eventType}`, (e) => {
+        logEvent(eventType, {
+          quizId: e.detail.quizId,
+          ...e.detail
+        });
+      });
+    });
+
+    // Theme selector
+    const themeOptions = document.querySelectorAll('.theme-option');
+    const themedQuiz = document.getElementById('quiz-themed');
+
+    const themes = {
+      default: { primary: '2563eb', accent: '1e40af' },
+      green: { primary: '059669', accent: '047857' },
+      purple: { primary: '7c3aed', accent: '6d28d9' },
+      orange: { primary: 'ea580c', accent: 'c2410c' }
+    };
+
+    themeOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        // Update active state
+        themeOptions.forEach(opt => opt.classList.remove('active'));
+        option.classList.add('active');
+
+        // Get theme
+        const themeName = option.dataset.theme;
+        const theme = themes[themeName];
+
+        // Update quiz theme
+        themedQuiz.dataset.primaryColor = theme.primary;
+        themedQuiz.dataset.accentColor = theme.accent;
+
+        // Reinitialize widget
+        themedQuiz.innerHTML = '';
+        delete themedQuiz.dataset.initialized;
+        if (window.WindshieldAdvisorQuiz) {
+          window.WindshieldAdvisorQuiz.init();
+        }
+
+        logEvent('theme-changed', { theme: themeName });
+      });
+    });
+  </script>
+</body>
+</html>
