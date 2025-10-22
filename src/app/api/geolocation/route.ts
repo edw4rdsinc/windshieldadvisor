@@ -7,14 +7,14 @@ export const dynamic = 'force-dynamic';
 const PARTNER_SHOPS = {
   // Portland Metro Area (OR: Washington, Clackamas, Multnomah counties)
   portland: {
-    name: 'Windshield Advisor Portland',
+    name: 'Vero Auto Glass, A Windshield Advisor Alliance Shop',
     phone: '(971) 317-8376',
     city: 'Portland Metro',
     serviceArea: 'Serving Washington, Clackamas, and Multnomah Counties'
   },
   // Las Vegas Metro (NV: Clark County)
   lasVegas: {
-    name: 'Vero Auto Glass',
+    name: 'Vero Auto Glass, A Windshield Advisor Alliance Shop',
     phone: '(702) 276-7448',
     city: 'Las Vegas Metro',
     serviceArea: 'Serving Clark County'
